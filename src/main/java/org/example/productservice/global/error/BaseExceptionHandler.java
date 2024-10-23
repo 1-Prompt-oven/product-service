@@ -1,7 +1,7 @@
 package org.example.productservice.global.error;
 
-import org.example.productadminservice.global.common.response.BaseResponse;
-import org.example.productadminservice.global.common.response.BaseResponseStatus;
+import org.example.productservice.global.common.response.BaseResponse;
+import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

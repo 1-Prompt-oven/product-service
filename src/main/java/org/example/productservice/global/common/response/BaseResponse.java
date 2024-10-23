@@ -1,6 +1,6 @@
 package org.example.productservice.global.common.response;
 
-import static org.example.productadminservice.global.common.response.BaseResponseStatus.*;
+import static org.example.productservice.global.common.response.BaseResponseStatus.*;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

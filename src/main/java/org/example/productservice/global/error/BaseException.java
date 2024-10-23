@@ -1,6 +1,6 @@
 package org.example.productservice.global.error;
 
-import org.example.productadminservice.global.common.response.BaseResponseStatus;
+import org.example.productservice.global.common.response.BaseResponseStatus;
 
 import lombok.Getter;
 

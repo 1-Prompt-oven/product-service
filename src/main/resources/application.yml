@@ -1,1 +1,46 @@
-spring.application.name=product-service
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/promptoven-product
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      dialect: org.hibernate.dialect.MySQLDialect
+      format_sql: true
+    generate-ddl: true
+  batch:
+    job:
+      enabled: true
+    jdbc:
+      initialize-schema: always
+
+
+  springdoc:
+    swagger-ui:
+      path: /swagger-ui.html
+      groups-order: DESC
+      operationsSorter: method
+      disable-swagger-default-url: true
+      display-request-duration: true
+      defaultModelsExpandDepth: -1
+    api-docs:
+      path: /api
+      show-actuator: true
+    default-consumes-media-type: application/json
+    default-produces-media-type: application/json
+    paths-to-match:
+      - /**
+
+logging:
+  level:
+    org.example.productadminservice: DEBUG

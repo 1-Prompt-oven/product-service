@@ -24,6 +24,11 @@ spring:
     jdbc:
       initialize-schema: always
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/product_service
+      auto-index-creation: true
+
 
 springdoc:
   swagger-ui:

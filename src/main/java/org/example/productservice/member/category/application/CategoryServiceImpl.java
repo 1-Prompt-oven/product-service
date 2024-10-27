@@ -1,9 +1,9 @@
-package org.example.productservice.category.application;
+package org.example.productservice.member.category.application;
 
 import java.util.List;
 
-import org.example.productservice.category.dto.out.GetSubCategoriesResponseDto;
-import org.example.productservice.category.infrastructure.CategoryRepository;
+import org.example.productservice.member.category.dto.out.GetSubCategoriesResponseDto;
+import org.example.productservice.member.category.infrastructure.CategoryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

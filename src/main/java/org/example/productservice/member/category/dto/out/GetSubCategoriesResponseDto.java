@@ -1,7 +1,7 @@
-package org.example.productservice.category.dto.out;
+package org.example.productservice.member.category.dto.out;
 
-import org.example.productservice.category.domain.Category;
-import org.example.productservice.category.vo.out.GetSubCategoriesResponseVo;
+import org.example.productservice.common.domain.Category;
+import org.example.productservice.member.category.vo.out.GetSubCategoriesResponseVo;
 
 import lombok.Builder;
 import lombok.Getter;

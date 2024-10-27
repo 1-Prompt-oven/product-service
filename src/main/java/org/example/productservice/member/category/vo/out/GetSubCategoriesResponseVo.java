@@ -1,4 +1,4 @@
-package org.example.productservice.category.vo.out;
+package org.example.productservice.member.category.vo.out;
 
 import lombok.Builder;
 import lombok.Getter;

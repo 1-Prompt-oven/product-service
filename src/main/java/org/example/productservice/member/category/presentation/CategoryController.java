@@ -1,10 +1,10 @@
-package org.example.productservice.category.presentation;
+package org.example.productservice.member.category.presentation;
 
 import java.util.List;
 
-import org.example.productservice.category.application.CategoryService;
-import org.example.productservice.category.dto.out.GetSubCategoriesResponseDto;
-import org.example.productservice.category.vo.out.GetSubCategoriesResponseVo;
+import org.example.productservice.member.category.application.CategoryService;
+import org.example.productservice.member.category.dto.out.GetSubCategoriesResponseDto;
+import org.example.productservice.member.category.vo.out.GetSubCategoriesResponseVo;
 import org.example.productservice.global.common.response.BaseResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -13,10 +13,15 @@ public class AddCategoryRequestVo {
     private String parentCategoryUuid;
 
     @Builder
-    public AddCategoryRequestDto toDto() {
+    public AddCategoryRequestVo(String categoryName, String parentCategoryUuid) {
+        this.categoryName = categoryName;
+        this.parentCategoryUuid = parentCategoryUuid;
+    }
+
+    public AddCategoryRequestDto toDto(AddCategoryRequestVo addCategoryRequestVo) {
         return AddCategoryRequestDto.builder()
-                .categoryName(categoryName)
-                .parentCategoryUuid(parentCategoryUuid)
+                .categoryName(addCategoryRequestVo.getCategoryName())
+                .parentCategoryUuid(addCategoryRequestVo.getParentCategoryUuid())
                 .build();
     }
 }

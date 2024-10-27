@@ -23,22 +23,22 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "카테고리 관리 API", description = "카테고리 관련 API endpoints")
-@RequestMapping("/api/category")
+@RequestMapping("/admin/category")
 public class AdminCategoryController {
 
 	private final AdminCategoryService adminCategoryService;
 
 	@Operation(summary = "카테고리 생성", description = "parentCategoryCode =\"\"입력시 최상위 카테고리 생성")
-	@PostMapping("/admin")
+	@PostMapping
 	public BaseResponse<Void> addCategory(
 		@RequestBody AddCategoryRequestVo addCategoryRequestVo) {
 
-		adminCategoryService.addCategory(addCategoryRequestVo.toDto());
+		adminCategoryService.addCategory(addCategoryRequestVo.toDto(addCategoryRequestVo));
 		return new BaseResponse<>();
 	}
 
 	@Operation(summary = "카테고리 수정", description = "카테고리 수정")
-	@PutMapping("/admin")
+	@PutMapping
 	public BaseResponse<Void> updateCategory(
 		@RequestBody UpdateCategoryRequestVo updateCategoryRequestVo) {
 		adminCategoryService.updateCategory(UpdateCategoryRequestDto.toDto(updateCategoryRequestVo));
@@ -46,7 +46,7 @@ public class AdminCategoryController {
 	}
 
 	@Operation(summary = "카테고리 삭제", description = "카테고리 삭제")
-	@DeleteMapping("/admin")
+	@DeleteMapping
 	public BaseResponse<Void> deleteCategory(
 		@RequestBody DeleteCategoryRequestVo deleteCategoryRequestVo) {
 		adminCategoryService.deleteCategory(DeleteCategoryRequestDto.toDto(deleteCategoryRequestVo));
@@ -54,7 +54,7 @@ public class AdminCategoryController {
 	}
 
 	@Operation(summary = "JSON 파일 기반으로 카테고리 생성")
-	@PostMapping(value = "/admin/json", consumes = "multipart/form-data")
+	@PostMapping(value = "/json", consumes = "multipart/form-data")
 	public BaseResponse<Void> addCategoryFromFile(@RequestPart("file") MultipartFile file) {
 		adminCategoryService.addCategoryFromFile(file);
 		return new BaseResponse<>();

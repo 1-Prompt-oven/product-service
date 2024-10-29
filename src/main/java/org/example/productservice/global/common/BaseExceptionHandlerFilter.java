@@ -2,10 +2,14 @@ package org.example.productservice.global.common;
 
 import java.io.IOException;
 
-import org.example.productadminservice.global.common.response.BaseResponse;
-import org.example.productadminservice.global.error.BaseException;
+import org.example.productservice.global.common.response.BaseResponse;
+import org.example.productservice.global.common.response.BaseResponseStatus;
+import org.example.productservice.global.error.BaseException;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

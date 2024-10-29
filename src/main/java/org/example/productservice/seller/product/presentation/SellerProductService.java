@@ -1,8 +1,14 @@
 package org.example.productservice.seller.product.presentation;
 
-import org.example.productservice.seller.product.dto.in.CreateProductRequestDto;
+import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
+import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
+import org.example.productservice.seller.product.dto.in.GetProductDetailRequestDto;
+import org.example.productservice.seller.product.dto.out.GetProductDetailResponseDto;
 
 public interface SellerProductService {
 
-	void createProduct(CreateProductRequestDto createProductRequestDto);
+	void addProduct(AddProductRequestDto addProductRequestDto);
+	void updateProduct(Long productUuid, AddProductRequestDto addProductRequestDto);
+	void deleteProduct(DeleteProductRequestDto deleteProductRequestDto);
+	GetProductDetailResponseDto getProductDetail(GetProductDetailRequestDto getProductDetailRequestDto);
 }

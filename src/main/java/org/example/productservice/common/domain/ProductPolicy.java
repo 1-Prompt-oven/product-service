@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,4 +42,31 @@ public class ProductPolicy {
 
 	@Column(nullable = false)
 	private Long llmId;
+
+	@Builder
+	public ProductPolicy(Long productPolicyId, Product product, float discountRate, boolean enabled, boolean premium,
+		String thumbnailSrc, boolean deleted, boolean approved, Long llmId) {
+		this.productPolicyId = productPolicyId;
+		this.product = product;
+		this.discountRate = discountRate;
+		this.enabled = enabled;
+		this.premium = premium;
+		this.thumbnailSrc = thumbnailSrc;
+		this.deleted = deleted;
+		this.approved = approved;
+		this.llmId = llmId;
+	}
+
+	@Builder
+	public ProductPolicy(Product product, float discountRate, boolean enabled, boolean premium, String thumbnailSrc,
+		boolean deleted, boolean approved, Long llmId) {
+		this.product = product;
+		this.discountRate = discountRate;
+		this.enabled = enabled;
+		this.premium = premium;
+		this.thumbnailSrc = thumbnailSrc;
+		this.deleted = deleted;
+		this.approved = approved;
+		this.llmId = llmId;
+	}
 }

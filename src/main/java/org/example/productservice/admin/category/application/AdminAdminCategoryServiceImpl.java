@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,7 +15,6 @@ import org.example.productservice.admin.category.infrastructure.AdminCategoryRep
 import org.example.productservice.common.domain.Category;
 import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.example.productservice.global.error.BaseException;
-import org.example.productservice.member.category.dto.out.GetSubCategoriesResponseDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class AdminAdminCategoryServiceImpl implements AdminCategoryService {
     private final AdminCategoryRepository adminCategoryRepository;
+    private final CategoryEventPublisher categoryEventPublisher;
+
 
     @Override
     public void addCategory(AddCategoryRequestDto addCategoryRequestDto) {
@@ -36,13 +36,16 @@ public class AdminAdminCategoryServiceImpl implements AdminCategoryService {
             throw new BaseException(BaseResponseStatus.DUPLICATE_CATEGORY_NAME);
         }
 
+        Category savedCategory;
         if (addCategoryRequestDto.getParentCategoryUuid().isEmpty()) {
-            adminCategoryRepository.save(addCategoryRequestDto.createRootCategory());
-            return;
+            savedCategory = adminCategoryRepository.save(addCategoryRequestDto.createRootCategory());
+        } else {
+            Category parentCategory = findCategoryByCategoryUuid(addCategoryRequestDto.getParentCategoryUuid());
+            savedCategory = adminCategoryRepository.save(addCategoryRequestDto.createChildCategory(parentCategory));
         }
 
-        Category parentCategory = findCategoryByCategoryUuid(addCategoryRequestDto.getParentCategoryUuid());
-        adminCategoryRepository.save(addCategoryRequestDto.createChildCategory(parentCategory));
+        // 카테고리 생성 이벤트 발행
+        categoryEventPublisher.publishCategoryCreated(savedCategory);
     }
 
     private Category findCategoryByCategoryUuid(String categoryUuid) {

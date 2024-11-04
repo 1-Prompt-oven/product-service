@@ -55,3 +55,32 @@ logging:
 server:
   port: 0 # random port for security reasons
   shutdown: graceful
+
+# prod 설정
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://mysql:3306/promptoven-product
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate  # prod 환경에서는 validate 권장
+  data:
+    mongodb:
+      uri: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017/product_service
+      auto-index-creation: false  # prod 환경에서는 자동 인덱스 생성 비활성화 권장
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

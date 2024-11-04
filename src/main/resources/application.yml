@@ -17,6 +17,10 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+  packages-to-scan: org.example.productservice  # 스캔할 패키지 명시
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  swagger-ui.operations-sorter: alpha
 
 logging:
   level:

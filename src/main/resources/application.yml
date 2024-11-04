@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: product-service
   servlet:
     multipart:
       max-file-size: 20MB
@@ -29,24 +31,27 @@ spring:
       uri: mongodb://localhost:27017/product_service
       auto-index-creation: true
 
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
 springdoc:
+  api-docs:
+    path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
-    groups-order: DESC
-    operationsSorter: method
-    disable-swagger-default-url: true
-    display-request-duration: true
-    default-models-expand-depth: -1
-  api-docs:
-    path: /api-docs
-  default-consumes-media-type: application/json
-  default-produces-media-type: application/json
-  paths-to-match:
-    - /**
 
 logging:
   level:
     org.example.product_admin_service: DEBUG
 
 server:
-  port: 8081
+  port: 0 # random port for security reasons
+  shutdown: graceful

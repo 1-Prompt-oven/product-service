@@ -69,7 +69,7 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    url: jdbc:mysql://product-service-mysql-1:3306/promptoven-product
+    url: jdbc:mysql://mysql:3306/promptoven-product
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -36,7 +36,7 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:mysql://localhost:3306/promptoven-product
+    url: jdbc:mysql://localhost:3306/promptoven_product
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -73,7 +73,7 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    url: jdbc:mysql://mysql:3306/promptoven-product
+    url: jdbc:mysql://mysql:3306/promptoven_product
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver

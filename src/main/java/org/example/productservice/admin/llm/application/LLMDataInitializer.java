@@ -1,4 +1,4 @@
-package org.example.productservice.admin.category.application;
+package org.example.productservice.admin.llm.application;
 
 import java.util.Arrays;
 import java.util.List;

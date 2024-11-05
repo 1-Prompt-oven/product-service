@@ -1,4 +1,4 @@
-package org.example.productservice.seller.product.presentation;
+package org.example.productservice.seller.product.application;
 
 import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
 import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;

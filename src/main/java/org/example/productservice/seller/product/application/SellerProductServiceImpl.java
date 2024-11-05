@@ -1,4 +1,4 @@
-package org.example.productservice.seller.product.presentation;
+package org.example.productservice.seller.product.application;
 
 import org.example.productservice.common.domain.Product;
 import org.example.productservice.common.domain.ProductPolicy;
@@ -37,7 +37,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
 		Product updatedProduct = addProductRequestDto.updateProduct(productUuid);
-		addProductRequestDto.updateProductPolicy(updatedProduct);
+		sellerProductPolicyRepository.save(addProductRequestDto.updateProductPolicy(updatedProduct));
 	}
 
 	@Override

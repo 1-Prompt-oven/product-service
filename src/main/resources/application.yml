@@ -1,5 +1,7 @@
 # 공통 설정
 spring:
+  profiles:
+    active: local
   application:
     name: product-service
   servlet:
@@ -36,16 +38,16 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:mysql://localhost:3306/promptoven_product
+    url: jdbc:mysql://localhost:3307/promptoven_product
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
     properties:
-      dialect: org.hibernate.dialect.MySQLDialect
+      dialect: org.hibernate.dialect.MySQL8Dialect
       format_sql: true
     generate-ddl: true
   data:
@@ -82,7 +84,7 @@ spring:
       ddl-auto: create  # prod 환경에서는 validate 권장
     show-sql: true
     properties:
-      dialect: org.hibernate.dialect.MySQLDialect
+      dialect: org.hibernate.dialect.MySQL8Dialect
   data:
     mongodb:
       uri: mongodb://product-service-mongodb-1:27017/product_service

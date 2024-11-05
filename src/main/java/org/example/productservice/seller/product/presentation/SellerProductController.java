@@ -3,7 +3,10 @@ package org.example.productservice.seller.product.presentation;
 import org.example.productservice.global.common.response.BaseResponse;
 import org.example.productservice.seller.product.application.SellerProductService;
 import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
+import org.example.productservice.seller.product.dto.in.UpdateProductRequestDto;
+import org.example.productservice.seller.product.vo.in.UpdateProductRequestVo;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,4 +29,12 @@ public class SellerProductController {
 		sellerProductService.addProduct(AddProductRequestDto.toDto(addProductRequestVo));
 		return new BaseResponse<>();
 	}
+
+	@Operation(summary = "상품 수정", description = "상품 수정")
+	@PutMapping
+	public BaseResponse<Void> updateProduct(@RequestBody UpdateProductRequestVo updateProductRequestVo) {
+		sellerProductService.updateProduct(UpdateProductRequestDto.toDto(updateProductRequestVo));
+		return new BaseResponse<>();
+	}
+
 }

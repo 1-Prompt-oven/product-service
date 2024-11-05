@@ -7,6 +7,7 @@ import org.example.productservice.global.error.BaseException;
 import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
 import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
 import org.example.productservice.seller.product.dto.in.GetProductDetailRequestDto;
+import org.example.productservice.seller.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.seller.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.seller.product.infrastructure.SellerProductPolicyRepository;
 import org.example.productservice.seller.product.infrastructure.SellerProductRepository;
@@ -27,17 +28,21 @@ public class SellerProductServiceImpl implements SellerProductService {
 	public void addProduct(AddProductRequestDto addProductRequestDto) {
 		// 하나의 트랜젝션으로 처리하여 롤백이 가능하도록 함
 		Product product = sellerProductRepository.save(addProductRequestDto.createProduct());
-		sellerProductPolicyRepository.save(addProductRequestDto.createProductPolicy(product));
+		sellerProductPolicyRepository.save(addProductRequestDto.createProductPolicy(product.getProductUuid()));
 	}
 
 	@Override
-	public void updateProduct(Long productUuid, AddProductRequestDto addProductRequestDto) {
+	public void updateProduct(UpdateProductRequestDto updateProductRequestDto) {
 
-		sellerProductRepository.findById(productUuid)
+		Product product = sellerProductRepository.findByUuid(updateProductRequestDto.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		Product updatedProduct = addProductRequestDto.updateProduct(productUuid);
-		sellerProductPolicyRepository.save(addProductRequestDto.updateProductPolicy(updatedProduct));
+		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProductUuid(product.getProductUuid())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
+
+		Product updatedProduct = sellerProductRepository.save(updateProductRequestDto.updateProduct(product.getProductId()));
+		sellerProductPolicyRepository.save(updateProductRequestDto
+			.updateProductPolicy(productPolicy.getProductPolicyId(), updatedProduct.getProductUuid()));
 	}
 
 	@Override
@@ -46,7 +51,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 		Product product = sellerProductRepository.findByUuid(deleteProductRequestDto.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProduct(product)
+		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProductUuid(product.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
 		sellerProductPolicyRepository.save(deleteProductRequestDto.deleteProduct(productPolicy));
@@ -59,7 +64,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 		Product product = sellerProductRepository.findByUuid(getProductDetailRequestDto.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProduct(product)
+		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProductUuid(product.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
 		return GetProductDetailResponseDto.toDto(product, productPolicy);

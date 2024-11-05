@@ -69,9 +69,9 @@ public class AddProductRequestDto {
 				.build();
 	}
 
-	public ProductPolicy createProductPolicy(Product product) {
+	public ProductPolicy createProductPolicy(String productUuid) {
 		return ProductPolicy.builder()
-				.product(product)
+				.productUuid(productUuid)
 				.discountRate(discountRate)
 				.enabled(enabled)
 				.premium(premium)
@@ -79,28 +79,5 @@ public class AddProductRequestDto {
 				.approved(approved)
 				.llmId(llmId)
 				.build();
-	}
-
-	public Product updateProduct(Long productId) {
-		return Product.builder()
-			.productId(productId)
-			.sellerUuid(sellerUuid)
-			.name(productName)
-			.price(price)
-			.prompt(prompt)
-			.description(description)
-			.build();
-	}
-
-	public ProductPolicy updateProductPolicy(Product product) {
-		return ProductPolicy.builder()
-			.product(product)
-			.discountRate(discountRate)
-			.enabled(enabled)
-			.premium(premium)
-			.thumbnailSrc(thumbnailSrc)
-			.approved(approved)
-			.llmId(llmId)
-			.build();
 	}
 }

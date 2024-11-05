@@ -1,14 +1,14 @@
 package org.example.productservice.common.domain;
 
-import jakarta.persistence.CascadeType;
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +16,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Builder
+@AllArgsConstructor
+@DynamicUpdate
 public class Product {
 
 	@Id
@@ -42,33 +45,4 @@ public class Product {
 
 	@Column(nullable = false, length = 100)
 	private String description;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "product_policy_id")
-	private ProductPolicy productPolicy;
-
-	@Builder
-	public Product(Long productId, String productUuid, String sellerUuid, String name, int price, String prompt,
-		String description, String sellerName) {
-		this.productId = productId;
-		this.productUuid = productUuid;
-		this.sellerUuid = sellerUuid;
-		this.name = name;
-		this.price = price;
-		this.prompt = prompt;
-		this.description = description;
-		this.sellerName = sellerName;
-	}
-
-	@Builder
-	public Product(String productUuid, String sellerUuid, String name, int price, String prompt,
-		String description, String sellerName) {
-		this.productUuid = productUuid;
-		this.sellerUuid = sellerUuid;
-		this.name = name;
-		this.price = price;
-		this.prompt = prompt;
-		this.description = description;
-		this.sellerName = sellerName;
-	}
 }

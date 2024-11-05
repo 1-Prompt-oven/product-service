@@ -18,7 +18,6 @@ public class DeleteProductRequestDto {
 	public ProductPolicy deleteProduct(ProductPolicy productPolicy) {
 		return ProductPolicy.builder()
 			.productPolicyId(productPolicy.getProductPolicyId())
-			.product(productPolicy.getProduct())
 			.discountRate(productPolicy.getDiscountRate())
 			.enabled(productPolicy.isEnabled())
 			.premium(productPolicy.isPremium())

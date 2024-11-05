@@ -1,16 +1,17 @@
-package org.example.productservice.seller.product.presentation;
+package org.example.productservice.seller.product.vo.out;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @Getter
-@AllArgsConstructor
 @Builder
-public class AddProductRequestVo {
+@NoArgsConstructor
+@AllArgsConstructor
+public class GetProductDetailResponseVo {
+
+	private String productUuid;
 
 	private String sellerUuid;
 
@@ -36,6 +37,5 @@ public class AddProductRequestVo {
 
 	private Long llmId;
 
-	@Schema(description = "모델 이름", example = "Midjourney")
 	private String llmName;
 }

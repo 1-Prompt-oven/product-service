@@ -40,6 +40,8 @@ public class AddProductRequestDto {
 
 	private Long llmId;
 
+	private String llmName;
+
 	public static AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {
 		return AddProductRequestDto.builder()
 			.sellerUuid(addProductRequestVo.getSellerUuid())
@@ -54,6 +56,7 @@ public class AddProductRequestDto {
 			.thumbnailSrc(addProductRequestVo.getThumbnailSrc())
 			.approved(addProductRequestVo.isApproved())
 			.llmId(addProductRequestVo.getLlmId())
+			.llmName(addProductRequestVo.getLlmName())
 			.build();
 	}
 
@@ -62,7 +65,7 @@ public class AddProductRequestDto {
 			.productUuid(UuidGenerator.generateProductUuid())
 				.sellerUuid(sellerUuid)
 				.sellerName(sellerName)
-				.name(productName)
+				.productName(productName)
 				.price(price)
 				.prompt(prompt)
 				.description(description)
@@ -78,6 +81,7 @@ public class AddProductRequestDto {
 				.thumbnailSrc(thumbnailSrc)
 				.approved(approved)
 				.llmId(llmId)
+				.llmName(llmName)
 				.build();
 	}
 }

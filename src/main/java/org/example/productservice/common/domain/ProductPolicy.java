@@ -45,4 +45,7 @@ public class ProductPolicy {
 	@Column(nullable = false)
 	private Long llmId;
 
+	@Column(nullable = false)
+	private String llmName;
+
 }

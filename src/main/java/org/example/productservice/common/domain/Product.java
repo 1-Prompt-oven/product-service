@@ -35,7 +35,7 @@ public class Product {
 	private String sellerName;
 
 	@Column(nullable = false, length = 50)
-	private String name;
+	private String productName;
 
 	@Column(nullable = false)
 	private int price;

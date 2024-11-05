@@ -65,7 +65,7 @@ public class UpdateProductRequestDto {
 			.productUuid(productUuid)
 			.sellerName(sellerName)
 			.sellerUuid(sellerUuid)
-			.name(productName)
+			.productName(productName)
 			.price(price)
 			.prompt(prompt)
 			.description(description)

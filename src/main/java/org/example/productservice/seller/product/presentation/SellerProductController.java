@@ -3,8 +3,11 @@ package org.example.productservice.seller.product.presentation;
 import org.example.productservice.global.common.response.BaseResponse;
 import org.example.productservice.seller.product.application.SellerProductService;
 import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
+import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
 import org.example.productservice.seller.product.dto.in.UpdateProductRequestDto;
+import org.example.productservice.seller.product.vo.in.DeleteProductRequestVo;
 import org.example.productservice.seller.product.vo.in.UpdateProductRequestVo;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +37,13 @@ public class SellerProductController {
 	@PutMapping
 	public BaseResponse<Void> updateProduct(@RequestBody UpdateProductRequestVo updateProductRequestVo) {
 		sellerProductService.updateProduct(UpdateProductRequestDto.toDto(updateProductRequestVo));
+		return new BaseResponse<>();
+	}
+
+	@Operation(summary = "상품 삭제", description = "상품 삭제")
+	@DeleteMapping
+	public BaseResponse<Void> deleteProduct(@RequestBody DeleteProductRequestVo deleteProductRequestVo) {
+		sellerProductService.deleteProduct(DeleteProductRequestDto.toDto(deleteProductRequestVo));
 		return new BaseResponse<>();
 	}
 

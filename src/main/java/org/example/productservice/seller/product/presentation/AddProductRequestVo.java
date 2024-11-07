@@ -28,8 +28,6 @@ public class AddProductRequestVo {
 
 	private boolean enabled;
 
-	private boolean premium;
-
 	private String thumbnailSrc;
 
 	private boolean approved;

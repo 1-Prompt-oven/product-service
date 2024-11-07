@@ -33,8 +33,6 @@ public class UpdateProductRequestDto {
 
 	private boolean enabled;
 
-	private boolean premium;
-
 	private String thumbnailSrc;
 
 	private boolean approved;
@@ -52,7 +50,6 @@ public class UpdateProductRequestDto {
 			.description(updateProductRequestVo.getDescription())
 			.discountRate(updateProductRequestVo.getDiscountRate())
 			.enabled(updateProductRequestVo.isEnabled())
-			.premium(updateProductRequestVo.isPremium())
 			.thumbnailSrc(updateProductRequestVo.getThumbnailSrc())
 			.approved(updateProductRequestVo.isApproved())
 			.llmId(updateProductRequestVo.getLlmId())
@@ -78,7 +75,6 @@ public class UpdateProductRequestDto {
 			.productPolicyId(productPolicyId)
 			.discountRate(discountRate)
 			.enabled(enabled)
-			.premium(premium)
 			.thumbnailSrc(thumbnailSrc)
 			.approved(approved)
 			.llmId(llmId)

@@ -31,9 +31,6 @@ public class ProductPolicy {
 	@Column(nullable = false)
 	private boolean enabled;
 
-	@Column(nullable = false)
-	private boolean premium;
-
 	private String thumbnailSrc;
 
 	@Column(nullable = false)

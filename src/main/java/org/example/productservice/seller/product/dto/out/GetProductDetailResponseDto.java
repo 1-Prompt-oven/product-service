@@ -33,8 +33,6 @@ public class GetProductDetailResponseDto {
 
 	private boolean enabled;
 
-	private boolean premium;
-
 	private String thumbnailSrc;
 
 	private boolean approved;
@@ -54,7 +52,6 @@ public class GetProductDetailResponseDto {
 			.description(product.getDescription())
 			.discountRate(productPolicy.getDiscountRate())
 			.enabled(productPolicy.isEnabled())
-			.premium(productPolicy.isPremium())
 			.thumbnailSrc(productPolicy.getThumbnailSrc())
 			.approved(productPolicy.isApproved())
 			.llmId(productPolicy.getLlmId())
@@ -73,7 +70,6 @@ public class GetProductDetailResponseDto {
 			.description(description)
 			.discountRate(discountRate)
 			.enabled(enabled)
-			.premium(premium)
 			.thumbnailSrc(thumbnailSrc)
 			.approved(approved)
 			.llmId(llmId)

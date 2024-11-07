@@ -29,7 +29,6 @@ public class DeleteProductRequestDto {
 			.productUuid(productPolicy.getProductUuid())
 			.discountRate(productPolicy.getDiscountRate())
 			.enabled(productPolicy.isEnabled())
-			.premium(productPolicy.isPremium())
 			.thumbnailSrc(productPolicy.getThumbnailSrc())
 			.llmId(productPolicy.getLlmId())
 			.approved(productPolicy.isApproved())

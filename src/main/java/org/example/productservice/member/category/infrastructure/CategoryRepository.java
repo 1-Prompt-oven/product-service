@@ -3,7 +3,7 @@ package org.example.productservice.member.category.infrastructure;
 import java.util.List;
 import java.util.Optional;
 
-import org.example.productservice.common.domain.Category;
+import org.example.productservice.common.category.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

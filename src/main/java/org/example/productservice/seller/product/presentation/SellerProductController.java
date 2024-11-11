@@ -6,6 +6,7 @@ import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
 import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
 import org.example.productservice.seller.product.dto.in.GetProductDetailRequestDto;
 import org.example.productservice.seller.product.dto.in.UpdateProductRequestDto;
+import org.example.productservice.seller.product.vo.in.AddProductRequestVo;
 import org.example.productservice.seller.product.vo.in.DeleteProductRequestVo;
 import org.example.productservice.seller.product.vo.in.GetProductDetailRequestVo;
 import org.example.productservice.seller.product.vo.in.UpdateProductRequestVo;

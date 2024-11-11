@@ -1,5 +1,7 @@
 package org.example.productservice.seller.product.vo.in;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,4 +38,6 @@ public class UpdateProductRequestVo {
 	private boolean approved;
 
 	private Long llmId;
+
+	private List<ProductContentRequestVo> productContentRequestVo;
 }

@@ -1,9 +1,8 @@
 package org.example.productservice.seller.product.dto.in;
 
-import org.example.productservice.common.domain.Product;
-import org.example.productservice.common.domain.ProductPolicy;
+import org.example.productservice.common.product.domain.Product;
 import org.example.productservice.global.common.UuidGenerator;
-import org.example.productservice.seller.product.presentation.AddProductRequestVo;
+import org.example.productservice.seller.product.vo.in.AddProductRequestVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,18 +27,6 @@ public class AddProductRequestDto {
 
 	private String description;
 
-	private float discountRate;
-
-	private boolean enabled;
-
-	private String thumbnailSrc;
-
-	private boolean approved;
-
-	private Long llmId;
-
-	private String llmName;
-
 	public static AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {
 		return AddProductRequestDto.builder()
 			.sellerUuid(addProductRequestVo.getSellerUuid())
@@ -48,12 +35,6 @@ public class AddProductRequestDto {
 			.productName(addProductRequestVo.getProductName())
 			.prompt(addProductRequestVo.getPrompt())
 			.description(addProductRequestVo.getDescription())
-			.discountRate(addProductRequestVo.getDiscountRate())
-			.enabled(addProductRequestVo.isEnabled())
-			.thumbnailSrc(addProductRequestVo.getThumbnailSrc())
-			.approved(addProductRequestVo.isApproved())
-			.llmId(addProductRequestVo.getLlmId())
-			.llmName(addProductRequestVo.getLlmName())
 			.build();
 	}
 
@@ -69,15 +50,5 @@ public class AddProductRequestDto {
 				.build();
 	}
 
-	public ProductPolicy createProductPolicy(String productUuid) {
-		return ProductPolicy.builder()
-				.productUuid(productUuid)
-				.discountRate(discountRate)
-				.enabled(enabled)
-				.thumbnailSrc(thumbnailSrc)
-				.approved(approved)
-				.llmId(llmId)
-				.llmName(llmName)
-				.build();
-	}
+
 }

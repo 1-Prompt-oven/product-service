@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.example.productservice.admin.llm.infrastructure.LLMRepository;
-import org.example.productservice.common.domain.LLM;
+import org.example.productservice.common.llm.domain.LLM;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;

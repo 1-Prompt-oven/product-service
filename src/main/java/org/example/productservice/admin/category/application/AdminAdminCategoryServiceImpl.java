@@ -12,7 +12,7 @@ import org.example.productservice.admin.category.dto.in.AddCategoryRequestDto;
 import org.example.productservice.admin.category.dto.in.DeleteCategoryRequestDto;
 import org.example.productservice.admin.category.dto.in.UpdateCategoryRequestDto;
 import org.example.productservice.admin.category.infrastructure.AdminCategoryRepository;
-import org.example.productservice.common.domain.Category;
+import org.example.productservice.common.category.domain.Category;
 import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.example.productservice.global.error.BaseException;
 import org.springframework.stereotype.Service;

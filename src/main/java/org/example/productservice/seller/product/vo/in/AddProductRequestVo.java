@@ -1,6 +1,5 @@
-package org.example.productservice.seller.product.presentation;
+package org.example.productservice.seller.product.vo.in;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,17 +22,4 @@ public class AddProductRequestVo {
 	private String prompt;
 
 	private String description;
-
-	private float discountRate;
-
-	private boolean enabled;
-
-	private String thumbnailSrc;
-
-	private boolean approved;
-
-	private Long llmId;
-
-	@Schema(description = "모델 이름", example = "Midjourney")
-	private String llmName;
 }

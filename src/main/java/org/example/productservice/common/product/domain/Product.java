@@ -1,4 +1,4 @@
-package org.example.productservice.common.domain;
+package org.example.productservice.common.product.domain;
 
 import org.hibernate.annotations.DynamicUpdate;
 

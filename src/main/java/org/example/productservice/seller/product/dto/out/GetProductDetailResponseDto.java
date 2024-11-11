@@ -1,7 +1,7 @@
 package org.example.productservice.seller.product.dto.out;
 
-import org.example.productservice.common.domain.Product;
-import org.example.productservice.common.domain.ProductPolicy;
+import org.example.productservice.common.product.domain.Product;
+import org.example.productservice.common.product.domain.ProductPolicy;
 import org.example.productservice.seller.product.vo.out.GetProductDetailResponseVo;
 
 import lombok.AllArgsConstructor;

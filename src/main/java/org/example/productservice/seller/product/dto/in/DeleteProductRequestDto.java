@@ -1,6 +1,6 @@
 package org.example.productservice.seller.product.dto.in;
 
-import org.example.productservice.common.domain.ProductPolicy;
+import org.example.productservice.common.product.domain.ProductPolicy;
 import org.example.productservice.seller.product.vo.in.DeleteProductRequestVo;
 
 import lombok.AllArgsConstructor;

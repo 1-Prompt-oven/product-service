@@ -22,6 +22,9 @@ public class ProductContent {
 	private Long productContentId;
 
 	@Column(nullable = false)
+	private String productContentUuid;
+
+	@Column(nullable = false)
 	private String productUuid;
 
 	@Column(nullable = false)
@@ -32,4 +35,7 @@ public class ProductContent {
 
 	@Column(nullable = false)
 	private String sampleValue;
+
+	@Column(nullable = false)
+	private boolean deleted;
 }

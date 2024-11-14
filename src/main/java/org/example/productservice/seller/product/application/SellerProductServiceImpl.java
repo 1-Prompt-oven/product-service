@@ -6,7 +6,6 @@ import org.example.productservice.common.product.domain.ProductPolicy;
 import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.example.productservice.global.error.BaseException;
 import org.example.productservice.seller.product.dto.in.AddProductContentRequestDto;
-import org.example.productservice.seller.product.dto.in.AddProductPolicyRequestDto;
 import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
 import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
 import org.example.productservice.seller.product.dto.in.GetProductDetailRequestDto;
@@ -31,31 +30,12 @@ public class SellerProductServiceImpl implements SellerProductService {
 
 	@Override
 	public void addProduct(AddProductRequestDto addProductRequestDto) {
-		// 하나의 트랜젝션으로 처리하여 롤백이 가능하도록 함
+
 		if (sellerProductRepository.existsByProductName(addProductRequestDto.getProductName())) {
 			throw new BaseException(BaseResponseStatus.DUPLICATED_DATA);
 		}
 
 		sellerProductRepository.save(addProductRequestDto.createProduct());
-		sellerProductContentRepository.save(addProductRequestDto.createProductContent(product.getProductUuid()));
-	}
-
-	@Override
-	public void addProductPolicy(AddProductPolicyRequestDto addProductPolicyRequestDto) {
-
-		Product product = sellerProductRepository.findByProductUuid(addProductPolicyRequestDto.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-
-		sellerProductPolicyRepository.save(addProductPolicyRequestDto.createProductPolicy(product.getProductUuid()));
-	}
-
-	@Override
-	public void addProductContent(AddProductContentRequestDto addProductContentRequestDto) {
-
-		Product product = sellerProductRepository.findByProductUuid(addProductContentRequestDto.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-
-		sellerProductContentRepository.save(addProductContentRequestDto.createProductContent(product.getProductUuid()));
 	}
 
 	@Override

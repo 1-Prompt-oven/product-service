@@ -4,7 +4,6 @@ import org.example.productservice.common.product.domain.Product;
 import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.example.productservice.global.error.BaseException;
 import org.example.productservice.seller.product.dto.in.AddProductPolicyRequestDto;
-import org.example.productservice.seller.product.infrastructure.SellerProductContentRepository;
 import org.example.productservice.seller.product.infrastructure.SellerProductPolicyRepository;
 import org.example.productservice.seller.product.infrastructure.SellerProductRepository;
 import org.springframework.stereotype.Service;

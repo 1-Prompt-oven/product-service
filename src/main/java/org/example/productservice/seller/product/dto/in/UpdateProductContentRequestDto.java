@@ -1,6 +1,7 @@
 package org.example.productservice.seller.product.dto.in;
 
 import org.example.productservice.common.product.domain.ProductContent;
+import org.example.productservice.seller.product.vo.in.UpdateProductContentRequestVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,16 @@ public class UpdateProductContentRequestDto {
 	private String contentUrl;
 	private int order;
 	private String sampleValue;
+
+	public static UpdateProductContentRequestDto toDto(UpdateProductContentRequestVo updateProductContentRequestVo) {
+		return UpdateProductContentRequestDto.builder()
+			.productContentUuid(updateProductContentRequestVo.getProductContentUuid())
+			.productUuid(updateProductContentRequestVo.getProductUuid())
+			.contentUrl(updateProductContentRequestVo.getContentUrl())
+			.order(updateProductContentRequestVo.getOrder())
+			.sampleValue(updateProductContentRequestVo.getSampleValue())
+			.build();
+	}
 
 	public ProductContent updateProductContent(Long productContentId) {
 		return ProductContent.builder()

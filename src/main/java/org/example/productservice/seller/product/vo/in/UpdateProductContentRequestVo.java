@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Builder
-public class AddProductContentRequestVo {
+@Getter
+public class UpdateProductContentRequestVo {
 
+	private String productContentUuid;
 	private String productUuid;
 	private String contentUrl;
 	private int order;

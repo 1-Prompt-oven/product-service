@@ -5,6 +5,6 @@ import java.util.Optional;
 import org.example.productservice.common.llm.domain.LLM;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LLMRepository extends JpaRepository<LLM, Long> {
+public interface AdminLLMRepository extends JpaRepository<LLM, Long> {
 	Optional<LLM> findByName(String name);
 }

@@ -1,7 +1,7 @@
 package org.example.productservice.admin.llm.dto.in;
 
 import org.example.productservice.admin.llm.vo.in.AddLLMRequestVo;
-import org.example.productservice.common.domain.LLM;
+import org.example.productservice.common.llm.domain.LLM;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

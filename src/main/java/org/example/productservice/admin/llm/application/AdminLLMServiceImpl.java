@@ -7,7 +7,7 @@ import org.example.productservice.admin.llm.dto.in.DeleteLLMRequestDto;
 import org.example.productservice.admin.llm.dto.in.UpdateLLMRequestDto;
 import org.example.productservice.admin.llm.dto.out.GetAllLLMResponseDto;
 import org.example.productservice.admin.llm.infrastructure.LLMRepository;
-import org.example.productservice.common.domain.LLM;
+import org.example.productservice.common.llm.domain.LLM;
 import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.example.productservice.global.error.BaseException;
 import org.springframework.stereotype.Service;

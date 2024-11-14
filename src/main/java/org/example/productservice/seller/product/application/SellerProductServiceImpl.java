@@ -1,13 +1,15 @@
-package org.example.productservice.seller.product.presentation;
+package org.example.productservice.seller.product.application;
 
-import org.example.productservice.common.domain.Product;
-import org.example.productservice.common.domain.ProductPolicy;
+import org.example.productservice.common.product.domain.Product;
+import org.example.productservice.common.product.domain.ProductPolicy;
 import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.example.productservice.global.error.BaseException;
 import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
 import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
 import org.example.productservice.seller.product.dto.in.GetProductDetailRequestDto;
+import org.example.productservice.seller.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.seller.product.dto.out.GetProductDetailResponseDto;
+import org.example.productservice.seller.product.infrastructure.SellerProductContentRepository;
 import org.example.productservice.seller.product.infrastructure.SellerProductPolicyRepository;
 import org.example.productservice.seller.product.infrastructure.SellerProductRepository;
 import org.springframework.stereotype.Service;
@@ -22,44 +24,45 @@ public class SellerProductServiceImpl implements SellerProductService {
 
 	private final SellerProductRepository sellerProductRepository;
 	private final SellerProductPolicyRepository sellerProductPolicyRepository;
+	private final SellerProductContentRepository sellerProductContentRepository;
 
 	@Override
 	public void addProduct(AddProductRequestDto addProductRequestDto) {
-		// 하나의 트랜젝션으로 처리하여 롤백이 가능하도록 함
-		Product product = sellerProductRepository.save(addProductRequestDto.createProduct());
-		sellerProductPolicyRepository.save(addProductRequestDto.createProductPolicy(product));
+
+		if (sellerProductRepository.existsByProductName(addProductRequestDto.getProductName())) {
+			throw new BaseException(BaseResponseStatus.DUPLICATED_DATA);
+		}
+
+		sellerProductRepository.save(addProductRequestDto.createProduct());
 	}
 
 	@Override
-	public void updateProduct(Long productUuid, AddProductRequestDto addProductRequestDto) {
+	public void updateProduct(UpdateProductRequestDto updateProductRequestDto) {
 
-		sellerProductRepository.findById(productUuid)
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
+		Long productId = sellerProductRepository.findByProductUuid(updateProductRequestDto.getProductUuid())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA))
+			.getProductId();
 
-		Product updatedProduct = addProductRequestDto.updateProduct(productUuid);
-		addProductRequestDto.updateProductPolicy(updatedProduct);
+		sellerProductRepository.save(updateProductRequestDto.updateProduct(productId));
 	}
 
 	@Override
 	public void deleteProduct(DeleteProductRequestDto deleteProductRequestDto) {
 
-		Product product = sellerProductRepository.findByUuid(deleteProductRequestDto.getProductUuid())
+		Product product = sellerProductRepository.findByProductUuid(deleteProductRequestDto.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProduct(product)
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-
-		sellerProductPolicyRepository.save(deleteProductRequestDto.deleteProduct(productPolicy));
+		sellerProductRepository.save(deleteProductRequestDto.deleteProduct(product));
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public GetProductDetailResponseDto getProductDetail(GetProductDetailRequestDto getProductDetailRequestDto) {
 
-		Product product = sellerProductRepository.findByUuid(getProductDetailRequestDto.getProductUuid())
+		Product product = sellerProductRepository.findByProductUuid(getProductDetailRequestDto.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProduct(product)
+		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProductUuid(product.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
 		return GetProductDetailResponseDto.toDto(product, productPolicy);

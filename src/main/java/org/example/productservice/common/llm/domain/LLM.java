@@ -1,4 +1,4 @@
-package org.example.productservice.common.domain;
+package org.example.productservice.common.llm.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

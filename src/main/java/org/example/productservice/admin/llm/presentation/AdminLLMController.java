@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/llm")
+@RequestMapping("/v1/admin/llm")
 @Tag(name = "LLM 관리 API", description = "LLM 관련 API endpoints")
 public class AdminLLMController {
 

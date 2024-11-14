@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Transactional
 @Service
-public class AdminAdminCategoryServiceImpl implements AdminCategoryService {
+public class AdminCategoryServiceImpl implements AdminCategoryService {
     private final AdminCategoryRepository adminCategoryRepository;
     private final CategoryEventPublisher categoryEventPublisher;
 

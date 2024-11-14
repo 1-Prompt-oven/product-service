@@ -31,7 +31,7 @@ public class ProductContent {
 	private String contentUrl;
 
 	@Column(nullable = false)
-	private int order;
+	private int contentOrder;
 
 	@Column(nullable = false)
 	private String sampleValue;

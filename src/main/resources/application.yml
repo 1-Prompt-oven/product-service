@@ -54,6 +54,8 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/product_service
       auto-index-creation: true
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
 
 eureka:
   client:
@@ -89,6 +91,8 @@ spring:
     mongodb:
       uri: mongodb://product-service-mongodb-1:27017/product_service
       auto-index-creation: false  # prod 환경에서는 자동 인덱스 생성 비활성화 권장
+  kafka:
+    bootstrap-servers: kafka:9092, kafka:9093, kafka:9094
 
 eureka:
   client:

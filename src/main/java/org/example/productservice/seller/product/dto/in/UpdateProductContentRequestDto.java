@@ -17,7 +17,7 @@ public class UpdateProductContentRequestDto {
 	private String productContentUuid;
 	private String productUuid;
 	private String contentUrl;
-	private int order;
+	private int contentOrder;
 	private String sampleValue;
 
 	public static UpdateProductContentRequestDto toDto(UpdateProductContentRequestVo updateProductContentRequestVo) {
@@ -25,7 +25,7 @@ public class UpdateProductContentRequestDto {
 			.productContentUuid(updateProductContentRequestVo.getProductContentUuid())
 			.productUuid(updateProductContentRequestVo.getProductUuid())
 			.contentUrl(updateProductContentRequestVo.getContentUrl())
-			.order(updateProductContentRequestVo.getOrder())
+			.contentOrder(updateProductContentRequestVo.getOrder())
 			.sampleValue(updateProductContentRequestVo.getSampleValue())
 			.build();
 	}
@@ -36,7 +36,7 @@ public class UpdateProductContentRequestDto {
 			.productContentUuid(productContentUuid)
 			.productUuid(productUuid)
 			.contentUrl(contentUrl)
-			.order(order)
+			.contentOrder(contentOrder)
 			.sampleValue(sampleValue)
 			.deleted(false)
 			.build();

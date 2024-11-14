@@ -17,14 +17,14 @@ public class AddProductContentRequestDto {
 
 	private String productUuid;
 	private String contentUrl;
-	private int order;
+	private int contentOrder;
 	private String sampleValue;
 
 	public static AddProductContentRequestDto toDto(AddProductContentRequestVo addProductContentRequestVo) {
 		return AddProductContentRequestDto.builder()
 			.productUuid(addProductContentRequestVo.getProductUuid())
 			.contentUrl(addProductContentRequestVo.getContentUrl())
-			.order(addProductContentRequestVo.getOrder())
+			.contentOrder(addProductContentRequestVo.getOrder())
 			.sampleValue(addProductContentRequestVo.getSampleValue())
 			.build();
 	}
@@ -34,7 +34,7 @@ public class AddProductContentRequestDto {
 			.productContentUuid(UuidGenerator.generateProductContentUuid())
 			.productUuid(productUuid)
 			.contentUrl(contentUrl)
-			.order(order)
+			.contentOrder(contentOrder)
 			.sampleValue(sampleValue)
 			.deleted(false)
 			.build();

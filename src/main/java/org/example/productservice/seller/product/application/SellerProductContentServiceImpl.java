@@ -54,7 +54,7 @@ public class SellerProductContentServiceImpl implements SellerProductContentServ
 			.productContentUuid(productContent.getProductContentUuid())
 			.productUuid(productContent.getProductUuid())
 			.contentUrl(productContent.getContentUrl())
-			.order(productContent.getOrder())
+			.contentOrder(productContent.getContentOrder())
 			.sampleValue(productContent.getSampleValue())
 			.deleted(true)
 			.build()
@@ -71,7 +71,7 @@ public class SellerProductContentServiceImpl implements SellerProductContentServ
 				.productContentUuid(productContent.getProductContentUuid())
 				.productUuid(productContent.getProductUuid())
 				.contentUrl(productContent.getContentUrl())
-				.order(productContent.getOrder())
+				.order(productContent.getContentOrder())
 				.sampleValue(productContent.getSampleValue())
 				.build())
 			.toList();

@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "판매자 상품 이미지 API", description = "판매자 상품 이미지 관련 API endpoints")
-@RequestMapping("/seller/product/content")
+@RequestMapping("/v1r/seller/product/content")
 public class SellerProductContentController {
 
 	private final SellerProductContentService sellerProductContentService;

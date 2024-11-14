@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "판매자 상품 정책 API", description = "판매자 상품 정책 관련 API endpoints")
-@RequestMapping("/seller/product/policy")
+@RequestMapping("/v1/seller/product/policy")
 public class SellerProductPolicyController {
 
 	private final SellerProductPolicyService sellerProductPolicyService;

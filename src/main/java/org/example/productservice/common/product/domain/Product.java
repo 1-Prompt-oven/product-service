@@ -40,6 +40,7 @@ public class Product {
 	@Column(nullable = false)
 	private int price;
 
+	// TODO: prompt 제거
 	@Column(nullable = false, length = 500)
 	private String prompt;
 

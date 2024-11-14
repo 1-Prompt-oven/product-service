@@ -10,7 +10,6 @@ import org.example.productservice.seller.product.dto.out.GetProductDetailRespons
 public interface SellerProductService {
 
 	void addProduct(AddProductRequestDto addProductRequestDto);
-	void addProductContent(AddProductContentRequestDto addProductContentRequestDto);
 	void updateProduct(UpdateProductRequestDto updateProductRequestDto);
 	void deleteProduct(DeleteProductRequestDto deleteProductRequestDto);
 	GetProductDetailResponseDto getProductDetail(GetProductDetailRequestDto getProductDetailRequestDto);

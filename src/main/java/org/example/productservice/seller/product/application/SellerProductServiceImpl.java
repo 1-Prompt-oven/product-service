@@ -1,11 +1,9 @@
 package org.example.productservice.seller.product.application;
 
 import org.example.productservice.common.product.domain.Product;
-import org.example.productservice.common.product.domain.ProductContent;
 import org.example.productservice.common.product.domain.ProductPolicy;
 import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.example.productservice.global.error.BaseException;
-import org.example.productservice.seller.product.dto.in.AddProductContentRequestDto;
 import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
 import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
 import org.example.productservice.seller.product.dto.in.GetProductDetailRequestDto;
@@ -41,24 +39,11 @@ public class SellerProductServiceImpl implements SellerProductService {
 	@Override
 	public void updateProduct(UpdateProductRequestDto updateProductRequestDto) {
 
-		Product product = sellerProductRepository.findByProductUuid(updateProductRequestDto.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
+		Long productId = sellerProductRepository.findByProductUuid(updateProductRequestDto.getProductUuid())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA))
+			.getProductId();
 
-		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProductUuid(product.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-
-		ProductContent productContent = sellerProductContentRepository.findByProductUuid(product.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-
-		Product updatedProduct = sellerProductRepository.save(updateProductRequestDto.updateProduct(product.getProductId()));
-		sellerProductPolicyRepository.save(updateProductRequestDto
-			.updateProductPolicy(productPolicy.getProductPolicyId(), updatedProduct.getProductUuid()));
-
-		updateProductRequestDto.getProductContentRequestDto()
-			.forEach(productContentRequestDto ->
-				sellerProductContentRepository.save(
-				updateProductRequestDto.updateProductContent(
-					productContent.getProductContentId(), productContentRequestDto)));
+		sellerProductRepository.save(updateProductRequestDto.updateProduct(productId));
 	}
 
 	@Override
@@ -67,10 +52,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 		Product product = sellerProductRepository.findByProductUuid(deleteProductRequestDto.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProductUuid(product.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-
-		sellerProductPolicyRepository.save(deleteProductRequestDto.deleteProduct(productPolicy));
+		sellerProductRepository.save(deleteProductRequestDto.deleteProduct(product));
 	}
 
 	@Transactional(readOnly = true)

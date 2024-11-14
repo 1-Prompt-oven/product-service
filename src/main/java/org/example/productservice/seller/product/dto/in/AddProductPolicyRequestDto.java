@@ -1,6 +1,7 @@
 package org.example.productservice.seller.product.dto.in;
 
 import org.example.productservice.common.product.domain.ProductPolicy;
+import org.example.productservice.global.common.UuidGenerator;
 import org.example.productservice.seller.product.vo.in.AddProductPolicyRequestVo;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class AddProductPolicyRequestDto {
 
-	private int price;
 	private String productUuid;
 	private float discountRate;
 	private boolean enabled;
@@ -40,6 +40,7 @@ public class AddProductPolicyRequestDto {
 	public ProductPolicy createProductPolicy(String productUuid) {
 		return ProductPolicy.builder()
 			.productUuid(productUuid)
+			.productPolicyUuid(UuidGenerator.generateProductPolicyUuid())
 			.discountRate(discountRate)
 			.enabled(enabled)
 			.deleted(deleted)

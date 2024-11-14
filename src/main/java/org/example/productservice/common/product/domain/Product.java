@@ -45,4 +45,7 @@ public class Product {
 
 	@Column(nullable = false, length = 100)
 	private String description;
+
+	@Column(nullable = false)
+	private boolean deleted;
 }

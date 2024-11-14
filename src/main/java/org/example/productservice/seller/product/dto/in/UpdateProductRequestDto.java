@@ -1,10 +1,6 @@
 package org.example.productservice.seller.product.dto.in;
 
-import java.util.List;
-
 import org.example.productservice.common.product.domain.Product;
-import org.example.productservice.common.product.domain.ProductContent;
-import org.example.productservice.common.product.domain.ProductPolicy;
 import org.example.productservice.seller.product.vo.in.UpdateProductRequestVo;
 
 import lombok.AllArgsConstructor;
@@ -42,8 +38,6 @@ public class UpdateProductRequestDto {
 
 	private Long llmId;
 
-	private List<ProductContentRequestDto> productContentRequestDto;
-
 	public static UpdateProductRequestDto toDto(UpdateProductRequestVo updateProductRequestVo) {
 		return UpdateProductRequestDto.builder()
 			.productUuid(updateProductRequestVo.getProductUuid())
@@ -74,24 +68,4 @@ public class UpdateProductRequestDto {
 			.build();
 	}
 
-	public ProductPolicy updateProductPolicy(Long productPolicyId, String productUuid) {
-		return ProductPolicy.builder()
-			.productUuid(productUuid)
-			.productPolicyId(productPolicyId)
-			.discountRate(discountRate)
-			.enabled(enabled)
-			.thumbnailSrc(thumbnailSrc)
-			.approved(approved)
-			.llmId(llmId)
-			.build();
-	}
-
-	public ProductContent updateProductContent(Long productContentId, ProductContentRequestDto productContentRequestDto) {
-		return ProductContent.builder()
-			.productContentId(productContentId)
-			.sampleValue(productContentRequestDto.getSampleValue())
-			.contentUrl(productContentRequestDto.getContentUrl())
-			.order(productContentRequestDto.getOrder())
-			.build();
-	}
 }

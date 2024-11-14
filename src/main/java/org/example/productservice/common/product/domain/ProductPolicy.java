@@ -23,6 +23,9 @@ public class ProductPolicy {
 	private Long productPolicyId;
 
 	@Column(nullable = false)
+	private String productPolicyUuid;
+
+	@Column(nullable = false)
 	private String productUuid;
 
 	@Column(nullable = false)

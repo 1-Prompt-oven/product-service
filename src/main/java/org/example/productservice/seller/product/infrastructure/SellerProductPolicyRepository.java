@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SellerProductPolicyRepository extends JpaRepository<ProductPolicy, Long> {
 
 	Optional<ProductPolicy> findByProductUuid(String productUuid);
+
+	boolean existsByProductUuid(String productUuid);
 }

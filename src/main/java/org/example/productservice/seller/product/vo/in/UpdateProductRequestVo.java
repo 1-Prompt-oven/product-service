@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateProductRequestVo {
 
+	private String productPolicyUuid;
+
 	private String productUuid;
 
 	private String sellerUuid;

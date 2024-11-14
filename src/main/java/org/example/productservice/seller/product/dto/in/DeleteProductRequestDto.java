@@ -1,6 +1,6 @@
 package org.example.productservice.seller.product.dto.in;
 
-import org.example.productservice.common.product.domain.ProductPolicy;
+import org.example.productservice.common.product.domain.Product;
 import org.example.productservice.seller.product.vo.in.DeleteProductRequestVo;
 
 import lombok.AllArgsConstructor;
@@ -23,15 +23,16 @@ public class DeleteProductRequestDto {
 			.build();
 	}
 
-	public ProductPolicy deleteProduct(ProductPolicy productPolicy) {
-		return ProductPolicy.builder()
-			.productPolicyId(productPolicy.getProductPolicyId())
-			.productUuid(productPolicy.getProductUuid())
-			.discountRate(productPolicy.getDiscountRate())
-			.enabled(productPolicy.isEnabled())
-			.thumbnailSrc(productPolicy.getThumbnailSrc())
-			.llmId(productPolicy.getLlmId())
-			.approved(productPolicy.isApproved())
+	public Product deleteProduct(Product product) {
+		return Product.builder()
+			.productId(product.getProductId())
+			.productUuid(product.getProductUuid())
+			.sellerUuid(product.getSellerUuid())
+			.sellerName(product.getSellerName())
+			.price(product.getPrice())
+			.productName(product.getProductName())
+			.prompt(product.getPrompt())
+			.description(product.getDescription())
 			.deleted(true)
 			.build();
 	}

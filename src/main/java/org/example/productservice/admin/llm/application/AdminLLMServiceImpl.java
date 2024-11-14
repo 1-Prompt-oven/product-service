@@ -23,7 +23,7 @@ public class AdminLLMServiceImpl implements AdminLLMService {
 	@Override
 	public void createLLM(AddLLMRequestDto createLLMRequestDto) {
 
-		if (adminLlmRepository.findByName(createLLMRequestDto.getName()).isPresent()) {
+		if (adminLlmRepository.findByLlmName(createLLMRequestDto.getLlmName()).isPresent()) {
 			throw new BaseException(BaseResponseStatus.DUPLICATED_DATA);
 		}
 

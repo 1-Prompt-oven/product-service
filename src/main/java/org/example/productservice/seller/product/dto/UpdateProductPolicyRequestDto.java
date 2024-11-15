@@ -19,8 +19,9 @@ public class UpdateProductPolicyRequestDto {
 	private float discountRate;
 	private boolean enabled;
 	private boolean approved;
-	private Long llmId;
-	private String llmName;
+	private String seed;
+	private Long llmVersion;
+	private String llmVersionName;
 
 	public static UpdateProductPolicyRequestDto toDto(UpdateProductPolicyRequestVo updateProductPolicyRequestVo) {
 		return UpdateProductPolicyRequestDto.builder()
@@ -29,8 +30,9 @@ public class UpdateProductPolicyRequestDto {
 			.discountRate(updateProductPolicyRequestVo.getDiscountRate())
 			.enabled(updateProductPolicyRequestVo.isEnabled())
 			.approved(updateProductPolicyRequestVo.isApproved())
-			.llmId(updateProductPolicyRequestVo.getLlmId())
-			.llmName(updateProductPolicyRequestVo.getLlmName())
+			.seed(updateProductPolicyRequestVo.getSeed())
+			.llmVersion(updateProductPolicyRequestVo.getLlmVersion())
+			.llmVersionName(updateProductPolicyRequestVo.getLlmVersionName())
 			.build();
 	}
 
@@ -42,8 +44,9 @@ public class UpdateProductPolicyRequestDto {
 			.discountRate(discountRate)
 			.enabled(enabled)
 			.approved(approved)
-			.llmId(llmId)
-			.llmName(llmName)
+			.seed(seed)
+			.llmVersion(llmVersion)
+			.llmVersionName(llmVersionName)
 			.build();
 	}
 }

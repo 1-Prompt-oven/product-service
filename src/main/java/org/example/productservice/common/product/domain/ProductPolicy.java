@@ -34,18 +34,18 @@ public class ProductPolicy {
 	@Column(nullable = false)
 	private boolean enabled;
 
-	private String thumbnailSrc;
-
 	@Column(nullable = false)
 	private boolean deleted;
 
 	@Column(nullable = false)
 	private boolean approved;
 
-	@Column(nullable = false)
-	private Long llmId;
+	@Column(length = 20)
+	private String seed;
 
 	@Column(nullable = false)
-	private String llmName;
+	private Long llmVersion;
 
+	@Column(nullable = false)
+	private String llmVersionName;
 }

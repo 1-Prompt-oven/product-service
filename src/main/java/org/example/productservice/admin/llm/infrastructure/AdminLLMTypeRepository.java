@@ -6,7 +6,7 @@ import org.example.productservice.common.llm.domain.LLMType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdminLLMTypeRepository extends JpaRepository<LLMType, Long> {
-	boolean existsByName(String name);
+	boolean existsByLlmTypeName(String llmTypeName);
 
-	Optional<LLMType> findByName(String typeName);
+	Optional<LLMType> findByLlmTypeName(String llmTypeName);
 }

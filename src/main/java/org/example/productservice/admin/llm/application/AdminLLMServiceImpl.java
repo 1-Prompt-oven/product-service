@@ -52,7 +52,7 @@ public class AdminLLMServiceImpl implements AdminLLMService {
 	public List<GetLLMListByTypeResponseDto> getLLMListByType(Long llmTypeId) {
 
 		return adminLlmRepository.findAll().stream()
-			.filter(llm -> !llm.isDeleted() && (llmTypeId == null || llm.getLlmTypeId().equals(llmTypeId)))
+			.filter(llm -> !llm.isDeleted() && (null == llmTypeId || llm.getLlmTypeId().equals(llmTypeId)))
 			.map(GetLLMListByTypeResponseDto::toDto)
 			.toList();
 	}

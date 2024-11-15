@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GetAllLLMResponseVo {
+public class GetLLMListByTypeResponseVo {
 
 	private Long llmId;
 	private String llmName;

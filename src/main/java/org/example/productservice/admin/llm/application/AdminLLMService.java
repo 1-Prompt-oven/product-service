@@ -5,7 +5,7 @@ import java.util.List;
 import org.example.productservice.admin.llm.dto.in.AddLLMRequestDto;
 import org.example.productservice.admin.llm.dto.in.DeleteLLMRequestDto;
 import org.example.productservice.admin.llm.dto.in.UpdateLLMRequestDto;
-import org.example.productservice.admin.llm.dto.out.GetAllLLMResponseDto;
+import org.example.productservice.admin.llm.dto.out.GetLLMListByTypeResponseDto;
 
 public interface AdminLLMService {
 
@@ -15,5 +15,5 @@ public interface AdminLLMService {
 
 	void deleteLLM(DeleteLLMRequestDto deleteLLMRequestDto);
 
-	List<GetAllLLMResponseDto> getAllLLM();
+	List<GetLLMListByTypeResponseDto> getLLMListByType(Long llmTypeId);
 }

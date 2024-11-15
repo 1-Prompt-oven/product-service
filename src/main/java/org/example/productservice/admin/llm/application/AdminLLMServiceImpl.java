@@ -5,7 +5,7 @@ import java.util.List;
 import org.example.productservice.admin.llm.dto.in.AddLLMRequestDto;
 import org.example.productservice.admin.llm.dto.in.DeleteLLMRequestDto;
 import org.example.productservice.admin.llm.dto.in.UpdateLLMRequestDto;
-import org.example.productservice.admin.llm.dto.out.GetAllLLMResponseDto;
+import org.example.productservice.admin.llm.dto.out.GetLLMListByTypeResponseDto;
 import org.example.productservice.admin.llm.infrastructure.AdminLLMRepository;
 import org.example.productservice.common.llm.domain.LLM;
 import org.example.productservice.global.common.response.BaseResponseStatus;
@@ -49,12 +49,11 @@ public class AdminLLMServiceImpl implements AdminLLMService {
 
 	}
 
-	@Override
-	public List<GetAllLLMResponseDto> getAllLLM() {
+	public List<GetLLMListByTypeResponseDto> getLLMListByType(Long llmTypeId) {
 
 		return adminLlmRepository.findAll().stream()
-				.filter(llm -> !llm.isDeleted())
-				.map(GetAllLLMResponseDto::toDto)
-				.toList();
+			.filter(llm -> !llm.isDeleted() && (llmTypeId == null || llm.getLlmTypeId().equals(llmTypeId)))
+			.map(GetLLMListByTypeResponseDto::toDto)
+			.toList();
 	}
 }

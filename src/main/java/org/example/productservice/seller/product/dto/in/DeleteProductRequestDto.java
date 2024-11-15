@@ -35,6 +35,10 @@ public class DeleteProductRequestDto {
 			.description(product.getDescription())
 			.llmId(product.getLlmId())
 			.llmName(product.getLlmName())
+			.topCategoryUuid(product.getTopCategoryUuid())
+			.topCategoryName(product.getTopCategoryName())
+			.subCategoryUuid(product.getSubCategoryUuid())
+			.subCategoryName(product.getSubCategoryName())
 			.deleted(true)
 			.build();
 	}

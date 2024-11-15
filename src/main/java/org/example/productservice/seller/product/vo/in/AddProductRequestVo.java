@@ -26,4 +26,12 @@ public class AddProductRequestVo {
 	private Long llmId;
 
 	private String llmName;
+
+	private String topCategoryUuid;
+
+	private String topCategoryName;
+
+	private String subCategoryUuid;
+
+	private String subCategoryName;
 }

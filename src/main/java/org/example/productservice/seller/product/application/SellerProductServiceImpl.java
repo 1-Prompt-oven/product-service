@@ -1,7 +1,6 @@
 package org.example.productservice.seller.product.application;
 
 import org.example.productservice.common.product.domain.Product;
-import org.example.productservice.common.product.domain.ProductPolicy;
 import org.example.productservice.global.common.response.BaseResponseStatus;
 import org.example.productservice.global.error.BaseException;
 import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
@@ -62,10 +61,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 		Product product = sellerProductRepository.findByProductUuid(getProductDetailRequestDto.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		ProductPolicy productPolicy = sellerProductPolicyRepository.findByProductUuid(product.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-
-		return GetProductDetailResponseDto.toDto(product, productPolicy);
+		return GetProductDetailResponseDto.toDto(product);
 	}
 
 }

@@ -40,6 +40,14 @@ public class UpdateProductRequestDto {
 
 	private String llmName;
 
+	private String topCategoryUuid;
+
+	private String topCategoryName;
+
+	private String subCategoryUuid;
+
+	private String subCategoryName;
+
 	public static UpdateProductRequestDto toDto(UpdateProductRequestVo updateProductRequestVo) {
 		return UpdateProductRequestDto.builder()
 			.productUuid(updateProductRequestVo.getProductUuid())
@@ -51,6 +59,10 @@ public class UpdateProductRequestDto {
 			.description(updateProductRequestVo.getDescription())
 			.llmId(updateProductRequestVo.getLlmId())
 			.llmName(updateProductRequestVo.getLlmName())
+			.topCategoryUuid(updateProductRequestVo.getTopCategoryUuid())
+			.topCategoryName(updateProductRequestVo.getTopCategoryName())
+			.subCategoryUuid(updateProductRequestVo.getSubCategoryUuid())
+			.subCategoryName(updateProductRequestVo.getSubCategoryName())
 			.build();
 	}
 
@@ -66,6 +78,10 @@ public class UpdateProductRequestDto {
 			.description(description)
 			.llmId(llmId)
 			.llmName(llmName)
+			.topCategoryUuid(topCategoryUuid)
+			.topCategoryName(topCategoryName)
+			.subCategoryUuid(subCategoryUuid)
+			.subCategoryName(subCategoryName)
 			.build();
 	}
 

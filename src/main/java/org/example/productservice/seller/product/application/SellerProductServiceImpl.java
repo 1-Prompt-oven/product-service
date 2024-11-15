@@ -8,8 +8,6 @@ import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
 import org.example.productservice.seller.product.dto.in.GetProductDetailRequestDto;
 import org.example.productservice.seller.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.seller.product.dto.out.GetProductDetailResponseDto;
-import org.example.productservice.seller.product.infrastructure.SellerProductContentRepository;
-import org.example.productservice.seller.product.infrastructure.SellerProductPolicyRepository;
 import org.example.productservice.seller.product.infrastructure.SellerProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +20,6 @@ import lombok.RequiredArgsConstructor;
 public class SellerProductServiceImpl implements SellerProductService {
 
 	private final SellerProductRepository sellerProductRepository;
-	private final SellerProductPolicyRepository sellerProductPolicyRepository;
-	private final SellerProductContentRepository sellerProductContentRepository;
 
 	@Override
 	public void addProduct(AddProductRequestDto addProductRequestDto) {

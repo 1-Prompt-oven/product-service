@@ -15,10 +15,9 @@ public class AddProductPolicyRequestVo {
 	private String productUuid;
 	private float discountRate;
 	private boolean enabled;
-	// TODO: 썸네일 링크 버리기
-	private String thumbnailSrc;
 	private boolean deleted;
 	private boolean approved;
-	private Long llmId;
-	private String llmName;
+	private String seed;
+	private Long llmVersion;
+	private String llmVersionName;
 }

@@ -16,7 +16,7 @@ public class UpdateProductPolicyRequestVo {
 	private float discountRate;
 	private boolean enabled;
 	private boolean approved;
-	private Long llmId;
-	private String llmName;
-
+	private String seed;
+	private Long llmVersion;
+	private String llmVersionName;
 }

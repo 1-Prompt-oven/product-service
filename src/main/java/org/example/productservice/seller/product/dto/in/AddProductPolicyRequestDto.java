@@ -20,8 +20,9 @@ public class AddProductPolicyRequestDto {
 	private boolean enabled;
 	private boolean deleted;
 	private boolean approved;
-	private Long llmId;
-	private String llmName;
+	private String seed;
+	private Long llmVersion;
+	private String llmVersionName;
 
 	public static AddProductPolicyRequestDto toDto(
 		AddProductPolicyRequestVo addProductPolicyRequestVo) {
@@ -31,8 +32,9 @@ public class AddProductPolicyRequestDto {
 			.enabled(addProductPolicyRequestVo.isEnabled())
 			.deleted(addProductPolicyRequestVo.isDeleted())
 			.approved(addProductPolicyRequestVo.isApproved())
-			.llmId(addProductPolicyRequestVo.getLlmId())
-			.llmName(addProductPolicyRequestVo.getLlmName())
+			.seed(addProductPolicyRequestVo.getSeed())
+			.llmVersion(addProductPolicyRequestVo.getLlmVersion())
+			.llmVersionName(addProductPolicyRequestVo.getLlmVersionName())
 			.build();
 	}
 
@@ -45,8 +47,9 @@ public class AddProductPolicyRequestDto {
 			.enabled(enabled)
 			.deleted(deleted)
 			.approved(approved)
-			.llmId(llmId)
-			.llmName(llmName)
+			.seed(seed)
+			.llmVersion(llmVersion)
+			.llmVersionName(llmVersionName)
 			.build();
 	}
 }

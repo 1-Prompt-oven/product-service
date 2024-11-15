@@ -29,14 +29,6 @@ public class GetProductDetailResponseDto {
 
 	private String description;
 
-	private float discountRate;
-
-	private boolean enabled;
-
-	private String thumbnailSrc;
-
-	private boolean approved;
-
 	private Long llmId;
 
 	private String llmName;
@@ -50,10 +42,6 @@ public class GetProductDetailResponseDto {
 			.prompt(product.getPrompt())
 			.productName(product.getProductName())
 			.description(product.getDescription())
-			.discountRate(productPolicy.getDiscountRate())
-			.enabled(productPolicy.isEnabled())
-			.thumbnailSrc(productPolicy.getThumbnailSrc())
-			.approved(productPolicy.isApproved())
 			.llmId(productPolicy.getLlmId())
 			.llmName(productPolicy.getLlmName())
 			.build();
@@ -68,10 +56,6 @@ public class GetProductDetailResponseDto {
 			.prompt(prompt)
 			.productName(productName)
 			.description(description)
-			.discountRate(discountRate)
-			.enabled(enabled)
-			.thumbnailSrc(thumbnailSrc)
-			.approved(approved)
 			.llmId(llmId)
 			.llmName(llmName)
 			.build();

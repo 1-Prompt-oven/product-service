@@ -40,12 +40,17 @@ public class Product {
 	@Column(nullable = false)
 	private int price;
 
-	// TODO: prompt 제거
 	@Column(nullable = false, length = 500)
 	private String prompt;
 
 	@Column(nullable = false, length = 100)
 	private String description;
+
+	@Column(nullable = false)
+	private Long llmId;
+
+	@Column(nullable = false)
+	private String llmName;
 
 	@Column(nullable = false)
 	private boolean deleted;

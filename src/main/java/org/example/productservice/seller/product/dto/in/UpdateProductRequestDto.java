@@ -38,6 +38,8 @@ public class UpdateProductRequestDto {
 
 	private Long llmId;
 
+	private String llmName;
+
 	public static UpdateProductRequestDto toDto(UpdateProductRequestVo updateProductRequestVo) {
 		return UpdateProductRequestDto.builder()
 			.productUuid(updateProductRequestVo.getProductUuid())
@@ -47,11 +49,8 @@ public class UpdateProductRequestDto {
 			.productName(updateProductRequestVo.getProductName())
 			.prompt(updateProductRequestVo.getPrompt())
 			.description(updateProductRequestVo.getDescription())
-			.discountRate(updateProductRequestVo.getDiscountRate())
-			.enabled(updateProductRequestVo.isEnabled())
-			.thumbnailSrc(updateProductRequestVo.getThumbnailSrc())
-			.approved(updateProductRequestVo.isApproved())
 			.llmId(updateProductRequestVo.getLlmId())
+			.llmName(updateProductRequestVo.getLlmName())
 			.build();
 	}
 
@@ -65,6 +64,8 @@ public class UpdateProductRequestDto {
 			.price(price)
 			.prompt(prompt)
 			.description(description)
+			.llmId(llmId)
+			.llmName(llmName)
 			.build();
 	}
 

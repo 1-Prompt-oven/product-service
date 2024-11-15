@@ -33,7 +33,7 @@ public class SellerProductController {
 	@Operation(summary = "상품 등록", description = """
 	상품 등록
 	
-	- llmName: Midjourney, Dall-E, Stable Diffusion, GPT
+	- llmName, llmId: (Dall-E, 1), (GPT, 2), (Midjourney, 3)
 	""")
 	@PostMapping
 	public BaseResponse<Void> addProduct(@RequestBody AddProductRequestVo addProductRequestVo) {
@@ -58,7 +58,11 @@ public class SellerProductController {
 	@Operation(summary = "상품 상세 조회", description = "상품 상세 조회")
 	@PostMapping("/detail")
 	public BaseResponse<GetProductDetailResponseVo> getProductDetail(@RequestBody GetProductDetailRequestVo getProductDetailRequestVo) {
-		return new BaseResponse<>(sellerProductService.getProductDetail(GetProductDetailRequestDto.toDto(getProductDetailRequestVo)).toVo());
+		GetProductDetailRequestDto getProductDetailRequestDto = GetProductDetailRequestDto.toDto(getProductDetailRequestVo);
+		return new BaseResponse<>(
+			sellerProductService.getProductDetail(getProductDetailRequestDto)
+			.toVo()
+		);
 	}
 
 }

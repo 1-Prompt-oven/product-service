@@ -33,6 +33,8 @@ public class DeleteProductRequestDto {
 			.productName(product.getProductName())
 			.prompt(product.getPrompt())
 			.description(product.getDescription())
+			.llmId(product.getLlmId())
+			.llmName(product.getLlmName())
 			.deleted(true)
 			.build();
 	}

@@ -27,6 +27,10 @@ public class AddProductRequestDto {
 
 	private String description;
 
+	private Long llmId;
+
+	private String llmName;
+
 	public static AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {
 		return AddProductRequestDto.builder()
 			.sellerUuid(addProductRequestVo.getSellerUuid())
@@ -35,6 +39,8 @@ public class AddProductRequestDto {
 			.productName(addProductRequestVo.getProductName())
 			.prompt(addProductRequestVo.getPrompt())
 			.description(addProductRequestVo.getDescription())
+			.llmId(addProductRequestVo.getLlmId())
+			.llmName(addProductRequestVo.getLlmName())
 			.build();
 	}
 
@@ -47,6 +53,9 @@ public class AddProductRequestDto {
 				.price(price)
 				.prompt(prompt)
 				.description(description)
+				.llmId(llmId)
+				.llmName(llmName)
+				.deleted(false)
 				.build();
 	}
 

@@ -25,16 +25,6 @@ public class GetProductDetailResponseVo {
 
 	private String description;
 
-	private float discountRate;
-
-	private boolean enabled;
-
-	private boolean premium;
-
-	private String thumbnailSrc;
-
-	private boolean approved;
-
 	private Long llmId;
 
 	private String llmName;

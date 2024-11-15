@@ -22,4 +22,8 @@ public class AddProductRequestVo {
 	private String prompt;
 
 	private String description;
+
+	private Long llmId;
+
+	private String llmName;
 }

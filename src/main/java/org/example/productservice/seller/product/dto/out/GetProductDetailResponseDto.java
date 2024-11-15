@@ -1,7 +1,6 @@
 package org.example.productservice.seller.product.dto.out;
 
 import org.example.productservice.common.product.domain.Product;
-import org.example.productservice.common.product.domain.ProductPolicy;
 import org.example.productservice.seller.product.vo.out.GetProductDetailResponseVo;
 
 import lombok.AllArgsConstructor;
@@ -33,7 +32,15 @@ public class GetProductDetailResponseDto {
 
 	private String llmName;
 
-	public static GetProductDetailResponseDto toDto(Product product, ProductPolicy productPolicy) {
+	private String topCategoryUuid;
+
+	private String topCategoryName;
+
+	private String subCategoryUuid;
+
+	private String subCategoryName;
+
+	public static GetProductDetailResponseDto toDto(Product product) {
 		return GetProductDetailResponseDto.builder()
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())
@@ -42,8 +49,12 @@ public class GetProductDetailResponseDto {
 			.prompt(product.getPrompt())
 			.productName(product.getProductName())
 			.description(product.getDescription())
-			.llmId(productPolicy.getLlmId())
-			.llmName(productPolicy.getLlmName())
+			.llmId(product.getLlmId())
+			.llmName(product.getLlmName())
+			.topCategoryUuid(product.getTopCategoryUuid())
+			.topCategoryName(product.getTopCategoryName())
+			.subCategoryUuid(product.getSubCategoryUuid())
+			.subCategoryName(product.getSubCategoryName())
 			.build();
 	}
 
@@ -58,6 +69,10 @@ public class GetProductDetailResponseDto {
 			.description(description)
 			.llmId(llmId)
 			.llmName(llmName)
+			.topCategoryUuid(topCategoryUuid)
+			.topCategoryName(topCategoryName)
+			.subCategoryUuid(subCategoryUuid)
+			.subCategoryName(subCategoryName)
 			.build();
 	}
 }

@@ -53,5 +53,17 @@ public class Product {
 	private String llmName;
 
 	@Column(nullable = false)
+	private String topCategoryUuid;
+
+	@Column(nullable = false)
+	private String topCategoryName;
+
+	@Column(nullable = false)
+	private String subCategoryUuid;
+
+	@Column(nullable = false)
+	private String subCategoryName;
+
+	@Column(nullable = false)
 	private boolean deleted;
 }

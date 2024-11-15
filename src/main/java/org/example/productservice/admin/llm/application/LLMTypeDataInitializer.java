@@ -39,8 +39,8 @@ public class LLMTypeDataInitializer implements ApplicationListener<ApplicationRe
 
 		try {
 			List<LLMType> types = typeNames.stream()
-				.map(name -> LLMType.builder()
-					.name(name)
+				.map(llmTypeName -> LLMType.builder()
+					.llmTypeName(llmTypeName)
 					.deleted(false)
 					.build())
 				.toList();

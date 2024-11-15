@@ -48,13 +48,13 @@ public class LLMDataInitializer implements ApplicationListener<ApplicationReadyE
 				.map(entry -> {
 					String llmName = entry.getKey();
 					String typeName = entry.getValue();
-					LLMType llmType = adminLLMTypeRepository.findByName(typeName)
+					LLMType llmType = adminLLMTypeRepository.findByLlmTypeName(typeName)
 						.orElseThrow(() -> new RuntimeException("LLMType not found: " + typeName));
 
 					return LLM.builder()
 						.llmName(llmName)
 						.llmTypeId(llmType.getLlmTypeId())
-						.llmTypeName(llmType.getName())
+						.llmTypeName(llmType.getLlmTypeName())
 						.deleted(false)
 						.build();
 				})

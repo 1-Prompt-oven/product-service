@@ -27,7 +27,7 @@ public class AdminLLMTypeServiceImpl implements AdminLLMTypeService {
 	@Override
 	public void addLLMType(AddLLMTypeRequestDto addLLMTypeRequestDto) {
 
-		if (adminLLMTypeRepository.existsByName(addLLMTypeRequestDto.getName())) {
+		if (adminLLMTypeRepository.existsByLlmTypeName(addLLMTypeRequestDto.getLlmTypeName())) {
 			throw new BaseException(BaseResponseStatus.DUPLICATED_DATA);
 		}
 
@@ -56,7 +56,7 @@ public class AdminLLMTypeServiceImpl implements AdminLLMTypeService {
 			.filter(llmType -> !llmType.isDeleted())
 			.map(llmType -> GetLLMTypeListResponseDto.builder()
 				.llmTypeId(llmType.getLlmTypeId())
-				.name(llmType.getName())
+				.name(llmType.getLlmTypeName())
 				.build())
 			.toList();
 	}

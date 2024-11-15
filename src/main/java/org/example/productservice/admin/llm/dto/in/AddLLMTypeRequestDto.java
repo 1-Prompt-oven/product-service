@@ -14,24 +14,24 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AddLLMTypeRequestDto {
 
-	private String name;
+	private String llmTypeName;
 
 	public static AddLLMTypeRequestDto toDto(AddLLMTypeRequestVo addLLMTypeRequestVo) {
 		return AddLLMTypeRequestDto.builder()
-				.name(addLLMTypeRequestVo.getName())
+				.llmTypeName(addLLMTypeRequestVo.getName())
 				.build();
 	}
 
 	public LLMType createEntity() {
 		return LLMType.builder()
-				.name(name)
+				.llmTypeName(llmTypeName)
 				.build();
 	}
 
 	public LLMType updateEntity(Long llmTypeId) {
 		return LLMType.builder()
 				.llmTypeId(llmTypeId)
-				.name(name)
+				.llmTypeName(llmTypeName)
 				.build();
 	}
 }

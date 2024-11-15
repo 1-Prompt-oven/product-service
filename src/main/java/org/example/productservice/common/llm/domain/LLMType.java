@@ -20,7 +20,7 @@ public class LLMType {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long llmTypeId;
 
-	private String name;
+	private String llmTypeName;
 
 	private boolean deleted;
 }

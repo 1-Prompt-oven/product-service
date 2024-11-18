@@ -13,4 +13,5 @@ public class GetLLMVersionListRequestDto {
 
 	private Long llmVersionId;
 	private String llmVersionName;
+	private Long llmId;
 }

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class AddLLMRequestVo {
 
 	private String llmName;
-	private Long llmTypeId;
-	private String llmTypeName;
+	private String llmType;
 
 }

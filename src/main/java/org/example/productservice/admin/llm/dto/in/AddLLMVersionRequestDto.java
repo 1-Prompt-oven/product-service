@@ -19,6 +19,7 @@ public class AddLLMVersionRequestDto {
 
 	public static AddLLMVersionRequestDto toDto(AddLLMVersionRequestVo addLLMVersionRequestVo) {
 		return AddLLMVersionRequestDto.builder()
+				.llmId(addLLMVersionRequestVo.getLlmId())
 				.llmVersionName(addLLMVersionRequestVo.getLlmVersionName())
 				.build();
 	}
@@ -34,8 +35,8 @@ public class AddLLMVersionRequestDto {
 	public LLMVersion updateEntity(Long llmVersionId) {
 		return LLMVersion.builder()
 				.llmVersionId(llmVersionId)
-				.llmVersionName(llmVersionName)
 				.llmId(llmId)
+				.llmVersionName(llmVersionName)
 				.deleted(false)
 				.build();
 	}

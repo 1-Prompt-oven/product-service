@@ -26,8 +26,7 @@ public class DeleteLLMRequestDto {
 		return LLM.builder()
 			.llmId(llmId)
 			.llmName(llm.getLlmName())
-			.llmTypeId(llm.getLlmTypeId())
-			.llmTypeName(llm.getLlmTypeName())
+			.llmType(llm.getLlmType())
 			.deleted(true)
 			.build();
 	}

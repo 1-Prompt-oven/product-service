@@ -13,7 +13,6 @@ public class GetLLMListByTypeResponseVo {
 
 	private Long llmId;
 	private String llmName;
-	private Long llmTypeId;
-	private String llmTypeName;
+	private String llmType;
 
 }

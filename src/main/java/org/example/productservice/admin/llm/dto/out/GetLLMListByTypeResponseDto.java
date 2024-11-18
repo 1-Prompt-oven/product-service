@@ -16,15 +16,13 @@ public class GetLLMListByTypeResponseDto {
 
 	private Long llmId;
 	private String llmName;
-	private Long llmTypeId;
-	private String llmTypeName;
+	private String llmType;
 
 	public static GetLLMListByTypeResponseDto toDto(LLM llm) {
 		return GetLLMListByTypeResponseDto.builder()
 				.llmId(llm.getLlmId())
 				.llmName(llm.getLlmName())
-				.llmTypeId(llm.getLlmTypeId())
-				.llmTypeName(llm.getLlmTypeName())
+				.llmType(llm.getLlmType())
 				.build();
 	}
 
@@ -32,8 +30,7 @@ public class GetLLMListByTypeResponseDto {
 		return GetLLMListByTypeResponseVo.builder()
 			.llmId(llmId)
 			.llmName(llmName)
-			.llmTypeId(llmTypeId)
-			.llmTypeName(llmTypeName)
+			.llmType(llmType)
 			.build();
 	}
 }

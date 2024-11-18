@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.example.productservice.admin.llm.dto.in.AddLLMRequestDto;
 import org.example.productservice.admin.llm.dto.in.DeleteLLMRequestDto;
-import org.example.productservice.admin.llm.dto.in.UpdateLLMRequestDto;
 import org.example.productservice.admin.llm.dto.out.GetLLMListByTypeResponseDto;
 import org.example.productservice.admin.llm.infrastructure.AdminLLMRepository;
 import org.example.productservice.common.llm.domain.LLM;
@@ -21,22 +20,19 @@ public class AdminLLMServiceImpl implements AdminLLMService {
 	private final AdminLLMRepository adminLlmRepository;
 
 	@Override
-	public void createLLM(AddLLMRequestDto createLLMRequestDto) {
+	public void createLLM(AddLLMRequestDto addLLMRequestDto) {
 
-		if (adminLlmRepository.findByLlmName(createLLMRequestDto.getLlmName()).isPresent()) {
+		if (adminLlmRepository.findByLlmName(addLLMRequestDto.getLlmName()).isPresent()) {
 			throw new BaseException(BaseResponseStatus.DUPLICATED_DATA);
 		}
 
-		adminLlmRepository.save(createLLMRequestDto.toEntity());
+		adminLlmRepository.save(addLLMRequestDto.createEntity());
 	}
 
 	@Override
-	public void updateLLM(UpdateLLMRequestDto updateLLMRequestDto) {
+	public void updateLLM(Long llmId, AddLLMRequestDto addLLMRequestDto) {
 
-		adminLlmRepository.findById(updateLLMRequestDto.getLlmId())
-				.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-
-		adminLlmRepository.save(updateLLMRequestDto.toEntity());
+		adminLlmRepository.save(addLLMRequestDto.updateEntity(llmId));
 	}
 
 	@Override
@@ -49,10 +45,10 @@ public class AdminLLMServiceImpl implements AdminLLMService {
 
 	}
 
-	public List<GetLLMListByTypeResponseDto> getLLMListByType(Long llmTypeId) {
+	public List<GetLLMListByTypeResponseDto> getLLMListByType(String llmType) {
 
 		return adminLlmRepository.findAll().stream()
-			.filter(llm -> !llm.isDeleted() && (null == llmTypeId || llm.getLlmTypeId().equals(llmTypeId)))
+			.filter(llm -> !llm.isDeleted() && (null == llmType || llm.getLlmType().equals(llmType)))
 			.map(GetLLMListByTypeResponseDto::toDto)
 			.toList();
 	}

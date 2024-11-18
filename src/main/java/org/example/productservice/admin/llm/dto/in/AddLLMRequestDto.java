@@ -15,23 +15,29 @@ import lombok.NoArgsConstructor;
 public class AddLLMRequestDto {
 
 	private String llmName;
-	private Long llmTypeId;
-	private String llmTypeName;
+	private String llmType;
 
 	public static AddLLMRequestDto toDto(AddLLMRequestVo addLLMRequestVo) {
 		return AddLLMRequestDto.builder()
 				.llmName(addLLMRequestVo.getLlmName())
-				.llmTypeId(addLLMRequestVo.getLlmTypeId())
-				.llmTypeName(addLLMRequestVo.getLlmTypeName())
+				.llmType(addLLMRequestVo.getLlmType())
 				.build();
 	}
 
-	public LLM toEntity() {
+	public LLM createEntity() {
 		return LLM.builder()
 				.llmName(llmName)
-				.llmTypeId(llmTypeId)
-				.llmTypeName(llmTypeName)
+				.llmType(llmType)
 				.deleted(false)
 				.build();
+	}
+
+	public LLM updateEntity(Long llmId) {
+		return LLM.builder()
+			.llmId(llmId)
+			.llmName(llmName)
+			.llmType(llmType)
+			.deleted(false)
+			.build();
 	}
 }

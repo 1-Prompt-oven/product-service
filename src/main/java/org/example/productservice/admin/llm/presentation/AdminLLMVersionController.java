@@ -58,7 +58,6 @@ public class AdminLLMVersionController {
 	LLM ID 매칭 정보
 	- llmId = 1: Dall-E (image)
 	- llmId = 2: GPT (text)
-	- llmId = 3: Midjourney (image)
 	""")
 	@GetMapping("/{llmId}")
 	public BaseResponse<List<GetLLMVersionListRequestVo>> getLLMVersionListByLLMId(@PathVariable Long llmId) {

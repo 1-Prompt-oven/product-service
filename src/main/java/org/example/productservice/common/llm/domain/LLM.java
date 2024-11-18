@@ -29,8 +29,5 @@ public class LLM {
 	private boolean deleted;
 
 	@Column(nullable = false)
-	private Long llmTypeId;
-
-	@Column(nullable = false)
-	private String llmTypeName;
+	private String llmType;
 }

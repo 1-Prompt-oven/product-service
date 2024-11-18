@@ -44,8 +44,9 @@ public class AdminLLMVersionServiceImpl implements AdminLLMVersionService {
 
 		adminLlmVersionRepository.save(
 			LLMVersion.builder()
-				.llmId(llmVersion.getLlmId())
+				.llmVersionId(llmVersion.getLlmVersionId())
 				.llmVersionName(llmVersion.getLlmVersionName())
+				.llmId(llmVersion.getLlmId())
 				.deleted(true)
 				.build()
 		);
@@ -59,6 +60,7 @@ public class AdminLLMVersionServiceImpl implements AdminLLMVersionService {
 			.map(llmVersion -> GetLLMVersionListRequestDto.builder()
 				.llmVersionId(llmVersion.getLlmVersionId())
 				.llmVersionName(llmVersion.getLlmVersionName())
+				.llmId(llmVersion.getLlmId())
 				.build()
 			)
 			.toList();

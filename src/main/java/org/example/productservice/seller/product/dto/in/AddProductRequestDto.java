@@ -1,14 +1,18 @@
 package org.example.productservice.seller.product.dto.in;
 
-import org.example.productservice.common.domain.Product;
-import org.example.productservice.common.domain.ProductPolicy;
+import org.example.productservice.common.product.domain.Product;
 import org.example.productservice.global.common.UuidGenerator;
+import org.example.productservice.seller.product.vo.in.AddProductRequestVo;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
+@Builder
 public class AddProductRequestDto {
 
 	private String sellerUuid;
@@ -17,35 +21,39 @@ public class AddProductRequestDto {
 
 	private int price;
 
+	private String productName;
+
 	private String prompt;
 
 	private String description;
 
-	private float discountRate;
-
-	private boolean enabled;
-
-	private boolean premium;
-
-	private String thumbnailSrc;
-
-	private boolean approved;
-
 	private Long llmId;
 
-	public AddProductRequestDto(String sellerUuid, String sellerName, int price, String prompt, String description,
-		float discountRate, boolean enabled, boolean premium, String thumbnailSrc, boolean approved, Long llmId) {
-		this.sellerUuid = sellerUuid;
-		this.sellerName = sellerName;
-		this.price = price;
-		this.prompt = prompt;
-		this.description = description;
-		this.discountRate = discountRate;
-		this.enabled = enabled;
-		this.premium = premium;
-		this.thumbnailSrc = thumbnailSrc;
-		this.approved = approved;
-		this.llmId = llmId;
+	private String llmName;
+
+	private String topCategoryUuid;
+
+	private String topCategoryName;
+
+	private String subCategoryUuid;
+
+	private String subCategoryName;
+
+	public static AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {
+		return AddProductRequestDto.builder()
+			.sellerUuid(addProductRequestVo.getSellerUuid())
+			.sellerName(addProductRequestVo.getSellerName())
+			.price(addProductRequestVo.getPrice())
+			.productName(addProductRequestVo.getProductName())
+			.prompt(addProductRequestVo.getPrompt())
+			.description(addProductRequestVo.getDescription())
+			.llmId(addProductRequestVo.getLlmId())
+			.llmName(addProductRequestVo.getLlmName())
+			.topCategoryUuid(addProductRequestVo.getTopCategoryUuid())
+			.topCategoryName(addProductRequestVo.getTopCategoryName())
+			.subCategoryUuid(addProductRequestVo.getSubCategoryUuid())
+			.subCategoryName(addProductRequestVo.getSubCategoryName())
+			.build();
 	}
 
 	public Product createProduct() {
@@ -53,43 +61,19 @@ public class AddProductRequestDto {
 			.productUuid(UuidGenerator.generateProductUuid())
 				.sellerUuid(sellerUuid)
 				.sellerName(sellerName)
+				.productName(productName)
 				.price(price)
 				.prompt(prompt)
 				.description(description)
-				.build();
-	}
-
-	public ProductPolicy createProductPolicy(Product product) {
-		return ProductPolicy.builder()
-				.product(product)
-				.discountRate(discountRate)
-				.enabled(enabled)
-				.premium(premium)
-				.thumbnailSrc(thumbnailSrc)
-				.approved(approved)
 				.llmId(llmId)
+				.llmName(llmName)
+				.topCategoryUuid(topCategoryUuid)
+				.topCategoryName(topCategoryName)
+				.subCategoryUuid(subCategoryUuid)
+				.subCategoryName(subCategoryName)
+				.deleted(false)
 				.build();
 	}
 
-	public Product updateProduct(Long productId) {
-		return Product.builder()
-			.productId(productId)
-			.sellerUuid(sellerUuid)
-			.price(price)
-			.prompt(prompt)
-			.description(description)
-			.build();
-	}
 
-	public ProductPolicy updateProductPolicy(Product product) {
-		return ProductPolicy.builder()
-			.product(product)
-			.discountRate(discountRate)
-			.enabled(enabled)
-			.premium(premium)
-			.thumbnailSrc(thumbnailSrc)
-			.approved(approved)
-			.llmId(llmId)
-			.build();
-	}
 }

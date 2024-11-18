@@ -1,15 +1,14 @@
-package org.example.productservice.seller.product.application;
+package org.example.productservice.product.application;
 
-import org.example.productservice.common.product.domain.Product;
-import org.example.productservice.global.common.response.BaseResponseStatus;
-import org.example.productservice.global.error.BaseException;
-import org.example.productservice.product.application.SellerProductService;
-import org.example.productservice.seller.product.dto.in.AddProductRequestDto;
-import org.example.productservice.seller.product.dto.in.DeleteProductRequestDto;
-import org.example.productservice.seller.product.dto.in.GetProductDetailRequestDto;
-import org.example.productservice.seller.product.dto.in.UpdateProductRequestDto;
-import org.example.productservice.seller.product.dto.out.GetProductDetailResponseDto;
-import org.example.productservice.seller.product.infrastructure.SellerProductRepository;
+import org.example.productservice.common.error.BaseException;
+import org.example.productservice.common.response.BaseResponseStatus;
+import org.example.productservice.product.domain.Product;
+import org.example.productservice.product.dto.in.AddProductRequestDto;
+import org.example.productservice.product.dto.in.DeleteProductRequestDto;
+import org.example.productservice.product.dto.in.GetProductDetailRequestDto;
+import org.example.productservice.product.dto.in.UpdateProductRequestDto;
+import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
+import org.example.productservice.product.infrastructure.SellerProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -73,18 +73,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<GetSubCategoriesResponseDto> getSubCategories(String parentCategoryUuid) {
 
-        if (parentCategoryUuid.equals("top")) {
-            // 최상위 카테고리를 가져옴
-            return categoryRepository.findByParentCategoryUuidIsNull()
-                .stream()
-                .filter(category -> !category.isDeleted())
-                .map(GetSubCategoriesResponseDto::from)
-                .toList();
-        }
-
         return categoryRepository.findByParentCategoryUuid(parentCategoryUuid)
             .stream()
-            .filter(category -> !category.isDeleted())
             .map(GetSubCategoriesResponseDto::from)
             .toList();
     }

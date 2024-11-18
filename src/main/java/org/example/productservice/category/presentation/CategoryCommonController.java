@@ -23,8 +23,7 @@ public class CategoryCommonController {
 
 	private final CategoryService categoryService;
 
-	@Operation(summary = "하위 카테고리 리스트 조회", description = "parentCategoryCode =\"top\"입력시 최상위 카테고리 리스트 조회",
-		tags = "공통")
+	@Operation(summary = "하위 카테고리 리스트 조회", description = "parentCategoryCode 미입력시 최상위 카테고리 리스트 조회")
 	@GetMapping("/sub-categories")
 	public BaseResponse<List<GetSubCategoriesResponseVo>> getSubCategories(
 		@RequestParam(value = "parentCategoryUuid", required = false) String parentCategoryUuid) {

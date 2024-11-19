@@ -32,37 +32,28 @@ public class Product {
 	private String sellerUuid;
 
 	@Column(nullable = false, length = 50)
-	private String sellerName;
-
-	@Column(nullable = false, length = 50)
 	private String productName;
 
+	// 통화체계에 따라 유연하게 하게끔 Double. 금액은 무조건 double.
+	// 정산관련할때 수익률 같은거 하게끔하면 반올림 관련해서도 애매해지는 부분이 있으니 double 쓰는게 좋음.
 	@Column(nullable = false)
-	private int price;
+	private double price;
 
-	@Column(nullable = false, length = 500)
+	// 암호화 고려하더라도 길이를 더 길게 쓰자.
+	@Column(nullable = false, length = 3000)
 	private String prompt;
 
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, length = 1000)
 	private String description;
 
 	@Column(nullable = false)
 	private Long llmId;
 
 	@Column(nullable = false)
-	private String llmName;
-
-	@Column(nullable = false)
 	private String topCategoryUuid;
 
 	@Column(nullable = false)
-	private String topCategoryName;
-
-	@Column(nullable = false)
 	private String subCategoryUuid;
-
-	@Column(nullable = false)
-	private String subCategoryName;
 
 	@Column(nullable = false)
 	private boolean deleted;

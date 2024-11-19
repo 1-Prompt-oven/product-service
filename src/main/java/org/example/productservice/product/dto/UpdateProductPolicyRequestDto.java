@@ -20,8 +20,7 @@ public class UpdateProductPolicyRequestDto {
 	private boolean enabled;
 	private boolean approved;
 	private String seed;
-	private Long llmVersion;
-	private String llmVersionName;
+	private Long llmVersionId;
 
 	public static UpdateProductPolicyRequestDto toDto(UpdateProductPolicyRequestVo updateProductPolicyRequestVo) {
 		return UpdateProductPolicyRequestDto.builder()
@@ -31,22 +30,22 @@ public class UpdateProductPolicyRequestDto {
 			.enabled(updateProductPolicyRequestVo.isEnabled())
 			.approved(updateProductPolicyRequestVo.isApproved())
 			.seed(updateProductPolicyRequestVo.getSeed())
-			.llmVersion(updateProductPolicyRequestVo.getLlmVersion())
-			.llmVersionName(updateProductPolicyRequestVo.getLlmVersionName())
+			.llmVersionId(updateProductPolicyRequestVo.getLlmVersionId())
 			.build();
 	}
 
-	public ProductPolicy updateProductPolicy(Long productPolicyId) {
+	public ProductPolicy updateProductPolicy(ProductPolicy productPolicy,
+		UpdateProductPolicyRequestDto updateProductPolicyRequestDto) {
+
 		return ProductPolicy.builder()
-			.productPolicyId(productPolicyId)
-			.productPolicyUuid(productPolicyUuid)
-			.productUuid(productUuid)
-			.discountRate(discountRate)
-			.enabled(enabled)
-			.approved(approved)
-			.seed(seed)
-			.llmVersion(llmVersion)
-			.llmVersionName(llmVersionName)
+			.productPolicyUuid(productPolicy.getProductPolicyUuid())
+			.productUuid(productPolicy.getProductUuid())
+			.productPolicyId(productPolicy.getProductPolicyId())
+			.discountRate(updateProductPolicyRequestDto.getDiscountRate())
+			.enabled(updateProductPolicyRequestDto.isEnabled())
+			.approved(updateProductPolicyRequestDto.isApproved())
+			.seed(updateProductPolicyRequestDto.getSeed())
+			.llmVersionId(updateProductPolicyRequestDto.getLlmVersionId())
 			.build();
 	}
 }

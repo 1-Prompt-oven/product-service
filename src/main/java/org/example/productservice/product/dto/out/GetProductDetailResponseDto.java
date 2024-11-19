@@ -18,11 +18,9 @@ public class GetProductDetailResponseDto {
 
 	private String sellerUuid;
 
-	private String sellerName;
-
 	private String productName;
 
-	private int price;
+	private double price;
 
 	private String prompt;
 
@@ -30,31 +28,21 @@ public class GetProductDetailResponseDto {
 
 	private Long llmId;
 
-	private String llmName;
-
 	private String topCategoryUuid;
 
-	private String topCategoryName;
-
 	private String subCategoryUuid;
-
-	private String subCategoryName;
 
 	public static GetProductDetailResponseDto toDto(Product product) {
 		return GetProductDetailResponseDto.builder()
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())
-			.sellerName(product.getSellerName())
 			.price(product.getPrice())
 			.prompt(product.getPrompt())
 			.productName(product.getProductName())
 			.description(product.getDescription())
 			.llmId(product.getLlmId())
-			.llmName(product.getLlmName())
 			.topCategoryUuid(product.getTopCategoryUuid())
-			.topCategoryName(product.getTopCategoryName())
 			.subCategoryUuid(product.getSubCategoryUuid())
-			.subCategoryName(product.getSubCategoryName())
 			.build();
 	}
 
@@ -62,17 +50,13 @@ public class GetProductDetailResponseDto {
 		return GetProductDetailResponseVo.builder()
 			.productUuid(productUuid)
 			.sellerUuid(sellerUuid)
-			.sellerName(sellerName)
 			.price(price)
 			.prompt(prompt)
 			.productName(productName)
 			.description(description)
 			.llmId(llmId)
-			.llmName(llmName)
 			.topCategoryUuid(topCategoryUuid)
-			.topCategoryName(topCategoryName)
 			.subCategoryUuid(subCategoryUuid)
-			.subCategoryName(subCategoryName)
 			.build();
 	}
 }

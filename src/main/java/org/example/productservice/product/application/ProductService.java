@@ -9,5 +9,4 @@ public interface ProductService {
 	void addProduct(AddProductRequestDto addProductRequestDto);
 	void updateProduct(UpdateProductRequestDto updateProductRequestDto);
 	void deleteProduct(DeleteProductRequestDto deleteProductRequestDto);
-	// GetProductDetailResponseDto getProductDetail(GetProductDetailRequestDto getProductDetailRequestDto);
 }

@@ -3,10 +3,11 @@ package org.example.productservice.product.presentation;
 import org.example.productservice.common.response.BaseResponse;
 import org.example.productservice.product.application.ProductContentService;
 import org.example.productservice.product.dto.in.AddProductContentRequestDto;
+import org.example.productservice.product.dto.in.DeleteProductContentRequestDto;
 import org.example.productservice.product.dto.in.UpdateProductContentRequestDto;
 import org.example.productservice.product.vo.in.AddProductContentRequestVo;
+import org.example.productservice.product.vo.in.DeleteProductContentRequestVo;
 import org.example.productservice.product.vo.in.UpdateProductContentRequestVo;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Tag(name = "판매자 상품 이미지 API", description = "판매자 상품 이미지 관련 API endpoints")
 @RequestMapping("/v1/seller/product/content")
-public class SellerProductContentController {
+public class ProductContentController {
 
 	private final ProductContentService productContentService;
 
@@ -49,10 +50,10 @@ public class SellerProductContentController {
 	}
 
 	@Operation(summary = "상품 콘텐츠 삭제", description = "상품 콘텐츠 삭제")
-	@DeleteMapping
-	public BaseResponse<Void> deleteProductContent(String productContentUuid) {
+	@PutMapping("/delete")
+	public BaseResponse<Void> deleteProductContent(DeleteProductContentRequestVo deleteProductContentRequestVo) {
 
-		productContentService.deleteProductContent(productContentUuid);
+		productContentService.deleteProductContent(DeleteProductContentRequestDto.toDto(deleteProductContentRequestVo));
 		return new BaseResponse<>();
 	}
 }

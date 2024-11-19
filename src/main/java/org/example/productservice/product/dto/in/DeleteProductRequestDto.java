@@ -28,17 +28,13 @@ public class DeleteProductRequestDto {
 			.productId(product.getProductId())
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())
-			.sellerName(product.getSellerName())
 			.price(product.getPrice())
 			.productName(product.getProductName())
 			.prompt(product.getPrompt())
 			.description(product.getDescription())
 			.llmId(product.getLlmId())
-			.llmName(product.getLlmName())
 			.topCategoryUuid(product.getTopCategoryUuid())
-			.topCategoryName(product.getTopCategoryName())
 			.subCategoryUuid(product.getSubCategoryUuid())
-			.subCategoryName(product.getSubCategoryName())
 			.deleted(true)
 			.build();
 	}

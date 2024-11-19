@@ -30,15 +30,17 @@ public class UpdateProductContentRequestDto {
 			.build();
 	}
 
-	public ProductContent updateProductContent(Long productContentId) {
+	public ProductContent updateEntity(ProductContent productContent,
+		UpdateProductContentRequestDto updateProductContentRequestDto) {
+
 		return ProductContent.builder()
-			.productContentId(productContentId)
-			.productContentUuid(productContentUuid)
-			.productUuid(productUuid)
-			.contentUrl(contentUrl)
-			.contentOrder(contentOrder)
-			.sampleValue(sampleValue)
-			.deleted(false)
+			.productContentId(productContent.getProductContentId())
+			.productContentUuid(updateProductContentRequestDto.getProductContentUuid())
+			.productUuid(productContent.getProductUuid())
+			.contentUrl(updateProductContentRequestDto.getContentUrl())
+			.contentOrder(updateProductContentRequestDto.getContentOrder())
+			.sampleValue(updateProductContentRequestDto.getSampleValue())
+			.deleted(productContent.isDeleted())
 			.build();
 	}
 }

@@ -8,7 +8,6 @@ import org.example.productservice.category.vo.in.AddCategoryRequestVo;
 import org.example.productservice.category.vo.in.DeleteCategoryRequestVo;
 import org.example.productservice.category.vo.in.UpdateCategoryRequestVo;
 import org.example.productservice.common.response.BaseResponse;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,7 +47,7 @@ public class CategoryController {
 	}
 
 	@Operation(summary = "카테고리 삭제", description = "카테고리 삭제")
-	@DeleteMapping
+	@PutMapping("/delete")
 	public BaseResponse<Void> deleteCategory(
 		@RequestBody DeleteCategoryRequestVo deleteCategoryRequestVo) {
 		categoryService.deleteCategory(DeleteCategoryRequestDto.toDto(deleteCategoryRequestVo));

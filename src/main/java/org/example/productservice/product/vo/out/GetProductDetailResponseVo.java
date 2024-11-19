@@ -15,11 +15,9 @@ public class GetProductDetailResponseVo {
 
 	private String sellerUuid;
 
-	private String sellerName;
-
 	private String productName;
 
-	private int price;
+	private double price;
 
 	private String prompt;
 
@@ -27,13 +25,7 @@ public class GetProductDetailResponseVo {
 
 	private Long llmId;
 
-	private String llmName;
-
 	private String topCategoryUuid;
 
-	private String topCategoryName;
-
 	private String subCategoryUuid;
-
-	private String subCategoryName;
 }

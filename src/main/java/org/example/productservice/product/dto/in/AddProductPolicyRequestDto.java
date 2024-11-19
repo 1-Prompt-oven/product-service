@@ -21,8 +21,7 @@ public class AddProductPolicyRequestDto {
 	private boolean deleted;
 	private boolean approved;
 	private String seed;
-	private Long llmVersion;
-	private String llmVersionName;
+	private Long llmVersionId;
 
 	public static AddProductPolicyRequestDto toDto(
 		AddProductPolicyRequestVo addProductPolicyRequestVo) {
@@ -33,13 +32,12 @@ public class AddProductPolicyRequestDto {
 			.deleted(addProductPolicyRequestVo.isDeleted())
 			.approved(addProductPolicyRequestVo.isApproved())
 			.seed(addProductPolicyRequestVo.getSeed())
-			.llmVersion(addProductPolicyRequestVo.getLlmVersion())
-			.llmVersionName(addProductPolicyRequestVo.getLlmVersionName())
+			.llmVersionId(addProductPolicyRequestVo.getLlmVersionId())
 			.build();
 	}
 
 
-	public ProductPolicy createProductPolicy(String productUuid) {
+	public ProductPolicy createEntity(String productUuid) {
 		return ProductPolicy.builder()
 			.productUuid(productUuid)
 			.productPolicyUuid(UuidGenerator.generateProductPolicyUuid())
@@ -48,8 +46,7 @@ public class AddProductPolicyRequestDto {
 			.deleted(deleted)
 			.approved(approved)
 			.seed(seed)
-			.llmVersion(llmVersion)
-			.llmVersionName(llmVersionName)
+			.llmVersionId(llmVersionId)
 			.build();
 	}
 }

@@ -44,7 +44,7 @@ public class ProductPolicy {
 	private String seed;
 
 	@Column(nullable = false)
-	private Long llmVersion;
+	private Long llmVersionId;
 
 	@Column(nullable = false)
 	private String llmVersionName;

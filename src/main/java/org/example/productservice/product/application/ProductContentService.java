@@ -1,6 +1,7 @@
 package org.example.productservice.product.application;
 
 import org.example.productservice.product.dto.in.AddProductContentRequestDto;
+import org.example.productservice.product.dto.in.DeleteProductContentRequestDto;
 import org.example.productservice.product.dto.in.UpdateProductContentRequestDto;
 
 public interface ProductContentService {
@@ -9,6 +10,6 @@ public interface ProductContentService {
 
 	void updateProductContent(UpdateProductContentRequestDto updateProductContentRequestDto);
 
-	void deleteProductContent(String productContentUuid);
+	void deleteProductContent(DeleteProductContentRequestDto deleteProductContentRequestDto);
 
 }

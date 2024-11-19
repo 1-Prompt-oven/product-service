@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Builder
-public class AddProductEventDto {
+public class ProductEventDto {
 
 	private Long productId;
 	private String productUuid;
@@ -25,9 +25,9 @@ public class AddProductEventDto {
 	private String subCategoryUuid;
 	private boolean deleted;
 
-	public static AddProductEventDto toDto(Product product) {
+	public static ProductEventDto toDto(Product product) {
 
-		return AddProductEventDto.builder()
+		return ProductEventDto.builder()
 			.productId(product.getProductId())
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())

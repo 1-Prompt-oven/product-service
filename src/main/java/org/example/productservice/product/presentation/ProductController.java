@@ -4,14 +4,10 @@ import org.example.productservice.common.response.BaseResponse;
 import org.example.productservice.product.application.ProductService;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
 import org.example.productservice.product.dto.in.DeleteProductRequestDto;
-import org.example.productservice.product.dto.in.GetProductDetailRequestDto;
 import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 import org.example.productservice.product.vo.in.DeleteProductRequestVo;
-import org.example.productservice.product.vo.in.GetProductDetailRequestVo;
 import org.example.productservice.product.vo.in.UpdateProductRequestVo;
-import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/v1/seller/product")
 @Tag(name = "판매자 상품 API", description = "판매자 상품 관련 API endpoints")
-public class SellerProductController {
+public class ProductController {
 
 	private final ProductService productService;
 
@@ -49,20 +45,10 @@ public class SellerProductController {
 	}
 
 	@Operation(summary = "상품 삭제", description = "상품 삭제")
-	@DeleteMapping
+	@PutMapping("/delete")
 	public BaseResponse<Void> deleteProduct(@RequestBody DeleteProductRequestVo deleteProductRequestVo) {
 		productService.deleteProduct(DeleteProductRequestDto.toDto(deleteProductRequestVo));
 		return new BaseResponse<>();
-	}
-
-	@Operation(summary = "상품 상세 조회", description = "상품 상세 조회")
-	@PostMapping("/detail")
-	public BaseResponse<GetProductDetailResponseVo> getProductDetail(@RequestBody GetProductDetailRequestVo getProductDetailRequestVo) {
-		GetProductDetailRequestDto getProductDetailRequestDto = GetProductDetailRequestDto.toDto(getProductDetailRequestVo);
-		return new BaseResponse<>(
-			productService.getProductDetail(getProductDetailRequestDto)
-			.toVo()
-		);
 	}
 
 }

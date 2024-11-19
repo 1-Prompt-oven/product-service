@@ -29,7 +29,7 @@ public class AddProductContentRequestDto {
 			.build();
 	}
 
-	public ProductContent createProductContent() {
+	public ProductContent createEntity() {
 		return ProductContent.builder()
 			.productContentUuid(UuidGenerator.generateProductContentUuid())
 			.productUuid(productUuid)

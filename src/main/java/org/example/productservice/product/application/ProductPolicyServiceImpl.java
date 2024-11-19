@@ -1,9 +1,11 @@
 package org.example.productservice.product.application;
 
-import org.example.productservice.common.response.BaseResponseStatus;
 import org.example.productservice.common.error.BaseException;
+import org.example.productservice.common.response.BaseResponseStatus;
+import org.example.productservice.product.domain.ProductPolicy;
 import org.example.productservice.product.dto.UpdateProductPolicyRequestDto;
 import org.example.productservice.product.dto.in.AddProductPolicyRequestDto;
+import org.example.productservice.product.dto.in.DeleteProductPolicyRequestDto;
 import org.example.productservice.product.infrastructure.ProductPolicyRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,23 +22,28 @@ public class ProductPolicyServiceImpl implements ProductPolicyService {
 	@Override
 	public void addProductPolicy(AddProductPolicyRequestDto addProductPolicyRequestDto) {
 
-		if (productPolicyRepository.existsByProductUuid(addProductPolicyRequestDto.getProductUuid())) {
-			throw new BaseException(BaseResponseStatus.DUPLICATED_DATA);
-		}
-
 		productPolicyRepository.save(addProductPolicyRequestDto
-			.createProductPolicy(addProductPolicyRequestDto.getProductUuid()));
+			.createEntity(addProductPolicyRequestDto.getProductUuid()));
 	}
 
 	@Override
 	public void updateProductPolicy(UpdateProductPolicyRequestDto updateProductPolicyRequestDto) {
 
-		Long productPolicyId = productPolicyRepository
+		ProductPolicy productPolicy = productPolicyRepository
 			.findByProductUuid(updateProductPolicyRequestDto.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA))
-			.getProductPolicyId();
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
 		productPolicyRepository.save(updateProductPolicyRequestDto
-			.updateProductPolicy(productPolicyId));
+			.updateProductPolicy(productPolicy, updateProductPolicyRequestDto));
+	}
+
+	@Override
+	public void deleteProductPolicy(DeleteProductPolicyRequestDto deleteProductPolicyRequestDto) {
+
+		ProductPolicy productPolicy = productPolicyRepository
+			.findByProductUuid(deleteProductPolicyRequestDto.getProductPolicyUuid())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
+
+		productPolicyRepository.save(deleteProductPolicyRequestDto.deleteEntity(productPolicy));
 	}
 }

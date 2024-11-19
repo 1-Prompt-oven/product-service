@@ -22,21 +22,16 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void addProduct(AddProductRequestDto addProductRequestDto) {
 
-		if (productRepository.existsByProductName(addProductRequestDto.getProductName())) {
-			throw new BaseException(BaseResponseStatus.DUPLICATED_DATA);
-		}
-
 		productRepository.save(addProductRequestDto.createProduct());
 	}
 
 	@Override
 	public void updateProduct(UpdateProductRequestDto updateProductRequestDto) {
 
-		Long productId = productRepository.findByProductUuid(updateProductRequestDto.getProductUuid())
-			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA))
-			.getProductId();
+		Product product = productRepository.findByProductUuid(updateProductRequestDto.getProductUuid())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		productRepository.save(updateProductRequestDto.updateProduct(productId));
+		productRepository.save(updateProductRequestDto.updateProduct(product, updateProductRequestDto));
 	}
 
 	@Override
@@ -47,15 +42,5 @@ public class ProductServiceImpl implements ProductService {
 
 		productRepository.save(deleteProductRequestDto.deleteProduct(product));
 	}
-
-	// @Transactional(readOnly = true)
-	// @Override
-	// public GetProductDetailResponseDto getProductDetail(GetProductDetailRequestDto getProductDetailRequestDto) {
-	//
-	// 	Product product = productRepository.findByProductUuid(getProductDetailRequestDto.getProductUuid())
-	// 		.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
-	//
-	// 	return GetProductDetailResponseDto.toDto(product);
-	// }
 
 }

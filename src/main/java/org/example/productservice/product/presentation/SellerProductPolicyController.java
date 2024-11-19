@@ -1,7 +1,7 @@
 package org.example.productservice.product.presentation;
 
 import org.example.productservice.common.response.BaseResponse;
-import org.example.productservice.product.application.SellerProductPolicyService;
+import org.example.productservice.product.application.ProductPolicyService;
 import org.example.productservice.product.dto.UpdateProductPolicyRequestDto;
 import org.example.productservice.product.dto.in.AddProductPolicyRequestDto;
 import org.example.productservice.product.vo.UpdateProductPolicyRequestVo;
@@ -21,14 +21,14 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/v1/seller/product/policy")
 public class SellerProductPolicyController {
 
-	private final SellerProductPolicyService sellerProductPolicyService;
+	private final ProductPolicyService productPolicyService;
 
 	@Operation(summary = "상품 정책 등록", description = """
 		""")
 	@PostMapping
 	public BaseResponse<Void> addProductPolicy(AddProductPolicyRequestVo addProductPolicyRequestVo) {
 
-		sellerProductPolicyService.addProductPolicy(
+		productPolicyService.addProductPolicy(
 			AddProductPolicyRequestDto.toDto(addProductPolicyRequestVo));
 		return new BaseResponse<>();
 	}
@@ -38,7 +38,7 @@ public class SellerProductPolicyController {
 	@PutMapping
 	public BaseResponse<Void> updateProductPolicy(UpdateProductPolicyRequestVo updateProductPolicyRequestVo) {
 
-		sellerProductPolicyService.updateProductPolicy(
+		productPolicyService.updateProductPolicy(
 			UpdateProductPolicyRequestDto.toDto(updateProductPolicyRequestVo));
 		return new BaseResponse<>();
 	}

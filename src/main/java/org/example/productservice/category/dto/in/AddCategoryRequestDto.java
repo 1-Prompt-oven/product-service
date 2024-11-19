@@ -19,6 +19,15 @@ public class AddCategoryRequestDto {
 		this.parentCategoryUuid = parentCategoryUuid;
 	}
 
+	public Category createCategory(Category parentCategory) {
+		return Category.builder()
+			.categoryName(categoryName)
+			.categoryUuid(UuidGenerator.generateCategoryUuid())
+			.parentCategoryUuid(parentCategory != null ? parentCategory.getCategoryUuid() : null)
+			.depth(parentCategory != null ? parentCategory.getDepth() + 1 : 0)
+			.build();
+	}
+
 	public Category createRootCategory() {
 		return Category.builder()
 			.categoryName(categoryName)

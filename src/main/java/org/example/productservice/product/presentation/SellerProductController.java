@@ -1,7 +1,7 @@
 package org.example.productservice.product.presentation;
 
 import org.example.productservice.common.response.BaseResponse;
-import org.example.productservice.product.application.SellerProductService;
+import org.example.productservice.product.application.ProductService;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
 import org.example.productservice.product.dto.in.DeleteProductRequestDto;
 import org.example.productservice.product.dto.in.GetProductDetailRequestDto;
@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "판매자 상품 API", description = "판매자 상품 관련 API endpoints")
 public class SellerProductController {
 
-	private final SellerProductService sellerProductService;
+	private final ProductService productService;
 
 	@Operation(summary = "상품 등록", description = """
 	상품 등록
@@ -37,21 +37,21 @@ public class SellerProductController {
 	""")
 	@PostMapping
 	public BaseResponse<Void> addProduct(@RequestBody AddProductRequestVo addProductRequestVo) {
-		sellerProductService.addProduct(AddProductRequestDto.toDto(addProductRequestVo));
+		productService.addProduct(AddProductRequestDto.toDto(addProductRequestVo));
 		return new BaseResponse<>();
 	}
 
 	@Operation(summary = "상품 수정", description = "상품 수정")
 	@PutMapping
 	public BaseResponse<Void> updateProduct(@RequestBody UpdateProductRequestVo updateProductRequestVo) {
-		sellerProductService.updateProduct(UpdateProductRequestDto.toDto(updateProductRequestVo));
+		productService.updateProduct(UpdateProductRequestDto.toDto(updateProductRequestVo));
 		return new BaseResponse<>();
 	}
 
 	@Operation(summary = "상품 삭제", description = "상품 삭제")
 	@DeleteMapping
 	public BaseResponse<Void> deleteProduct(@RequestBody DeleteProductRequestVo deleteProductRequestVo) {
-		sellerProductService.deleteProduct(DeleteProductRequestDto.toDto(deleteProductRequestVo));
+		productService.deleteProduct(DeleteProductRequestDto.toDto(deleteProductRequestVo));
 		return new BaseResponse<>();
 	}
 
@@ -60,7 +60,7 @@ public class SellerProductController {
 	public BaseResponse<GetProductDetailResponseVo> getProductDetail(@RequestBody GetProductDetailRequestVo getProductDetailRequestVo) {
 		GetProductDetailRequestDto getProductDetailRequestDto = GetProductDetailRequestDto.toDto(getProductDetailRequestVo);
 		return new BaseResponse<>(
-			sellerProductService.getProductDetail(getProductDetailRequestDto)
+			productService.getProductDetail(getProductDetailRequestDto)
 			.toVo()
 		);
 	}

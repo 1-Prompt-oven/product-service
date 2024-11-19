@@ -3,7 +3,7 @@ package org.example.productservice.product.application;
 import org.example.productservice.product.dto.UpdateProductPolicyRequestDto;
 import org.example.productservice.product.dto.in.AddProductPolicyRequestDto;
 
-public interface SellerProductPolicyService {
+public interface ProductPolicyService {
 
 	void addProductPolicy(AddProductPolicyRequestDto addProductPolicyRequestDto);
 	void updateProductPolicy(UpdateProductPolicyRequestDto updateProductPolicyRequestDto);

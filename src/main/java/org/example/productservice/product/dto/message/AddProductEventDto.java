@@ -1,53 +1,44 @@
-package org.example.productservice.product.dto.out;
+package org.example.productservice.product.dto.message;
 
 import org.example.productservice.product.domain.Product;
-import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@AllArgsConstructor
 @Builder
-public class GetProductDetailResponseDto {
+public class AddProductEventDto {
 
+	private Long productId;
 	private String productUuid;
-
 	private String sellerUuid;
-
 	private String sellerName;
-
 	private String productName;
-
 	private int price;
-
 	private String prompt;
-
 	private String description;
-
 	private Long llmId;
-
 	private String llmName;
-
 	private String topCategoryUuid;
-
 	private String topCategoryName;
-
 	private String subCategoryUuid;
-
 	private String subCategoryName;
+	private boolean deleted;
 
-	public static GetProductDetailResponseDto toDto(Product product) {
-		return GetProductDetailResponseDto.builder()
+	public static AddProductEventDto toDto(Product product) {
+
+		return AddProductEventDto.builder()
+			.productId(product.getProductId())
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())
 			.sellerName(product.getSellerName())
+			.productName(product.getProductName())
 			.price(product.getPrice())
 			.prompt(product.getPrompt())
-			.productName(product.getProductName())
 			.description(product.getDescription())
 			.llmId(product.getLlmId())
 			.llmName(product.getLlmName())
@@ -55,24 +46,7 @@ public class GetProductDetailResponseDto {
 			.topCategoryName(product.getTopCategoryName())
 			.subCategoryUuid(product.getSubCategoryUuid())
 			.subCategoryName(product.getSubCategoryName())
-			.build();
-	}
-
-	public GetProductDetailResponseVo toVo() {
-		return GetProductDetailResponseVo.builder()
-			.productUuid(productUuid)
-			.sellerUuid(sellerUuid)
-			.sellerName(sellerName)
-			.price(price)
-			.prompt(prompt)
-			.productName(productName)
-			.description(description)
-			.llmId(llmId)
-			.llmName(llmName)
-			.topCategoryUuid(topCategoryUuid)
-			.topCategoryName(topCategoryName)
-			.subCategoryUuid(subCategoryUuid)
-			.subCategoryName(subCategoryName)
+			.deleted(product.isDeleted())
 			.build();
 	}
 }

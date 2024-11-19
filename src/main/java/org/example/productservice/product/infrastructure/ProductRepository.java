@@ -6,7 +6,7 @@ import org.example.productservice.product.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface SellerProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 	@Query("SELECT p FROM Product p WHERE p.productUuid = :productUuid")
 	Optional<Product> findByProductUuid(String productUuid);
 

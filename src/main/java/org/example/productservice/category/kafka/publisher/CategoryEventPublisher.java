@@ -14,7 +14,7 @@ public class CategoryEventPublisher {
 	private static final String TOPIC = "category-events";
 
 	public void publishCategoryCreated(Category category) {
-		AddCategoryEventDto event = AddCategoryEventDto.from(category);
+		AddCategoryEventDto event = AddCategoryEventDto.toDto(category);
 		kafkaTemplate.send(TOPIC, event);
 	}
 }

@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @Tag(name = "카테고리 관리 API", description = "카테고리 관련 API endpoints")
 @RequestMapping("/v1/admin/category")
-public class CategoryManageController {
+public class CategoryController {
 
 	private final CategoryService categoryService;
 	private final CategoryFileProcessor categoryFileProcessor;
@@ -55,8 +55,8 @@ public class CategoryManageController {
 		return new BaseResponse<>();
 	}
 
-	@Operation(summary = "JSON 파일 기반으로 카테고리 생성")
-	@PostMapping(value = "/json", consumes = "multipart/form-data")
+	@Operation(summary = "CSV 파일 기반으로 카테고리 생성")
+	@PostMapping(value = "/csv", consumes = "multipart/form-data")
 	public BaseResponse<Void> addCategoryFromFile(@RequestPart("file") MultipartFile file) {
 		categoryFileProcessor.addCategoryFromFile(file);
 		return new BaseResponse<>();

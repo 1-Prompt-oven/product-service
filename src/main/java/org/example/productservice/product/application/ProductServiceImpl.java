@@ -2,6 +2,7 @@ package org.example.productservice.product.application;
 
 import org.example.productservice.common.error.BaseException;
 import org.example.productservice.common.response.BaseResponseStatus;
+import org.example.productservice.common.utils.Encrypter;
 import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
 import org.example.productservice.product.dto.in.DeleteProductRequestDto;
@@ -18,11 +19,15 @@ import lombok.RequiredArgsConstructor;
 public class ProductServiceImpl implements ProductService {
 
 	private final ProductRepository productRepository;
+	private final Encrypter encrypter;
 
 	@Override
 	public void addProduct(AddProductRequestDto addProductRequestDto) {
 
-		productRepository.save(addProductRequestDto.createProduct());
+		String encryptedPrompt = encrypter.encrypt(addProductRequestDto.getPrompt())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.ENCRYPTION_ERROR));
+
+		productRepository.save(addProductRequestDto.createProduct(encryptedPrompt));
 	}
 
 	@Override

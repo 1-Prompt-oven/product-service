@@ -29,7 +29,7 @@ public class ProductController {
 	@Operation(summary = "상품 등록", description = """
 	상품 등록
 	
-	- llmName, llmId: (Dall-E, 1), (GPT, 2), (Midjourney, 3)
+	- llmId: (Dall-E, 1), (GPT, 2)
 	""")
 	@PostMapping
 	public BaseResponse<Void> addProduct(@RequestBody AddProductRequestVo addProductRequestVo) {

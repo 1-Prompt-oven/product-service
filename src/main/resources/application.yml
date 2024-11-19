@@ -32,6 +32,9 @@ logging:
 server:
   shutdown: graceful
 
+encrypted:
+  secret-key: ${ENCRYPTED_SECRET_KEY}
+
 # local 설정
 ---
 spring:

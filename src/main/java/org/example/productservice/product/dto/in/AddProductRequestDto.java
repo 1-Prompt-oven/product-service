@@ -37,13 +37,14 @@ public class AddProductRequestDto {
 			.build();
 	}
 
-	public Product createProduct() {
+	public Product createProduct(String encryptedPrompt) {
+
 		return Product.builder()
 			.productUuid(UuidGenerator.generateProductUuid())
 				.sellerUuid(sellerUuid)
 				.productName(productName)
 				.price(price)
-				.prompt(prompt)
+				.prompt(encryptedPrompt)
 				.description(description)
 				.llmId(llmId)
 				.topCategoryUuid(topCategoryUuid)

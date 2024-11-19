@@ -31,23 +31,14 @@ public class CategoryServiceImpl implements CategoryService {
             throw new BaseException(BaseResponseStatus.DUPLICATE_CATEGORY_NAME);
         }
 
-        Category savedCategory;
-        if (addCategoryRequestDto.getParentCategoryUuid().isEmpty()) {
-            savedCategory = categoryRepository.save(addCategoryRequestDto.createRootCategory());
+        Category parentCategory = categoryRepository.findByCategoryUuid(addCategoryRequestDto.getParentCategoryUuid())
+            .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
 
-        } else {
-
-            Category parentCategory = findCategoryByCategoryUuid(addCategoryRequestDto.getParentCategoryUuid());
-            savedCategory = categoryRepository.save(addCategoryRequestDto.createChildCategory(parentCategory));
-        }
+        Category savedCategory = categoryRepository.save(
+            addCategoryRequestDto.createCategory(parentCategory));
 
         // 카테고리 생성 이벤트 발행
         categoryEventPublisher.publishCategoryCreated(savedCategory);
-    }
-
-    private Category findCategoryByCategoryUuid(String categoryUuid) {
-        return categoryRepository.findByCategoryUuid(categoryUuid)
-            .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
     }
 
     @Override

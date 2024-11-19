@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.example.productservice.product.domain.ProductContent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SellerProductContentRepository extends JpaRepository<ProductContent, Long> {
+public interface ProductContentRepository extends JpaRepository<ProductContent, Long> {
 	Optional<ProductContent> findByProductUuid(String productUuid);
 
 	Optional<ProductContent> findByProductContentUuid(String productContentUuid);

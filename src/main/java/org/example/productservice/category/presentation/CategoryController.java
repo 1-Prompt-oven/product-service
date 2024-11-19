@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @Tag(name = "카테고리 관리 API", description = "카테고리 관련 API endpoints")
 @RequestMapping("/v1/admin/category")
-public class CategoryManageController {
+public class CategoryController {
 
 	private final CategoryService categoryService;
 	private final CategoryFileProcessor categoryFileProcessor;

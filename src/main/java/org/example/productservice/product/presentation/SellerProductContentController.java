@@ -1,7 +1,7 @@
 package org.example.productservice.product.presentation;
 
 import org.example.productservice.common.response.BaseResponse;
-import org.example.productservice.product.application.SellerProductContentService;
+import org.example.productservice.product.application.ProductContentService;
 import org.example.productservice.product.dto.in.AddProductContentRequestDto;
 import org.example.productservice.product.dto.in.UpdateProductContentRequestDto;
 import org.example.productservice.product.vo.in.AddProductContentRequestVo;
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/v1/seller/product/content")
 public class SellerProductContentController {
 
-	private final SellerProductContentService sellerProductContentService;
+	private final ProductContentService productContentService;
 
 	@Operation(summary = "상품 콘텐츠 등록", description = """
 		contentUrl = 콘텐츠 URL(이미지 URL)
@@ -32,7 +32,7 @@ public class SellerProductContentController {
 	@PostMapping
 	public BaseResponse<Void> addProductContent(AddProductContentRequestVo addProductContentRequestVo) {
 
-		sellerProductContentService.addProductContent(AddProductContentRequestDto.toDto(addProductContentRequestVo));
+		productContentService.addProductContent(AddProductContentRequestDto.toDto(addProductContentRequestVo));
 		return new BaseResponse<>();
 	}
 
@@ -44,7 +44,7 @@ public class SellerProductContentController {
 	@PutMapping
 	public BaseResponse<Void> updateProductContent(UpdateProductContentRequestVo updateProductContentRequestVo) {
 
-		sellerProductContentService.updateProductContent(UpdateProductContentRequestDto.toDto(updateProductContentRequestVo));
+		productContentService.updateProductContent(UpdateProductContentRequestDto.toDto(updateProductContentRequestVo));
 		return new BaseResponse<>();
 	}
 
@@ -52,7 +52,7 @@ public class SellerProductContentController {
 	@DeleteMapping
 	public BaseResponse<Void> deleteProductContent(String productContentUuid) {
 
-		sellerProductContentService.deleteProductContent(productContentUuid);
+		productContentService.deleteProductContent(productContentUuid);
 		return new BaseResponse<>();
 	}
 }

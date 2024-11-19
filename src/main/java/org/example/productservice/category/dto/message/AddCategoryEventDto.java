@@ -16,7 +16,7 @@ public class AddCategoryEventDto {
 	private String categoryName;
 	private String parentCategoryUuid;
 
-	public static AddCategoryEventDto from(Category category) {
+	public static AddCategoryEventDto toDto(Category category) {
 		return AddCategoryEventDto.builder()
 			.categoryName(category.getCategoryName())
 			.parentCategoryUuid(category.getParentCategoryUuid() != null ?

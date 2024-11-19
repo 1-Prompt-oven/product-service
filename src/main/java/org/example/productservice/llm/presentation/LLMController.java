@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/v1/admin/llm")
 @Tag(name = "LLM 관리 API", description = "LLM 관련 API endpoints")
-public class LLMManageController {
+public class LLMController {
 
 	private final LLMService adminLLMService;
 

@@ -25,6 +25,8 @@ public class ProductController {
 	상품 등록
 	
 	- llmId: (Dall-E, 1), (GPT, 2)
+	
+	contents는 리스트 형태로 여러 개 등록 가능.
 	""")
 	@PostMapping
 	public BaseResponse<Void> addProduct(@RequestBody AddProductRequestVo addProductRequestVo) {

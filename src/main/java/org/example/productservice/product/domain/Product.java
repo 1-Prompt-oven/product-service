@@ -2,6 +2,7 @@ package org.example.productservice.product.domain;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,9 +21,11 @@ import lombok.NoArgsConstructor;
 public class Product {
 
 	@Id
+	private String id;
+
+	@Indexed(unique = true)
 	private String productUuid;
 
-	@TextIndexed
 	private String sellerUuid;
 
 	@TextIndexed

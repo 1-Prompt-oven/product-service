@@ -3,13 +3,8 @@ package org.example.productservice.product.presentation;
 import org.example.productservice.common.response.BaseResponse;
 import org.example.productservice.product.application.ProductService;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
-import org.example.productservice.product.dto.in.DeleteProductRequestDto;
-import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
-import org.example.productservice.product.vo.in.DeleteProductRequestVo;
-import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,18 +32,18 @@ public class ProductController {
 		return new BaseResponse<>();
 	}
 
-	@Operation(summary = "상품 수정", description = "상품 수정")
-	@PutMapping
-	public BaseResponse<Void> updateProduct(@RequestBody UpdateProductRequestVo updateProductRequestVo) {
-		productService.updateProduct(UpdateProductRequestDto.toDto(updateProductRequestVo));
-		return new BaseResponse<>();
-	}
-
-	@Operation(summary = "상품 삭제", description = "상품 삭제")
-	@PutMapping("/delete")
-	public BaseResponse<Void> deleteProduct(@RequestBody DeleteProductRequestVo deleteProductRequestVo) {
-		productService.deleteProduct(DeleteProductRequestDto.toDto(deleteProductRequestVo));
-		return new BaseResponse<>();
-	}
+	// @Operation(summary = "상품 수정", description = "상품 수정")
+	// @PutMapping
+	// public BaseResponse<Void> updateProduct(@RequestBody UpdateProductRequestVo updateProductRequestVo) {
+	// 	productService.updateProduct(UpdateProductRequestDto.toDto(updateProductRequestVo));
+	// 	return new BaseResponse<>();
+	// }
+	//
+	// @Operation(summary = "상품 삭제", description = "상품 삭제")
+	// @PutMapping("/delete")
+	// public BaseResponse<Void> deleteProduct(@RequestBody DeleteProductRequestVo deleteProductRequestVo) {
+	// 	productService.deleteProduct(DeleteProductRequestDto.toDto(deleteProductRequestVo));
+	// 	return new BaseResponse<>();
+	// }
 
 }

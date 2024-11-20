@@ -28,7 +28,6 @@ public class ProductEventDto {
 	public static ProductEventDto toDto(Product product) {
 
 		return ProductEventDto.builder()
-			.productId(product.getProductId())
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())
 			.productName(product.getProductName())

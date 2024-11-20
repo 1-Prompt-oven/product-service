@@ -1,16 +1,10 @@
 package org.example.productservice.product.infrastructure;
 
-import java.util.Optional;
-
 import org.example.productservice.product.domain.Product;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
-	@Query("SELECT p FROM Product p WHERE p.productUuid = :productUuid")
-	Optional<Product> findByProductUuid(String productUuid);
+@Repository
+public interface ProductRepository extends MongoRepository<Product, String> {
 
-	boolean existsByProductName(String productName);
-
-	boolean existsByProductUuid(String productUuid);
 }

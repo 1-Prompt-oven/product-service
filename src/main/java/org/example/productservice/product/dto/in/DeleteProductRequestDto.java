@@ -25,17 +25,22 @@ public class DeleteProductRequestDto {
 
 	public Product deleteProduct(Product product) {
 		return Product.builder()
-			.productId(product.getProductId())
-			.productUuid(product.getProductUuid())
-			.sellerUuid(product.getSellerUuid())
-			.price(product.getPrice())
 			.productName(product.getProductName())
-			.prompt(product.getPrompt())
+			.productUuid(product.getProductUuid())
+			.enabled(true)
+			.deleted(true)
 			.description(product.getDescription())
+			.price(product.getPrice())
+			.seed(product.getSeed())
 			.llmId(product.getLlmId())
 			.topCategoryUuid(product.getTopCategoryUuid())
 			.subCategoryUuid(product.getSubCategoryUuid())
-			.deleted(true)
+			.contents(product.getContents())
+			.discountRate(product.getDiscountRate())
+			.llmVersionId(product.getLlmVersionId())
+			.sellerUuid(product.getSellerUuid())
+			.prompt(product.getPrompt())
+			.approved(product.isApproved())
 			.build();
 	}
 }

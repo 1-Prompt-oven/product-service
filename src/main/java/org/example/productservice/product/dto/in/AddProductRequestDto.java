@@ -23,10 +23,8 @@ public class AddProductRequestDto {
 	private Long llmId;
 	private String topCategoryUuid;
 	private String subCategoryUuid;
-	private boolean deleted;
 	private List<ProductContent> contents;
 	private float discountRate;
 	private String seed;
 	private Long llmVersionId;
-	private double avgStar;
 }

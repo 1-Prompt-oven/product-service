@@ -31,4 +31,5 @@ public class GetProductDetailResponseVo {
 	private String seed;
 	private Long llmVersionId;
 	private double avgStar;
+	private Long sells;
 }

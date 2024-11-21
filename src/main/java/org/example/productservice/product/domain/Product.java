@@ -1,7 +1,10 @@
 package org.example.productservice.product.domain;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -61,4 +64,14 @@ public class Product {
 	private Long llmVersionId;
 
 	private double avgStar;
+
+	@CreatedDate
+	private LocalDateTime createdAt;
+
+	@LastModifiedDate
+	private LocalDateTime updatedAt;
+
+	private Long sells;
+
+	private Long likeCount;
 }

@@ -25,13 +25,14 @@ public class ProductMapper {
 			.llmId(addProductRequestDto.getLlmId())
 			.topCategoryUuid(addProductRequestDto.getTopCategoryUuid())
 			.subCategoryUuid(addProductRequestDto.getSubCategoryUuid())
-			.deleted(addProductRequestDto.isDeleted())
 			.contents(addProductRequestDto.getContents())
 			.enabled(true)
 			.approved(true)
 			.discountRate(addProductRequestDto.getDiscountRate())
 			.seed(addProductRequestDto.getSeed())
 			.llmVersionId(addProductRequestDto.getLlmVersionId())
+			.sells(0L)
+			.avgStar(0.0)
 			.build();
 	}
 
@@ -46,7 +47,6 @@ public class ProductMapper {
 			.llmId(addProductRequestVo.getLlmId())
 			.topCategoryUuid(addProductRequestVo.getTopCategoryUuid())
 			.subCategoryUuid(addProductRequestVo.getSubCategoryUuid())
-			.deleted(addProductRequestVo.isDeleted())
 			.contents(addProductRequestVo.getContents())
 			.discountRate(addProductRequestVo.getDiscountRate())
 			.seed(addProductRequestVo.getSeed())
@@ -74,6 +74,8 @@ public class ProductMapper {
 			.approved(updateProductRequestDto.isApproved())
 			.seed(updateProductRequestDto.getSeed())
 			.llmVersionId(updateProductRequestDto.getLlmVersionId())
+			.avgStar(product.getAvgStar())
+			.sells(product.getSells())
 			.build();
 	}
 
@@ -135,6 +137,8 @@ public class ProductMapper {
 			.approved(product.isApproved())
 			.seed(product.getSeed())
 			.llmVersionId(product.getLlmVersionId())
+			.avgStar(product.getAvgStar())
+			.sells(product.getSells())
 			.build();
 	}
 
@@ -155,6 +159,8 @@ public class ProductMapper {
 			.approved(getProductDetailResponseDto.isApproved())
 			.seed(getProductDetailResponseDto.getSeed())
 			.llmVersionId(getProductDetailResponseDto.getLlmVersionId())
+			.avgStar(getProductDetailResponseDto.getAvgStar())
+			.sells(getProductDetailResponseDto.getSells())
 			.build();
 	}
 }

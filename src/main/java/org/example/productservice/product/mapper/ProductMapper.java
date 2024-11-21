@@ -4,8 +4,10 @@ import org.example.productservice.common.utils.UuidGenerator;
 import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
 import org.example.productservice.product.dto.in.UpdateProductRequestDto;
+import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 import org.example.productservice.product.vo.in.UpdateProductRequestVo;
+import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -65,7 +67,7 @@ public class ProductMapper {
 			.llmId(updateProductRequestDto.getLlmId())
 			.topCategoryUuid(updateProductRequestDto.getTopCategoryUuid())
 			.subCategoryUuid(updateProductRequestDto.getSubCategoryUuid())
-			.deleted(updateProductRequestDto.isDeleted())
+			.deleted(product.isDeleted())
 			.contents(updateProductRequestDto.getContents())
 			.discountRate(updateProductRequestDto.getDiscountRate())
 			.enabled(updateProductRequestDto.isEnabled())
@@ -85,7 +87,6 @@ public class ProductMapper {
 			.llmId(updateProductRequestVo.getLlmId())
 			.topCategoryUuid(updateProductRequestVo.getTopCategoryUuid())
 			.subCategoryUuid(updateProductRequestVo.getSubCategoryUuid())
-			.deleted(updateProductRequestVo.isDeleted())
 			.contents(updateProductRequestVo.getContents())
 			.discountRate(updateProductRequestVo.getDiscountRate())
 			.enabled(updateProductRequestVo.isEnabled())
@@ -114,6 +115,46 @@ public class ProductMapper {
 			.sellerUuid(product.getSellerUuid())
 			.prompt(product.getPrompt())
 			.approved(product.isApproved())
+			.build();
+	}
+
+	public GetProductDetailResponseDto toDto(Product product) {
+		return GetProductDetailResponseDto.builder()
+			.productUuid(product.getProductUuid())
+			.sellerUuid(product.getSellerUuid())
+			.productName(product.getProductName())
+			.price(product.getPrice())
+			.prompt(product.getPrompt())
+			.description(product.getDescription())
+			.llmId(product.getLlmId())
+			.topCategoryUuid(product.getTopCategoryUuid())
+			.subCategoryUuid(product.getSubCategoryUuid())
+			.contents(product.getContents())
+			.discountRate(product.getDiscountRate())
+			.enabled(product.isEnabled())
+			.approved(product.isApproved())
+			.seed(product.getSeed())
+			.llmVersionId(product.getLlmVersionId())
+			.build();
+	}
+
+	public GetProductDetailResponseVo toVo(GetProductDetailResponseDto getProductDetailResponseDto) {
+		return GetProductDetailResponseVo.builder()
+			.productUuid(getProductDetailResponseDto.getProductUuid())
+			.sellerUuid(getProductDetailResponseDto.getSellerUuid())
+			.productName(getProductDetailResponseDto.getProductName())
+			.price(getProductDetailResponseDto.getPrice())
+			.prompt(getProductDetailResponseDto.getPrompt())
+			.description(getProductDetailResponseDto.getDescription())
+			.llmId(getProductDetailResponseDto.getLlmId())
+			.topCategoryUuid(getProductDetailResponseDto.getTopCategoryUuid())
+			.subCategoryUuid(getProductDetailResponseDto.getSubCategoryUuid())
+			.contents(getProductDetailResponseDto.getContents())
+			.discountRate(getProductDetailResponseDto.getDiscountRate())
+			.enabled(getProductDetailResponseDto.isEnabled())
+			.approved(getProductDetailResponseDto.isApproved())
+			.seed(getProductDetailResponseDto.getSeed())
+			.llmVersionId(getProductDetailResponseDto.getLlmVersionId())
 			.build();
 	}
 }

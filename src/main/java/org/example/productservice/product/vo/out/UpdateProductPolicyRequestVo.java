@@ -1,4 +1,4 @@
-package org.example.productservice.product.vo;
+package org.example.productservice.product.vo.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

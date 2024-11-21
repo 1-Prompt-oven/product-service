@@ -59,4 +59,6 @@ public class Product {
 	private String seed;
 
 	private Long llmVersionId;
+
+	private double avgStar;
 }

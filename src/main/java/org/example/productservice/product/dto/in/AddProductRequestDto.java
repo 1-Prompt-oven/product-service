@@ -2,7 +2,6 @@ package org.example.productservice.product.dto.in;
 
 import java.util.List;
 
-import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.domain.ProductContent;
 
 import lombok.AllArgsConstructor;
@@ -29,8 +28,5 @@ public class AddProductRequestDto {
 	private float discountRate;
 	private String seed;
 	private Long llmVersionId;
-
-
-
-
+	private double avgStar;
 }

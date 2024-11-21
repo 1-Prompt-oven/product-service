@@ -29,4 +29,5 @@ public class UpdateProductRequestDto {
 	private boolean approved;
 	private String seed;
 	private Long llmVersionId;
+	private double avgStar;
 }

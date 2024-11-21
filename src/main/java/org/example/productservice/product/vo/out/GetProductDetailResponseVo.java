@@ -30,4 +30,5 @@ public class GetProductDetailResponseVo {
 	private boolean approved;
 	private String seed;
 	private Long llmVersionId;
+	private double avgStar;
 }

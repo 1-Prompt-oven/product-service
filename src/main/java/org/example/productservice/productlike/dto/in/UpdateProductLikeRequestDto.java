@@ -1,16 +1,16 @@
-package org.example.productservice.product.dto.in;
+package org.example.productservice.productlike.dto.in;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @Getter
-public class DeleteProductRequestDto {
+@Builder
+public class UpdateProductLikeRequestDto {
 
+	private String memberUuid;
 	private String productUuid;
-
 }

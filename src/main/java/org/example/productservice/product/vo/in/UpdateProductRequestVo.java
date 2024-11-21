@@ -23,7 +23,6 @@ public class UpdateProductRequestVo {
 	private Long llmId;
 	private String topCategoryUuid;
 	private String subCategoryUuid;
-	private boolean deleted;
 	private List<ProductContent> contents;
 	private float discountRate;
 	private boolean enabled;

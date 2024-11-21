@@ -18,6 +18,5 @@ public class AddProductPolicyRequestVo {
 	private boolean deleted;
 	private boolean approved;
 	private String seed;
-	private Long llmVersion;
-	private String llmVersionName;
+	private Long llmVersionId;
 }

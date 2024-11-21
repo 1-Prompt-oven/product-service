@@ -1,62 +1,43 @@
-package org.example.productservice.product.dto.out;
+package org.example.productservice.product.dto.message;
 
 import org.example.productservice.product.domain.Product;
-import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@AllArgsConstructor
 @Builder
-public class GetProductDetailResponseDto {
+public class ProductEventDto {
 
+	private Long productId;
 	private String productUuid;
-
 	private String sellerUuid;
-
 	private String productName;
-
 	private double price;
-
 	private String prompt;
-
 	private String description;
-
 	private Long llmId;
-
 	private String topCategoryUuid;
-
 	private String subCategoryUuid;
+	private boolean deleted;
 
-	public static GetProductDetailResponseDto toDto(Product product) {
-		return GetProductDetailResponseDto.builder()
+	public static ProductEventDto toDto(Product product) {
+
+		return ProductEventDto.builder()
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())
+			.productName(product.getProductName())
 			.price(product.getPrice())
 			.prompt(product.getPrompt())
-			.productName(product.getProductName())
 			.description(product.getDescription())
 			.llmId(product.getLlmId())
 			.topCategoryUuid(product.getTopCategoryUuid())
 			.subCategoryUuid(product.getSubCategoryUuid())
-			.build();
-	}
-
-	public GetProductDetailResponseVo toVo() {
-		return GetProductDetailResponseVo.builder()
-			.productUuid(productUuid)
-			.sellerUuid(sellerUuid)
-			.price(price)
-			.prompt(prompt)
-			.productName(productName)
-			.description(description)
-			.llmId(llmId)
-			.topCategoryUuid(topCategoryUuid)
-			.subCategoryUuid(subCategoryUuid)
+			.deleted(product.isDeleted())
 			.build();
 	}
 }

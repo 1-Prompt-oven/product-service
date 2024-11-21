@@ -1,7 +1,9 @@
 package org.example.productservice.product.dto.in;
 
+import java.util.List;
+
 import org.example.productservice.product.domain.Product;
-import org.example.productservice.common.utils.UuidGenerator;
+import org.example.productservice.product.domain.ProductContent;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 
 import lombok.AllArgsConstructor;
@@ -16,63 +18,58 @@ import lombok.NoArgsConstructor;
 public class AddProductRequestDto {
 
 	private String sellerUuid;
-
-	private String sellerName;
-
-	private int price;
-
 	private String productName;
-
+	private double price;
 	private String prompt;
-
 	private String description;
-
 	private Long llmId;
-
-	private String llmName;
-
 	private String topCategoryUuid;
-
-	private String topCategoryName;
-
 	private String subCategoryUuid;
-
-	private String subCategoryName;
+	private boolean deleted;
+	private List<ProductContent> contents;
+	private float discountRate;
+	private String seed;
+	private Long llmVersionId;
 
 	public static AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {
+
 		return AddProductRequestDto.builder()
 			.sellerUuid(addProductRequestVo.getSellerUuid())
-			.sellerName(addProductRequestVo.getSellerName())
-			.price(addProductRequestVo.getPrice())
 			.productName(addProductRequestVo.getProductName())
+			.price(addProductRequestVo.getPrice())
 			.prompt(addProductRequestVo.getPrompt())
 			.description(addProductRequestVo.getDescription())
 			.llmId(addProductRequestVo.getLlmId())
-			.llmName(addProductRequestVo.getLlmName())
 			.topCategoryUuid(addProductRequestVo.getTopCategoryUuid())
-			.topCategoryName(addProductRequestVo.getTopCategoryName())
 			.subCategoryUuid(addProductRequestVo.getSubCategoryUuid())
-			.subCategoryName(addProductRequestVo.getSubCategoryName())
+			.deleted(addProductRequestVo.isDeleted())
+			.contents(addProductRequestVo.getContents())
+			.discountRate(addProductRequestVo.getDiscountRate())
+			.seed(addProductRequestVo.getSeed())
+			.llmVersionId(addProductRequestVo.getLlmVersionId())
 			.build();
+
 	}
 
-	public Product createProduct() {
+	public Product createProduct(String encryptedPrompt) {
+
 		return Product.builder()
-			.productUuid(UuidGenerator.generateProductUuid())
-				.sellerUuid(sellerUuid)
-				.sellerName(sellerName)
-				.productName(productName)
-				.price(price)
-				.prompt(prompt)
-				.description(description)
-				.llmId(llmId)
-				.llmName(llmName)
-				.topCategoryUuid(topCategoryUuid)
-				.topCategoryName(topCategoryName)
-				.subCategoryUuid(subCategoryUuid)
-				.subCategoryName(subCategoryName)
-				.deleted(false)
-				.build();
+			.sellerUuid(sellerUuid)
+			.productName(productName)
+			.price(price)
+			.prompt(encryptedPrompt)
+			.description(description)
+			.llmId(llmId)
+			.topCategoryUuid(topCategoryUuid)
+			.subCategoryUuid(subCategoryUuid)
+			.deleted(deleted)
+			.contents(contents)
+			.enabled(true)
+			.approved(true)
+			.discountRate(discountRate)
+			.seed(seed)
+			.llmVersionId(llmVersionId)
+			.build();
 	}
 
 

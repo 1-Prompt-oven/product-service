@@ -1,6 +1,9 @@
 package org.example.productservice.product.dto.in;
 
+import java.util.List;
+
 import org.example.productservice.product.domain.Product;
+import org.example.productservice.product.domain.ProductContent;
 import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 
 import lombok.AllArgsConstructor;
@@ -15,73 +18,60 @@ import lombok.NoArgsConstructor;
 public class UpdateProductRequestDto {
 
 	private String productUuid;
-
-	private String sellerUuid;
-
-	private String sellerName;
-
-	private int price;
-
 	private String productName;
-
+	private double price;
 	private String prompt;
-
 	private String description;
-
-	private float discountRate;
-
-	private boolean enabled;
-
-	private String thumbnailSrc;
-
-	private boolean approved;
-
 	private Long llmId;
-
-	private String llmName;
-
 	private String topCategoryUuid;
-
-	private String topCategoryName;
-
 	private String subCategoryUuid;
+	private boolean deleted;
+	private List<ProductContent> contents;
+	private float discountRate;
+	private boolean enabled;
+	private boolean approved;
+	private String seed;
+	private Long llmVersionId;
 
-	private String subCategoryName;
 
 	public static UpdateProductRequestDto toDto(UpdateProductRequestVo updateProductRequestVo) {
 		return UpdateProductRequestDto.builder()
 			.productUuid(updateProductRequestVo.getProductUuid())
-			.sellerUuid(updateProductRequestVo.getSellerUuid())
-			.sellerName(updateProductRequestVo.getSellerName())
-			.price(updateProductRequestVo.getPrice())
 			.productName(updateProductRequestVo.getProductName())
+			.price(updateProductRequestVo.getPrice())
 			.prompt(updateProductRequestVo.getPrompt())
 			.description(updateProductRequestVo.getDescription())
 			.llmId(updateProductRequestVo.getLlmId())
-			.llmName(updateProductRequestVo.getLlmName())
 			.topCategoryUuid(updateProductRequestVo.getTopCategoryUuid())
-			.topCategoryName(updateProductRequestVo.getTopCategoryName())
 			.subCategoryUuid(updateProductRequestVo.getSubCategoryUuid())
-			.subCategoryName(updateProductRequestVo.getSubCategoryName())
+			.deleted(updateProductRequestVo.isDeleted())
+			.contents(updateProductRequestVo.getContents())
+			.discountRate(updateProductRequestVo.getDiscountRate())
+			.enabled(updateProductRequestVo.isEnabled())
+			.approved(updateProductRequestVo.isApproved())
+			.seed(updateProductRequestVo.getSeed())
+			.llmVersionId(updateProductRequestVo.getLlmVersionId())
 			.build();
 	}
 
-	public Product updateProduct(Long productId) {
+	public Product updateProduct(Product product, UpdateProductRequestDto updateProductRequestDto) {
 		return Product.builder()
-			.productId(productId)
-			.productUuid(productUuid)
-			.sellerName(sellerName)
-			.sellerUuid(sellerUuid)
-			.productName(productName)
-			.price(price)
-			.prompt(prompt)
-			.description(description)
-			.llmId(llmId)
-			.llmName(llmName)
-			.topCategoryUuid(topCategoryUuid)
-			.topCategoryName(topCategoryName)
-			.subCategoryUuid(subCategoryUuid)
-			.subCategoryName(subCategoryName)
+			.productUuid(product.getProductUuid())
+			.sellerUuid(product.getSellerUuid())
+			.productName(updateProductRequestDto.getProductName())
+			.price(updateProductRequestDto.getPrice())
+			.prompt(updateProductRequestDto.getPrompt())
+			.description(updateProductRequestDto.getDescription())
+			.llmId(updateProductRequestDto.getLlmId())
+			.topCategoryUuid(updateProductRequestDto.getTopCategoryUuid())
+			.subCategoryUuid(updateProductRequestDto.getSubCategoryUuid())
+			.deleted(updateProductRequestDto.isDeleted())
+			.contents(updateProductRequestDto.getContents())
+			.discountRate(updateProductRequestDto.getDiscountRate())
+			.enabled(updateProductRequestDto.isEnabled())
+			.approved(updateProductRequestDto.isApproved())
+			.seed(updateProductRequestDto.getSeed())
+			.llmVersionId(updateProductRequestDto.getLlmVersionId())
 			.build();
 	}
 

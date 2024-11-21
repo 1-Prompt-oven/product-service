@@ -1,11 +1,10 @@
 package org.example.productservice.product.domain;
 
-import org.hibernate.annotations.DynamicUpdate;
+import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,55 +14,46 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity
 @Builder
 @AllArgsConstructor
-@DynamicUpdate
+@Document(collection = "products")
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long productId;
-
-	@Column(nullable = false, length = 50)
 	private String productUuid;
 
-	@Column(nullable = false, length = 50)
+	@TextIndexed
 	private String sellerUuid;
 
-	@Column(nullable = false, length = 50)
-	private String sellerName;
-
-	@Column(nullable = false, length = 50)
+	@TextIndexed
 	private String productName;
 
-	@Column(nullable = false)
-	private int price;
+	// 통화체계에 따라 유연하게 하게끔 Double. 금액은 무조건 double.
+	// 정산관련할때 수익률 같은거 하게끔하면 반올림 관련해서도 애매해지는 부분이 있으니 double 쓰는게 좋음.
+	private double price;
 
-	@Column(nullable = false, length = 500)
+	// 암호화 고려하더라도 길이를 더 길게 쓰자.
 	private String prompt;
 
-	@Column(nullable = false, length = 100)
 	private String description;
 
-	@Column(nullable = false)
 	private Long llmId;
 
-	@Column(nullable = false)
-	private String llmName;
-
-	@Column(nullable = false)
 	private String topCategoryUuid;
 
-	@Column(nullable = false)
-	private String topCategoryName;
-
-	@Column(nullable = false)
 	private String subCategoryUuid;
 
-	@Column(nullable = false)
-	private String subCategoryName;
-
-	@Column(nullable = false)
 	private boolean deleted;
+
+	private List<ProductContent> contents;
+
+	private float discountRate;
+
+	private boolean enabled;
+
+	private boolean approved;
+
+	private String seed;
+
+	private Long llmVersionId;
 }

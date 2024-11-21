@@ -17,5 +17,4 @@ public class ProductContent {
 
 	private String sampleValue;
 
-	private boolean deleted;
 }

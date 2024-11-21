@@ -1,16 +1,15 @@
-package org.example.productservice.product.dto.in;
+package org.example.productservice.productlike.vo.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Getter
-public class DeleteProductRequestDto {
+public class GetLikeInfoResponseVo {
 
-	private String productUuid;
-
+	private boolean liked;
 }

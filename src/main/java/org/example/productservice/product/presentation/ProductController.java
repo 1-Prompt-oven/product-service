@@ -6,6 +6,7 @@ import org.example.productservice.product.mapper.ProductMapper;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
+import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,6 +62,15 @@ public class ProductController {
 
 		return new BaseResponse<>(
 			productMapper.toVo(productService.getProductDetail(productUuid))
+		);
+	}
+
+	@Operation(summary = "상품 판매자 조회", description = "상품 판매자 조회")
+	@GetMapping("/{productUuid}/seller")
+	public BaseResponse<GetSellerUuidByProductUuidResponseVo> getSellerUuidByProductUuid(@PathVariable String productUuid) {
+
+		return new BaseResponse<>(
+			productMapper.toVo(productService.getSellerUuidByProductUuid(productUuid))
 		);
 	}
 

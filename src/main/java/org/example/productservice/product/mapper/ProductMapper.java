@@ -5,9 +5,11 @@ import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
 import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
+import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
+import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -167,6 +169,20 @@ public class ProductMapper {
 			.sells(getProductDetailResponseDto.getSells())
 			.createdAt(getProductDetailResponseDto.getCreatedAt())
 			.updatedAt(getProductDetailResponseDto.getUpdatedAt())
+			.build();
+	}
+
+	public GetSellerUuidByProductUuidResponseDto toSellerUuidDto(Product product) {
+
+		return GetSellerUuidByProductUuidResponseDto.builder()
+			.sellerUuid(product.getSellerUuid())
+			.build();
+	}
+
+	public GetSellerUuidByProductUuidResponseVo toVo(GetSellerUuidByProductUuidResponseDto getSellerUuidByProductUuidResponseDto) {
+
+		return GetSellerUuidByProductUuidResponseVo.builder()
+			.sellerUuid(getSellerUuidByProductUuidResponseDto.getSellerUuid())
 			.build();
 	}
 }

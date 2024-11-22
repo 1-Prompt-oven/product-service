@@ -5,10 +5,12 @@ import java.util.List;
 import org.example.productservice.llm.dto.in.AddLLMRequestDto;
 import org.example.productservice.llm.dto.in.DeleteLLMRequestDto;
 import org.example.productservice.llm.dto.out.GetLLMListByTypeResponseDto;
+import org.example.productservice.llm.dto.out.GetLLMNameByLLMIdResponseDto;
 import org.example.productservice.llm.infrastructure.AdminLLMRepository;
 import org.example.productservice.llm.domain.LLM;
 import org.example.productservice.common.response.BaseResponseStatus;
 import org.example.productservice.common.error.BaseException;
+import org.example.productservice.llm.llmMapper.LLMMapper;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class LLMServiceImpl implements LLMService {
 
 	private final AdminLLMRepository adminLlmRepository;
+	private final LLMMapper llmMapper;
 
 	@Override
 	public void createLLM(AddLLMRequestDto addLLMRequestDto) {
@@ -49,5 +52,14 @@ public class LLMServiceImpl implements LLMService {
 		return adminLlmRepository.findAllByTypeAndNotDeleted(llmType).stream()
 			.map(GetLLMListByTypeResponseDto::toDto)
 			.toList();
+	}
+
+	@Override
+	public GetLLMNameByLLMIdResponseDto getLLMNameByLLMId(Long llmId) {
+
+		LLM llm = adminLlmRepository.findById(llmId)
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
+
+		return llmMapper.toDto(llm);
 	}
 }

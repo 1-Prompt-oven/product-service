@@ -1,6 +1,5 @@
-package org.example.productservice.category.kafka.publisher;
+package org.example.productservice.product.kafka.publisher;
 
-import org.example.productservice.category.dto.message.AddCategoryEventDto;
 import org.example.productservice.category.domain.Category;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

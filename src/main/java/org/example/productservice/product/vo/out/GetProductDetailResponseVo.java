@@ -1,5 +1,6 @@
 package org.example.productservice.product.vo.out;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.example.productservice.product.domain.ProductContent;
@@ -32,4 +33,6 @@ public class GetProductDetailResponseVo {
 	private Long llmVersionId;
 	private double avgStar;
 	private Long sells;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 }

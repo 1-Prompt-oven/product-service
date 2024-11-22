@@ -24,4 +24,9 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 	protected boolean autoIndexCreation() {
 		return true;
 	}
+
+	// @Bean
+	// public AuditorAware<String> auditorProvider() {
+	// 	return () -> Optional.of("system");
+	// }
 }

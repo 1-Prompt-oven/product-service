@@ -1,16 +1,15 @@
-package org.example.productservice.llm.vo.in;
+package org.example.productservice.product.vo.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Builder
-public class AddLLMVersionRequestVo {
+public class GetSellerUuidByProductUuidResponseVo {
 
-	private String llmVersionName;
-	private Long llmId;
+	private String sellerUuid;
 }

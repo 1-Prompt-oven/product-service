@@ -1,15 +1,15 @@
-package org.example.productservice.llm.vo.in;
+package org.example.productservice.product.dto.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
-public class AddLLMTypeRequestVo {
+public class GetSellerUuidByProductUuidResponseDto {
 
-	private String name;
+	private String sellerUuid;
 }

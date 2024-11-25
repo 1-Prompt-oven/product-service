@@ -1,15 +1,15 @@
-package org.example.productservice.llm.vo.in;
+package org.example.productservice.llm.dto.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @Getter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
-public class DeleteLLMRequestVo {
+public class GetLLMNameByLLMIdResponseDto {
 
-	private Long llmId;
+	private String llmName;
 }

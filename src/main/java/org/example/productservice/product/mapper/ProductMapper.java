@@ -3,11 +3,18 @@ package org.example.productservice.product.mapper;
 import org.example.productservice.common.utils.UuidGenerator;
 import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
+import org.example.productservice.product.dto.in.GetProductListRequestDto;
 import org.example.productservice.product.dto.in.UpdateProductRequestDto;
+import org.example.productservice.product.dto.message.GetProductListResponseDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
+import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
+import org.example.productservice.product.dto.out.ProductDto;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
+import org.example.productservice.product.vo.in.GetProductListRequestVo;
 import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
+import org.example.productservice.product.vo.out.GetProductListResponseVo;
+import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -167,6 +174,62 @@ public class ProductMapper {
 			.sells(getProductDetailResponseDto.getSells())
 			.createdAt(getProductDetailResponseDto.getCreatedAt())
 			.updatedAt(getProductDetailResponseDto.getUpdatedAt())
+			.build();
+	}
+
+	public GetSellerUuidByProductUuidResponseDto toSellerUuidDto(Product product) {
+
+		return GetSellerUuidByProductUuidResponseDto.builder()
+			.sellerUuid(product.getSellerUuid())
+			.build();
+	}
+
+	public GetSellerUuidByProductUuidResponseVo toVo(GetSellerUuidByProductUuidResponseDto getSellerUuidByProductUuidResponseDto) {
+
+		return GetSellerUuidByProductUuidResponseVo.builder()
+			.sellerUuid(getSellerUuidByProductUuidResponseDto.getSellerUuid())
+			.build();
+	}
+
+	public ProductDto productToDto(Product product) {
+		return ProductDto.builder()
+			.productUuid(product.getProductUuid())
+			.productName(product.getProductName())
+			.price(product.getPrice())
+			.topCategoryUuid(product.getTopCategoryUuid())
+			.subCategoryUuid(product.getSubCategoryUuid())
+			.enabled(product.isEnabled())
+			.avgStar(product.getAvgStar())
+			.sells(product.getSells())
+			.likeCount(product.getLikeCount())
+			.llmId(product.getLlmId())
+			.createdAt(product.getCreatedAt())
+			.thumbnailUrl(product.getContents().getFirst().getContentUrl())
+			.build();
+	}
+
+	public GetProductListRequestDto toDto(GetProductListRequestVo getProductListRequestVo) {
+		return GetProductListRequestDto.builder()
+			.pageSize(getProductListRequestVo.getPageSize())
+			.cursorId(getProductListRequestVo.getCursorId())
+			.searchBar(getProductListRequestVo.getSearchBar())
+			.topCategoryUuid(getProductListRequestVo.getTopCategoryUuid())
+			.subCategoryUuid(getProductListRequestVo.getSubCategoryUuid())
+			.minPrice(getProductListRequestVo.getMinPrice())
+			.maxPrice(getProductListRequestVo.getMaxPrice())
+			.llmIdList(getProductListRequestVo.getLlmList())
+			.enable(getProductListRequestVo.isEnable())
+			.sortOption(getProductListRequestVo.getSortOption())
+			.sortBy(getProductListRequestVo.getSortDate())
+			.build();
+
+	}
+
+	public GetProductListResponseVo toVo(GetProductListResponseDto getProductListResponseDto) {
+		return GetProductListResponseVo.builder()
+			.productList(getProductListResponseDto.getProductList())
+			.nextCursorId(getProductListResponseDto.getNextCursorId())
+			.hasNext(getProductListResponseDto.isHasNext())
 			.build();
 	}
 }

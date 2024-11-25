@@ -13,11 +13,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 		"AND (:parentCategoryUuid IS NULL OR c.parentCategoryUuid = :parentCategoryUuid)")
 	List<Category> findByParentCategoryUuid(String parentCategoryUuid);
 
-	@Query("SELECT c FROM Category c WHERE c.categoryUuid = :categoryUuid")
-	Optional<Category> findByCategoryUuid(String categoryUuid);
-
-	Boolean existsByCategoryName(String categoryName);
-
-	Optional<Category> findByCategoryName(String rootCategoryName);
 
 }

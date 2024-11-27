@@ -53,7 +53,7 @@ spring:
     generate-ddl: true
   data:
     mongodb:
-      uri: mongodb://localhost:27017/product_service
+      uri: mongodb://localhost:27017/product-service
       auto-index-creation: true
   kafka:
     bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
@@ -90,7 +90,7 @@ spring:
       dialect: org.hibernate.dialect.MySQL8Dialect
   data:
     mongodb:
-      uri: mongodb://product-service-mongodb-1:27017/product_service
+      uri: mongodb://product-service-mongodb-1:27017/product-service
       auto-index-creation: false  # prod 환경에서는 자동 인덱스 생성 비활성화 권장
   kafka:
     bootstrap-servers: kafka:9092, kafka:9093, kafka:9094

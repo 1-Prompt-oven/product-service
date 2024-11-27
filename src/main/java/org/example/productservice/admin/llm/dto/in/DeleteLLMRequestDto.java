@@ -1,20 +1,22 @@
 package org.example.productservice.admin.llm.dto.in;
 
 import org.example.productservice.admin.llm.vo.in.DeleteLLMRequestVo;
-import org.example.productservice.common.llm.domain.LLM;
+import org.example.productservice.common.domain.LLM;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-@AllArgsConstructor
-@Builder
 public class DeleteLLMRequestDto {
 
 	private Long llmId;
+
+	@Builder
+	public DeleteLLMRequestDto(Long llmId) {
+		this.llmId = llmId;
+	}
 
 	public static DeleteLLMRequestDto toDto(DeleteLLMRequestVo deleteLLMRequestVo) {
 		return DeleteLLMRequestDto.builder()
@@ -24,10 +26,8 @@ public class DeleteLLMRequestDto {
 
 	public LLM toEntity(LLM llm) {
 		return LLM.builder()
-			.llmId(llmId)
-			.llmName(llm.getLlmName())
-			.llmTypeId(llm.getLlmTypeId())
-			.llmTypeName(llm.getLlmTypeName())
+				.llmId(llmId)
+			.name(llm.getName())
 			.deleted(true)
 			.build();
 	}

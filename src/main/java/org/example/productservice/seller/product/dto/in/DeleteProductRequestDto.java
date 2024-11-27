@@ -1,44 +1,30 @@
 package org.example.productservice.seller.product.dto.in;
 
-import org.example.productservice.common.product.domain.Product;
-import org.example.productservice.seller.product.vo.in.DeleteProductRequestVo;
+import org.example.productservice.common.domain.ProductPolicy;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 public class DeleteProductRequestDto {
 
 	private String productUuid;
 
-
-	public static DeleteProductRequestDto toDto(DeleteProductRequestVo deleteProductRequestVo) {
-		return DeleteProductRequestDto.builder()
-			.productUuid(deleteProductRequestVo.getProductUuid())
-			.build();
+	public DeleteProductRequestDto(String productUuid) {
+		this.productUuid = productUuid;
 	}
 
-	public Product deleteProduct(Product product) {
-		return Product.builder()
-			.productId(product.getProductId())
-			.productUuid(product.getProductUuid())
-			.sellerUuid(product.getSellerUuid())
-			.sellerName(product.getSellerName())
-			.price(product.getPrice())
-			.productName(product.getProductName())
-			.prompt(product.getPrompt())
-			.description(product.getDescription())
-			.llmId(product.getLlmId())
-			.llmName(product.getLlmName())
-			.topCategoryUuid(product.getTopCategoryUuid())
-			.topCategoryName(product.getTopCategoryName())
-			.subCategoryUuid(product.getSubCategoryUuid())
-			.subCategoryName(product.getSubCategoryName())
+	public ProductPolicy deleteProduct(ProductPolicy productPolicy) {
+		return ProductPolicy.builder()
+			.productPolicyId(productPolicy.getProductPolicyId())
+			.product(productPolicy.getProduct())
+			.discountRate(productPolicy.getDiscountRate())
+			.enabled(productPolicy.isEnabled())
+			.premium(productPolicy.isPremium())
+			.thumbnailSrc(productPolicy.getThumbnailSrc())
+			.llmId(productPolicy.getLlmId())
+			.approved(productPolicy.isApproved())
 			.deleted(true)
 			.build();
 	}

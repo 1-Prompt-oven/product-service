@@ -1,7 +1,7 @@
 package org.example.productservice.admin.category.application;
 
 import org.example.productservice.admin.category.event.CategoryCreatedEvent;
-import org.example.productservice.common.category.domain.Category;
+import org.example.productservice.common.domain.Category;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 

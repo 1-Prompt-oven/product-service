@@ -1,6 +1,6 @@
 package org.example.productservice.admin.category.dto.in;
 
-import org.example.productservice.common.category.domain.Category;
+import org.example.productservice.common.domain.Category;
 import org.example.productservice.admin.category.vo.in.UpdateCategoryRequestVo;
 
 import lombok.Builder;

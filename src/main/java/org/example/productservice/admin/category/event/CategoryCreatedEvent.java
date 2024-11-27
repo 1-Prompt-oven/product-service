@@ -1,6 +1,6 @@
 package org.example.productservice.admin.category.event;
 
-import org.example.productservice.common.category.domain.Category;
+import org.example.productservice.common.domain.Category;
 
 import lombok.Builder;
 import lombok.Getter;

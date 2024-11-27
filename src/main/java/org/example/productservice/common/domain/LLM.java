@@ -1,4 +1,4 @@
-package org.example.productservice.common.llm.domain;
+package org.example.productservice.common.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,16 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Getter
-@Builder
 public class LLM {
 
 	@Id
@@ -23,14 +20,21 @@ public class LLM {
 	private Long llmId;
 
 	@Column(nullable = false, length = 20)
-	private String llmName;
+	private String name;
 
 	@Column(nullable = false)
 	private boolean deleted;
 
-	@Column(nullable = false)
-	private Long llmTypeId;
+	@Builder
+	public LLM(Long llmId, String name, boolean deleted) {
+		this.llmId = llmId;
+		this.name = name;
+		this.deleted = deleted;
+	}
 
-	@Column(nullable = false)
-	private String llmTypeName;
+	@Builder
+	public LLM(String name, boolean deleted) {
+		this.name = name;
+		this.deleted = deleted;
+	}
 }

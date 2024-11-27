@@ -1,18 +1,17 @@
 package org.example.productservice.admin.llm.vo.in;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class UpdateLLMRequestVo {
 
 	private Long llmId;
 	private String name;
-	private Long llmTypeId;
-	private String llmTypeName;
+
+	@Builder
+	public UpdateLLMRequestVo(Long llmId, String name) {
+		this.llmId = llmId;
+		this.name = name;
+	}
 }

@@ -1,8 +1,8 @@
 package org.example.productservice.category.infrastructure;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.example.productservice.category.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

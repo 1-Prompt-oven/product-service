@@ -19,7 +19,7 @@ public class LLM {
 	private Long llmId;
 
 	@Column(nullable = false, length = 20)
-	private String name;
+	private String llmName;
 
 	@Column(nullable = false)
 	private boolean deleted;

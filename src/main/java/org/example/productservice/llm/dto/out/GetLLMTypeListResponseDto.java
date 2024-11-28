@@ -1,7 +1,6 @@
 package org.example.productservice.llm.dto.out;
 
 import org.example.productservice.llm.vo.out.GetLLMTypeListResponseVo;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -93,9 +93,9 @@ public class ProductController {
 		@RequestParam(required = false) String maxPrice,
 
 		@Parameter(
-			description = "정렬 기준 likeCount, avgStar, sells, createdAt"
+			description = "정렬 기준 likeCount, avgStar, sells, createdAt, reviewCount"
 		)
-		@RequestParam(required = false, defaultValue = "CREATED_AT") String sortOption,
+		@RequestParam(required = false, defaultValue = "createdAt") String sortOption,
 
 		@Parameter(
 			description = "정렬 방향 ASC, DESC"

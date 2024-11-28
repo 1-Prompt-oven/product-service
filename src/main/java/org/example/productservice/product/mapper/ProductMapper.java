@@ -40,6 +40,7 @@ public class ProductMapper {
 			.llmVersionId(addProductRequestDto.getLlmVersionId())
 			.sells(0L)
 			.avgStar(0.0)
+			.reviewCount(0L)
 			.build();
 	}
 
@@ -85,6 +86,7 @@ public class ProductMapper {
 			.sells(product.getSells())
 			.createdAt(product.getCreatedAt())
 			.likeCount(product.getLikeCount())
+			.reviewCount(product.getReviewCount())
 			.build();
 	}
 
@@ -126,6 +128,9 @@ public class ProductMapper {
 			.sellerUuid(product.getSellerUuid())
 			.prompt(product.getPrompt())
 			.approved(product.isApproved())
+			.avgStar(product.getAvgStar())
+			.sells(product.getSells())
+			.reviewCount(product.getReviewCount())
 			.build();
 	}
 
@@ -148,6 +153,7 @@ public class ProductMapper {
 			.llmVersionId(product.getLlmVersionId())
 			.avgStar(product.getAvgStar())
 			.sells(product.getSells())
+			.reviewCount(product.getReviewCount())
 			.createdAt(product.getCreatedAt())
 			.updatedAt(product.getUpdatedAt())
 			.build();
@@ -172,6 +178,7 @@ public class ProductMapper {
 			.llmVersionId(getProductDetailResponseDto.getLlmVersionId())
 			.avgStar(getProductDetailResponseDto.getAvgStar())
 			.sells(getProductDetailResponseDto.getSells())
+			.reviewCount(getProductDetailResponseDto.getReviewCount())
 			.createdAt(getProductDetailResponseDto.getCreatedAt())
 			.updatedAt(getProductDetailResponseDto.getUpdatedAt())
 			.build();
@@ -204,6 +211,7 @@ public class ProductMapper {
 			.likeCount(product.getLikeCount())
 			.llmId(product.getLlmId())
 			.createdAt(product.getCreatedAt())
+			.reviewCount(product.getReviewCount())
 			.thumbnailUrl(product.getContents().getFirst().getContentUrl())
 			.build();
 	}

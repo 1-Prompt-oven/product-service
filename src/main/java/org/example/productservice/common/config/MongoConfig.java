@@ -2,31 +2,17 @@ package org.example.productservice.common.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
-
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
+import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
 @Configuration
 public class MongoConfig extends AbstractMongoClientConfiguration {
-
 	@Override
 	protected String getDatabaseName() {
-		return "prompt_oven";
+		return "product-service";
 	}
 
 	@Override
-	public MongoClient mongoClient() {
-		return MongoClients.create("mongodb://localhost:27017");
+	protected void configureConverters(MongoCustomConversions.MongoConverterConfigurationAdapter adapter) {
+		adapter.registerConverter(new BinaryToStringConverter());
 	}
-
-	// 보안 설정 비활성화
-	@Override
-	protected boolean autoIndexCreation() {
-		return true;
-	}
-
-	// @Bean
-	// public AuditorAware<String> auditorProvider() {
-	// 	return () -> Optional.of("system");
-	// }
 }

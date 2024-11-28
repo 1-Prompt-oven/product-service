@@ -22,6 +22,8 @@ springdoc:
 # application-prod.yml
 spring:
   config:
+    import:
+      - "optional:configserver:http://localhost:8888"
     activate:
       on-profile: prod
   datasource:

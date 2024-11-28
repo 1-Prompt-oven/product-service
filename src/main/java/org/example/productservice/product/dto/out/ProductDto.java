@@ -23,6 +23,7 @@ public class ProductDto {
 	private Long sells;
 	private Long likeCount;
 	private Long llmId;
+	private Long reviewCount;
 	private LocalDateTime createdAt;
 	private String thumbnailUrl;
 }

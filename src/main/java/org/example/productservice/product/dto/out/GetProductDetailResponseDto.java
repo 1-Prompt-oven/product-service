@@ -33,6 +33,7 @@ public class GetProductDetailResponseDto {
 	private Long llmVersionId;
 	private double avgStar;
 	private Long sells;
+	private Long reviewCount;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 }

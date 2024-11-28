@@ -59,7 +59,6 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
 		if (dto.getLlmIdList() != null && !dto.getLlmIdList().isEmpty()) {
 			andCriterias.add(Criteria.where("llmId").in(dto.getLlmIdList()));
 		}
-//TODO 정렬옵션이 하나의 페이지에선 잘 먹히는데 여러 페이지로 나눠서 받을 경우 제대로 적용 안됨..
 		// 커서 기반 페이징
 		if (StringUtils.hasText(dto.getCursorId())) {
 			Document cursorDoc = mongoTemplate.findById(dto.getCursorId(), Document.class, "products");
@@ -109,6 +108,8 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
 				return "avgStar";
 			case "sells":
 				return "sells";
+			case "reviewCount":
+				return "reviewCount";
 			default:
 				return "createdAt";
 		}
@@ -129,6 +130,9 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
 			case "sells":
 				Number sells = cursorDoc.get("sells", Number.class);
 				return sells != null ? sells.longValue() : 0L;
+			case "reviewCount":
+				Number reviewCount = cursorDoc.get("reviewCount", Number.class);
+				return reviewCount != null ? reviewCount.longValue() : 0L;
 			default:
 				return cursorDoc.get("createdAt");
 		}

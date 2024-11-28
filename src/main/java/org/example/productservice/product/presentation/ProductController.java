@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/seller/product")
+@RequestMapping("/v1")
 @Tag(name = "판매자 상품 API", description = "판매자 상품 관련 API endpoints")
 public class ProductController {
 
@@ -44,28 +44,28 @@ public class ProductController {
 	
 	contents는 리스트 형태로 여러 개 등록 가능.
 	""")
-	@PostMapping
+	@PostMapping("/seller/product")
 	public BaseResponse<Void> addProduct(@RequestBody AddProductRequestVo addProductRequestVo) {
 		productService.addProduct(productMapper.toDto(addProductRequestVo));
 		return new BaseResponse<>();
 	}
 
 	@Operation(summary = "상품 수정", description = "상품 수정")
-	@PutMapping
+	@PutMapping("/seller/product")
 	public BaseResponse<Void> updateProduct(@RequestBody UpdateProductRequestVo updateProductRequestVo) {
 		productService.updateProduct(productMapper.toDto(updateProductRequestVo));
 		return new BaseResponse<>();
 	}
 
 	@Operation(summary = "상품 삭제", description = "상품 삭제")
-	@DeleteMapping("/{productUuid}")
+	@DeleteMapping("/seller/product/{productUuid}")
 	public BaseResponse<Void> deleteProduct(@PathVariable String productUuid) {
 		productService.deleteProduct(productUuid);
 		return new BaseResponse<>();
 	}
 
 	@Operation(summary = "상품 상세 조회", description = "상품 상세 조회")
-	@GetMapping("/{productUuid}")
+	@GetMapping("/product/{productUuid}")
 	public BaseResponse<GetProductDetailResponseVo> getProductDetail(@PathVariable String productUuid) {
 
 		return new BaseResponse<>(
@@ -74,7 +74,7 @@ public class ProductController {
 	}
 
 	@Operation(summary = "상품 판매자 조회", description = "상품 판매자 조회")
-	@GetMapping("/{productUuid}/seller")
+	@GetMapping("/product/{productUuid}/seller")
 	public BaseResponse<GetSellerUuidByProductUuidResponseVo> getSellerUuidByProductUuid(@PathVariable String productUuid) {
 
 		return new BaseResponse<>(
@@ -83,7 +83,7 @@ public class ProductController {
 	}
 
 	@Operation(summary = "상품 목록 보기", description = "상품 목록 보기")
-	@GetMapping("/list")
+	@GetMapping("/product/list")
 	public BaseResponse<GetProductListResponseVo> searchProducts(
 		@RequestParam(required = false) String searchBar,
 		@RequestParam(required = false) String topCategoryUuid,

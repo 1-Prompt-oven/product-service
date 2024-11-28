@@ -24,6 +24,7 @@ public class ProductDto {
 	private Long likeCount;
 	private Long llmId;
 	private Long reviewCount;
+	private String description;
 	private LocalDateTime createdAt;
 	private String thumbnailUrl;
 }

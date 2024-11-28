@@ -209,6 +209,7 @@ public class ProductMapper {
 			.avgStar(product.getAvgStar())
 			.sells(product.getSells())
 			.likeCount(product.getLikeCount())
+			.description(product.getDescription())
 			.llmId(product.getLlmId())
 			.createdAt(product.getCreatedAt())
 			.reviewCount(product.getReviewCount())

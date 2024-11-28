@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/org/example/productservice/common/domain/Category.java
-package org.example.productservice.common.domain;
-========
 package org.example.productservice.category.domain;
->>>>>>>> develop:src/main/java/org/example/productservice/category/domain/Category.java
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

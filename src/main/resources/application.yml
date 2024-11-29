@@ -21,11 +21,11 @@ springdoc:
 ---
 # application-prod.yml
 spring:
-#  config:
-#    import:
-#      - "optional:configserver:http://config-server:8888"
-#    activate:
-#      on-profile: prod
+  config:
+    import:
+      - "optional:configserver:http://config-server:8888"
+    activate:
+      on-profile: prod
   datasource:
     url: jdbc:mysql://mysql:3306/promptoven_product
     username: root

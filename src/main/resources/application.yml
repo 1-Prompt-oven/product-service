@@ -23,7 +23,7 @@ springdoc:
 spring:
   config:
     import:
-      - "optional:configserver:http://localhost:8888"
+      - "optional:configserver:http://config-server:8888"
     activate:
       on-profile: prod
   datasource:

@@ -72,7 +72,7 @@ spring:
       on-profile: local
   data:
     mongodb:
-      uri: mongodb+srv://1630202:minjihun@promptoven.5ld4d.mongodb.net/promptoven?retryWrites=true&w=majority&appName=promptoven
+      uri: mongodb+srv://1630202:minjihun@promptoven.5ld4d.mongodb.net/promptoven?ssl=true&tlsAllowInvalidCertificates=true
   datasource:
     url: jdbc:mysql://localhost:3306/promptoven_product
     username: root

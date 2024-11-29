@@ -42,7 +42,7 @@ spring:
     generate-ddl: true
   data:
     mongodb:
-      uri: mongodb+srv://1630202:minjihun@promptoven.5ld4d.mongodb.net/promptoven?retryWrites=true&w=majority&appName=promptoven
+      uri: mongodb+srv://1630202:<db_password>@promptoven.5ld4d.mongodb.net/?retryWrites=true&w=majority&appName=promptoven
       auto-index-creation: true
   kafka:
     bootstrap-servers: kafka-1:9092,kafka-2:9092,kafka-3:9092

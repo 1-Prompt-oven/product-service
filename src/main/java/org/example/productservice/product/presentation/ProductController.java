@@ -11,6 +11,7 @@ import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 import org.example.productservice.product.vo.out.GetProductListResponseVo;
 import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
+import org.example.productservice.product.vo.out.GetTemporaryProductListResponseVo;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +50,17 @@ public class ProductController {
 
 		productService.temporaryAddProduct(productMapper.toDto(addProductRequestVo));
 		return new BaseResponse<>();
+	}
+
+	@Operation(summary = "상품 임시 등록 목록 보기", description = "상품 임시 등록 목록 보기")
+	@GetMapping("/seller/product/temporary/list")
+	public BaseResponse<List<GetTemporaryProductListResponseVo>> getTemporaryProductList(@RequestParam String memberUuid) {
+
+		return new BaseResponse<>(
+			productService.getTemporaryProductList(memberUuid).stream()
+				.map(productMapper::toVo)
+				.toList()
+		);
 	}
 
 	@Operation(summary = "상품 등록", description = """

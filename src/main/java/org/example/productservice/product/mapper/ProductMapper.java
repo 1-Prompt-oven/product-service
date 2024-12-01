@@ -8,6 +8,7 @@ import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.dto.message.GetProductListResponseDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
+import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
 import org.example.productservice.product.dto.out.ProductDto;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 import org.example.productservice.product.vo.in.GetProductListRequestVo;
@@ -15,13 +16,14 @@ import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 import org.example.productservice.product.vo.out.GetProductListResponseVo;
 import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
+import org.example.productservice.product.vo.out.GetTemporaryProductListResponseVo;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductMapper {
 
-	public Product createProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
 
+	private Product buildProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt, boolean isTemporary) {
 		return Product.builder()
 			.sellerUuid(addProductRequestDto.getSellerUuid())
 			.productUuid(UuidGenerator.generateProductUuid())
@@ -34,7 +36,7 @@ public class ProductMapper {
 			.subCategoryUuid(addProductRequestDto.getSubCategoryUuid())
 			.contents(addProductRequestDto.getContents())
 			.enabled(true)
-			.temporaryEnrolled(true)
+			.temporaryEnrolled(isTemporary)
 			.approved(true)
 			.discountRate(addProductRequestDto.getDiscountRate())
 			.seed(addProductRequestDto.getSeed())
@@ -45,29 +47,14 @@ public class ProductMapper {
 			.build();
 	}
 
+	public Product createProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
+
+		return buildProduct(addProductRequestDto, encryptedPrompt, false);
+	}
+
 	public Product temporaryCreateProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
 
-		return Product.builder()
-			.sellerUuid(addProductRequestDto.getSellerUuid())
-			.productUuid(UuidGenerator.generateProductUuid())
-			.productName(addProductRequestDto.getProductName())
-			.price(addProductRequestDto.getPrice())
-			.prompt(encryptedPrompt)
-			.description(addProductRequestDto.getDescription())
-			.llmId(addProductRequestDto.getLlmId())
-			.topCategoryUuid(addProductRequestDto.getTopCategoryUuid())
-			.subCategoryUuid(addProductRequestDto.getSubCategoryUuid())
-			.contents(addProductRequestDto.getContents())
-			.enabled(true)
-			.temporaryEnrolled(true)
-			.approved(true)
-			.discountRate(addProductRequestDto.getDiscountRate())
-			.seed(addProductRequestDto.getSeed())
-			.llmVersionId(addProductRequestDto.getLlmVersionId())
-			.sells(0L)
-			.avgStar(0.0)
-			.reviewCount(0L)
-			.build();
+		return buildProduct(addProductRequestDto, encryptedPrompt, true);
 	}
 
 	public AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {
@@ -269,6 +256,24 @@ public class ProductMapper {
 			.productList(getProductListResponseDto.getProductList())
 			.nextCursorId(getProductListResponseDto.getNextCursorId())
 			.hasNext(getProductListResponseDto.isHasNext())
+			.build();
+	}
+
+	public GetTemporaryProductListResponseDto temporaryProductToDto(Product product) {
+
+		return GetTemporaryProductListResponseDto.builder()
+			.productUuid(product.getProductUuid())
+			.productName(product.getProductName())
+			.createdAt(product.getCreatedAt())
+			.build();
+	}
+
+	public GetTemporaryProductListResponseVo toVo(GetTemporaryProductListResponseDto getTemporaryProductListResponseDto) {
+
+		return GetTemporaryProductListResponseVo.builder()
+			.productUuid(getTemporaryProductListResponseDto.getProductUuid())
+			.productName(getTemporaryProductListResponseDto.getProductName())
+			.createdAt(getTemporaryProductListResponseDto.getCreatedAt())
 			.build();
 	}
 }

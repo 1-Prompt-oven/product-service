@@ -65,7 +65,7 @@ public class ProductLikeServiceImpl implements ProductLikeService {
 
 		String nextCursorId = null;
 		if (hasNext && !productLikes.isEmpty()) {
-			nextCursorId = String.valueOf(productLikes.getLast().getProductLikeId());
+			nextCursorId = String.valueOf(productLikes.get(productLikes.size() - 1).getProductLikeId());
 		}
 
 		return GetProductLikeListResponseDto.builder()

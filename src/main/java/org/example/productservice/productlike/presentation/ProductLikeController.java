@@ -2,6 +2,8 @@ package org.example.productservice.productlike.presentation;
 
 import org.example.productservice.common.response.BaseResponse;
 import org.example.productservice.productlike.application.ProductLikeService;
+import org.example.productservice.productlike.dto.in.GetProductLikeListRequestDto;
+import org.example.productservice.productlike.dto.out.GetProductLikeListResponseDto;
 import org.example.productservice.productlike.mapper.ProductLikeMapper;
 import org.example.productservice.productlike.vo.in.UpdateProductLikeRequestVo;
 import org.example.productservice.productlike.vo.out.GetLikeInfoResponseVo;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,5 +44,21 @@ public class ProductLikeController {
 
 		return new BaseResponse<>(
 			productLikeMapper.toVo(productLikeService.getProductLikeInfo(memberUuid, productUuid)));
+	}
+
+	@Operation(summary = "좋아요한 상품 목록 조회", description = "좋아요한 상품 목록 조회")
+	@GetMapping("/list")
+	public BaseResponse<GetProductLikeListResponseDto> getLikedProductList(
+		@RequestParam String memberUuid,
+		@RequestParam(required = false) Long cursorId,
+		@RequestParam int pageSize,
+		@RequestParam(required = false) String sortOption
+	) {
+
+		GetProductLikeListRequestDto getProductLikeListRequestDto =
+			productLikeMapper.toDto(memberUuid, cursorId, pageSize, sortOption);
+
+		return new BaseResponse<>(
+			productLikeMapper.toVo(productLikeService.getLikedProductList(getProductLikeListRequestDto)));
 	}
 }

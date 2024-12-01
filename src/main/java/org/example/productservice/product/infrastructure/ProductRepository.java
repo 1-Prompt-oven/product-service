@@ -1,5 +1,6 @@
 package org.example.productservice.product.infrastructure;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.example.productservice.product.domain.Product;
@@ -10,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends MongoRepository<Product, String> {
 
 	Optional<Product> findByProductUuid(String productUuid);
+
+	List<Product> findAllByProductUuidIn(List<String> productUuids);
 }

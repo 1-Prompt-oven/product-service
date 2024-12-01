@@ -205,6 +205,8 @@ public class ProductMapper {
 			.price(product.getPrice())
 			.topCategoryUuid(product.getTopCategoryUuid())
 			.subCategoryUuid(product.getSubCategoryUuid())
+			.discountRate(product.getDiscountRate())
+			.description(product.getDescription())
 			.enabled(product.isEnabled())
 			.avgStar(product.getAvgStar())
 			.sells(product.getSells())

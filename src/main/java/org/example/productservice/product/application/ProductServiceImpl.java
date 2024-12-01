@@ -12,6 +12,7 @@ import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.dto.message.GetProductListResponseDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
+import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
 import org.example.productservice.product.dto.out.ProductDto;
 import org.example.productservice.product.infrastructure.CustomProductRepository;
 import org.example.productservice.product.infrastructure.ProductRepository;
@@ -100,6 +101,23 @@ public class ProductServiceImpl implements ProductService {
 			.nextCursorId(nextCursorId)
 			.hasNext(hasNext)
 			.build();
+	}
+
+	@Override
+	public void temporaryAddProduct(AddProductRequestDto addProductRequestDto) {
+		String encryptedPrompt = encrypter.encrypt(addProductRequestDto.getPrompt())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.ENCRYPTION_ERROR));
+
+		productRepository.save(productMapper.temporaryCreateProduct(addProductRequestDto, encryptedPrompt));
+	}
+
+	@Override
+	public List<GetTemporaryProductListResponseDto> getTemporaryProductList(String memberUuid) {
+
+		return productRepository.findTemporaryProductList(memberUuid)
+			.stream()
+			.map(productMapper::temporaryProductToDto)
+			.toList();
 	}
 
 }

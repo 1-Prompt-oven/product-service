@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -52,11 +53,15 @@ public class ProductLikeController {
 		@RequestParam String memberUuid,
 		@RequestParam(required = false) Long cursorId,
 		@RequestParam int pageSize,
-		@RequestParam(required = false) String sortOption
+
+		@Parameter(
+			description = "정렬 방향 ASC, DESC"
+		)
+		@RequestParam(required = false) String sortBy
 	) {
 
 		GetProductLikeListRequestDto getProductLikeListRequestDto =
-			productLikeMapper.toDto(memberUuid, cursorId, pageSize, sortOption);
+			productLikeMapper.toDto(memberUuid, cursorId, pageSize, sortBy);
 
 		return new BaseResponse<>(
 			productLikeMapper.toVo(productLikeService.getLikedProductList(getProductLikeListRequestDto)));

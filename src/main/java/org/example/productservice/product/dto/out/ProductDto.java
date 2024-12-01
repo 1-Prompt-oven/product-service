@@ -26,7 +26,6 @@ public class ProductDto {
 	private String description;
 	private double discountRate;
 	private Long reviewCount;
-	private String description;
 	private LocalDateTime createdAt;
 	private String thumbnailUrl;
 }

@@ -15,4 +15,6 @@ public interface ProductService {
 	GetProductDetailResponseDto getProductDetail(String productUuid);
 	GetSellerUuidByProductUuidResponseDto getSellerUuidByProductUuid(String productUuid);
 	GetProductListResponseDto searchProducts(GetProductListRequestDto getProductListRequestDto);
+
+	void temporaryAddProduct(AddProductRequestDto addProductRequestDto);
 }

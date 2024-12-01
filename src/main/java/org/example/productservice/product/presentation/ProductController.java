@@ -37,6 +37,20 @@ public class ProductController {
 	private final ProductService productService;
 	private final ProductMapper productMapper;
 
+	@Operation(summary = "상품 임시 등록", description = """
+	상품 등록
+	
+	- llmId: (Dall-E, 1), (GPT, 2)
+	
+	contents는 리스트 형태로 여러 개 등록 가능.
+	""")
+	@PostMapping("/seller/product/temporary")
+	public BaseResponse<Void> temporaryAddProduct(@RequestBody AddProductRequestVo addProductRequestVo) {
+
+		productService.temporaryAddProduct(productMapper.toDto(addProductRequestVo));
+		return new BaseResponse<>();
+	}
+
 	@Operation(summary = "상품 등록", description = """
 	상품 등록
 	
@@ -46,6 +60,7 @@ public class ProductController {
 	""")
 	@PostMapping("/seller/product")
 	public BaseResponse<Void> addProduct(@RequestBody AddProductRequestVo addProductRequestVo) {
+
 		productService.addProduct(productMapper.toDto(addProductRequestVo));
 		return new BaseResponse<>();
 	}
@@ -53,6 +68,7 @@ public class ProductController {
 	@Operation(summary = "상품 수정", description = "상품 수정")
 	@PutMapping("/seller/product")
 	public BaseResponse<Void> updateProduct(@RequestBody UpdateProductRequestVo updateProductRequestVo) {
+
 		productService.updateProduct(productMapper.toDto(updateProductRequestVo));
 		return new BaseResponse<>();
 	}
@@ -126,5 +142,7 @@ public class ProductController {
 			productMapper.toVo(productService.searchProducts(getProductListRequestDto))
 		);
 	}
+
+
 
 }

@@ -102,4 +102,12 @@ public class ProductServiceImpl implements ProductService {
 			.build();
 	}
 
+	@Override
+	public void temporaryAddProduct(AddProductRequestDto addProductRequestDto) {
+		String encryptedPrompt = encrypter.encrypt(addProductRequestDto.getPrompt())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.ENCRYPTION_ERROR));
+
+		productRepository.save(productMapper.temporaryCreateProduct(addProductRequestDto, encryptedPrompt));
+	}
+
 }

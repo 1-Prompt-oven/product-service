@@ -101,7 +101,6 @@ public class ProductController {
 			description = "정렬 방향 ASC, DESC"
 		)
 		@RequestParam(required = false, defaultValue = "DESC") String sortBy,
-
 		@RequestParam(required = false) String cursorId,
 		@RequestParam(required = false, defaultValue = "20") Integer pageSize,
 		@RequestParam(required = false) List<Long> llmIdList

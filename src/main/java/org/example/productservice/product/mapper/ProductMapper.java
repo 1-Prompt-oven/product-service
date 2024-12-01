@@ -8,6 +8,7 @@ import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.dto.message.GetProductListResponseDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
+import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
 import org.example.productservice.product.dto.out.ProductDto;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 import org.example.productservice.product.vo.in.GetProductListRequestVo;
@@ -15,13 +16,14 @@ import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 import org.example.productservice.product.vo.out.GetProductListResponseVo;
 import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
+import org.example.productservice.product.vo.out.GetTemporaryProductListResponseVo;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductMapper {
 
-	public Product createProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
 
+	private Product buildProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt, boolean isTemporary) {
 		return Product.builder()
 			.sellerUuid(addProductRequestDto.getSellerUuid())
 			.productUuid(UuidGenerator.generateProductUuid())
@@ -34,6 +36,7 @@ public class ProductMapper {
 			.subCategoryUuid(addProductRequestDto.getSubCategoryUuid())
 			.contents(addProductRequestDto.getContents())
 			.enabled(true)
+			.temporaryEnrolled(isTemporary)
 			.approved(true)
 			.discountRate(addProductRequestDto.getDiscountRate())
 			.seed(addProductRequestDto.getSeed())
@@ -42,6 +45,16 @@ public class ProductMapper {
 			.avgStar(0.0)
 			.reviewCount(0L)
 			.build();
+	}
+
+	public Product createProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
+
+		return buildProduct(addProductRequestDto, encryptedPrompt, false);
+	}
+
+	public Product temporaryCreateProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
+
+		return buildProduct(addProductRequestDto, encryptedPrompt, true);
 	}
 
 	public AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {
@@ -76,6 +89,7 @@ public class ProductMapper {
 			.topCategoryUuid(updateProductRequestDto.getTopCategoryUuid())
 			.subCategoryUuid(updateProductRequestDto.getSubCategoryUuid())
 			.deleted(product.isDeleted())
+			.temporaryEnrolled(product.isTemporaryEnrolled())
 			.contents(updateProductRequestDto.getContents())
 			.discountRate(updateProductRequestDto.getDiscountRate())
 			.enabled(updateProductRequestDto.isEnabled())
@@ -120,6 +134,7 @@ public class ProductMapper {
 			.price(product.getPrice())
 			.seed(product.getSeed())
 			.llmId(product.getLlmId())
+			.temporaryEnrolled(product.isTemporaryEnrolled())
 			.topCategoryUuid(product.getTopCategoryUuid())
 			.subCategoryUuid(product.getSubCategoryUuid())
 			.contents(product.getContents())
@@ -205,6 +220,8 @@ public class ProductMapper {
 			.price(product.getPrice())
 			.topCategoryUuid(product.getTopCategoryUuid())
 			.subCategoryUuid(product.getSubCategoryUuid())
+			.discountRate(product.getDiscountRate())
+			.description(product.getDescription())
 			.enabled(product.isEnabled())
 			.avgStar(product.getAvgStar())
 			.sells(product.getSells())
@@ -239,6 +256,24 @@ public class ProductMapper {
 			.productList(getProductListResponseDto.getProductList())
 			.nextCursorId(getProductListResponseDto.getNextCursorId())
 			.hasNext(getProductListResponseDto.isHasNext())
+			.build();
+	}
+
+	public GetTemporaryProductListResponseDto temporaryProductToDto(Product product) {
+
+		return GetTemporaryProductListResponseDto.builder()
+			.productUuid(product.getProductUuid())
+			.productName(product.getProductName())
+			.createdAt(product.getCreatedAt())
+			.build();
+	}
+
+	public GetTemporaryProductListResponseVo toVo(GetTemporaryProductListResponseDto getTemporaryProductListResponseDto) {
+
+		return GetTemporaryProductListResponseVo.builder()
+			.productUuid(getTemporaryProductListResponseDto.getProductUuid())
+			.productName(getTemporaryProductListResponseDto.getProductName())
+			.createdAt(getTemporaryProductListResponseDto.getCreatedAt())
 			.build();
 	}
 }

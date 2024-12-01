@@ -23,8 +23,9 @@ public class ProductDto {
 	private Long sells;
 	private Long likeCount;
 	private Long llmId;
-	private Long reviewCount;
 	private String description;
+	private double discountRate;
+	private Long reviewCount;
 	private LocalDateTime createdAt;
 	private String thumbnailUrl;
 }

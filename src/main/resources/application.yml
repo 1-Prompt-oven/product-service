@@ -19,24 +19,24 @@ springdoc:
     display-request-duration: true
 
 management:
-  # Actuator Port
-  server:
-    port: 9200
-
-  # endpoint 활성화/비활성화
-  endpoint:
-    health:
-      enabled: true
-    metrics:
-      enabled: true
-    prometheus:
-      enabled: true
   # endpoint 노출
   endpoints:
     web:
       exposure:
         include: "*"
         exclude: "env,beans,info,configprops"
+      base-path: /actuator
+  # endpoint 활성화/비활성화
+  endpoint:
+    health:
+      enabled: true
+    metrics:
+      enabled: true
+      tags:
+        application: ${spring.application.name}
+    prometheus:
+      enabled: true
+
 
 # tomcat 관련 지표 활성화
 server:

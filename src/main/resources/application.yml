@@ -18,6 +18,32 @@ springdoc:
     path: /swagger-ui.html
     display-request-duration: true
 
+management:
+  # Actuator Port
+  server:
+    port: 9200
+
+  # endpoint 활성화/비활성화
+  endpoint:
+    health:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  # endpoint 노출
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans,info,configprops"
+
+# tomcat 관련 지표 활성화
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
+
 ---
 # application-prod.yml
 spring:
@@ -93,7 +119,7 @@ spring:
       name: product-service
       fail-fast: false
 server:
-  port: 8081 # random port for security reasons
+  port: 8080 # random port for security reasons
   shutdown: graceful
 logging:
   level:

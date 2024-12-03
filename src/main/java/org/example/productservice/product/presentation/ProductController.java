@@ -5,6 +5,7 @@ import java.util.List;
 import org.example.productservice.common.response.BaseResponse;
 import org.example.productservice.product.application.ProductService;
 import org.example.productservice.product.dto.in.GetProductListRequestDto;
+import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
 import org.example.productservice.product.mapper.ProductMapper;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 import org.example.productservice.product.vo.in.UpdateProductRequestVo;
@@ -46,10 +47,14 @@ public class ProductController {
 	contents는 리스트 형태로 여러 개 등록 가능.
 	""")
 	@PostMapping("/seller/product/temporary")
-	public BaseResponse<Void> temporaryAddProduct(@RequestBody AddProductRequestVo addProductRequestVo) {
+	public BaseResponse<TemporaryAddProductResponseVo> temporaryAddProduct(@RequestBody AddProductRequestVo addProductRequestVo) {
 
-		productService.temporaryAddProduct(productMapper.toDto(addProductRequestVo));
-		return new BaseResponse<>();
+		TemporaryAddProductResponseDto temporaryAddProductResponseDto =
+			productService.temporaryAddProduct(productMapper.toDto(addProductRequestVo));
+
+		return new BaseResponse<>(
+			productMapper.toVo(temporaryAddProductResponseDto)
+		);
 	}
 
 	@Operation(summary = "상품 임시 등록 목록 보기", description = "상품 임시 등록 목록 보기")

@@ -10,6 +10,8 @@ import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
 import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
 import org.example.productservice.product.dto.out.ProductDto;
+import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
+import org.example.productservice.product.presentation.TemporaryAddProductResponseVo;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
 import org.example.productservice.product.vo.in.GetProductListRequestVo;
 import org.example.productservice.product.vo.in.UpdateProductRequestVo;
@@ -274,6 +276,13 @@ public class ProductMapper {
 			.productUuid(getTemporaryProductListResponseDto.getProductUuid())
 			.productName(getTemporaryProductListResponseDto.getProductName())
 			.createdAt(getTemporaryProductListResponseDto.getCreatedAt())
+			.build();
+	}
+
+	public TemporaryAddProductResponseVo toVo(TemporaryAddProductResponseDto temporaryAddProductResponseDto) {
+
+		return TemporaryAddProductResponseVo.builder()
+			.productUuid(temporaryAddProductResponseDto.getProductUuid())
 			.build();
 	}
 }

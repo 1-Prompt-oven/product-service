@@ -9,6 +9,7 @@ import org.example.productservice.product.dto.message.GetProductListResponseDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
 import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
+import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
 
 public interface ProductService {
 
@@ -19,6 +20,6 @@ public interface ProductService {
 	GetSellerUuidByProductUuidResponseDto getSellerUuidByProductUuid(String productUuid);
 	GetProductListResponseDto searchProducts(GetProductListRequestDto getProductListRequestDto);
 
-	void temporaryAddProduct(AddProductRequestDto addProductRequestDto);
+	TemporaryAddProductResponseDto temporaryAddProduct(AddProductRequestDto addProductRequestDto);
 	List<GetTemporaryProductListResponseDto> getTemporaryProductList(String memberUuid);
 }

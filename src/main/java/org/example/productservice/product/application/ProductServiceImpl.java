@@ -14,6 +14,7 @@ import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
 import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
 import org.example.productservice.product.dto.out.ProductDto;
+import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
 import org.example.productservice.product.infrastructure.CustomProductRepository;
 import org.example.productservice.product.infrastructure.ProductRepository;
 import org.example.productservice.product.mapper.ProductMapper;
@@ -104,11 +105,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void temporaryAddProduct(AddProductRequestDto addProductRequestDto) {
+	public TemporaryAddProductResponseDto temporaryAddProduct(AddProductRequestDto addProductRequestDto) {
 		String encryptedPrompt = encrypter.encrypt(addProductRequestDto.getPrompt())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.ENCRYPTION_ERROR));
 
-		productRepository.save(productMapper.temporaryCreateProduct(addProductRequestDto, encryptedPrompt));
+		Product product = productRepository.save(productMapper.temporaryCreateProduct(addProductRequestDto, encryptedPrompt));
+
+		return TemporaryAddProductResponseDto.builder()
+			.productUuid(product.getProductUuid())
+			.build();
 	}
 
 	@Override

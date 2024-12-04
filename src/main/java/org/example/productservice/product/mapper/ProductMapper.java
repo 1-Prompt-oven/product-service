@@ -151,13 +151,13 @@ public class ProductMapper {
 			.build();
 	}
 
-	public GetProductDetailResponseDto toDto(Product product) {
+	public GetProductDetailResponseDto toDto(Product product, String prompt) {
 		return GetProductDetailResponseDto.builder()
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())
 			.productName(product.getProductName())
 			.price(product.getPrice())
-			.prompt(product.getPrompt())
+			.prompt(prompt)
 			.description(product.getDescription())
 			.llmId(product.getLlmId())
 			.topCategoryUuid(product.getTopCategoryUuid())

@@ -66,7 +66,10 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productRepository.findByProductUuid(productUuid)
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		return productMapper.toDto(product);
+		String prompt = encrypter.decrypt(product.getPrompt())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.DECRYPTION_ERROR));
+
+		return productMapper.toDto(product, prompt);
 	}
 
 	@Override

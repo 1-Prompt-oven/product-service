@@ -1,5 +1,6 @@
 package org.example.productservice.common.utils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -41,13 +42,24 @@ public class Encrypter {
 	}
 
 	// 암호화된 데이터를 복호화하는 메서드입니다.
-	public String decrypt(String encryptedData) throws Exception {
-		Cipher cipher = Cipher.getInstance(ALGO);
-		cipher.init(Cipher.DECRYPT_MODE, secretKey);
-		byte[] decoded = Base64.getDecoder().decode(encryptedData);
-		byte[] decryptedData = cipher.doFinal(decoded);
-		return new String(decryptedData);
+	public Optional<String> decrypt(String encryptedData) {
+		if (encryptedData == null || encryptedData.isEmpty()) {
+			log.warn("Empty or null data provided for decryption");
+			return Optional.empty();
+		}
+
+		try {
+			Cipher cipher = Cipher.getInstance(ALGO);
+			cipher.init(Cipher.DECRYPT_MODE, secretKey);
+			byte[] decoded = Base64.getDecoder().decode(encryptedData);
+			byte[] decryptedData = cipher.doFinal(decoded);
+			return Optional.of(new String(decryptedData, StandardCharsets.UTF_8));
+		} catch (Exception e) {
+			log.error("Decryption failed: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
+
 
 	// 암호화 키를 생성하는 메서드입니다. 백업용 겸 설정파일 내용 업데이트 위한 값 생성 용이에요
 	public String generateKey() throws Exception {

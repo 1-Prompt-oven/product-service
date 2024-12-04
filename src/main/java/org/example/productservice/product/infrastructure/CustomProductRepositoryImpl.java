@@ -28,6 +28,8 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
 
 		// 기본 필터 조건
 		andCriterias.add(Criteria.where("deleted").is(false));
+		andCriterias.add(Criteria.where("temporaryEnrolled").is(false));  // temporaryEnrolled가 false인 항목만 필터링
+
 
 		// 검색어 필터
 		if (StringUtils.hasText(dto.getSearchBar())) {

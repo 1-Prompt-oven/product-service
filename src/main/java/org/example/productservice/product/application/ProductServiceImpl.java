@@ -48,7 +48,10 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productRepository.findByProductUuid(updateProductRequestDto.getProductUuid())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		productRepository.save(productMapper.updateProduct(product, updateProductRequestDto));
+		String encryptedPrompt = encrypter.encrypt(updateProductRequestDto.getPrompt())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.ENCRYPTION_ERROR));
+
+		productRepository.save(productMapper.updateProduct(product, encryptedPrompt, updateProductRequestDto));
 	}
 
 	@Override
@@ -57,7 +60,10 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productRepository.findByProductUuid(productUuid)
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
-		productRepository.save(productMapper.deleteProduct(product));
+		String encryptedPrompt = encrypter.encrypt(product.getPrompt())
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.ENCRYPTION_ERROR));
+
+		productRepository.save(productMapper.deleteProduct(product, encryptedPrompt));
 	}
 
 	@Override

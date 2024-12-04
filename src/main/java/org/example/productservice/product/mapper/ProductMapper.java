@@ -232,7 +232,9 @@ public class ProductMapper {
 			.llmId(product.getLlmId())
 			.createdAt(product.getCreatedAt())
 			.reviewCount(product.getReviewCount())
-			.thumbnailUrl(product.getContents().getFirst().getContentUrl())
+			.thumbnailUrl(product.getContents() != null && !product.getContents().isEmpty()
+				? product.getContents().getFirst().getContentUrl()
+				: null)
 			.build();
 	}
 

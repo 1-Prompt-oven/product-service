@@ -78,14 +78,14 @@ public class ProductMapper {
 
 	}
 
-	public Product updateProduct(Product product, UpdateProductRequestDto updateProductRequestDto) {
+	public Product updateProduct(Product product, String encryptedPrompt, UpdateProductRequestDto updateProductRequestDto) {
 		return Product.builder()
 			.id(product.getId())
 			.productUuid(product.getProductUuid())
 			.sellerUuid(product.getSellerUuid())
 			.productName(updateProductRequestDto.getProductName())
 			.price(updateProductRequestDto.getPrice())
-			.prompt(updateProductRequestDto.getPrompt())
+			.prompt(encryptedPrompt)
 			.description(updateProductRequestDto.getDescription())
 			.llmId(updateProductRequestDto.getLlmId())
 			.topCategoryUuid(updateProductRequestDto.getTopCategoryUuid())
@@ -125,7 +125,7 @@ public class ProductMapper {
 			.build();
 	}
 
-	public Product deleteProduct(Product product) {
+	public Product deleteProduct(Product product, String encryptedPrompt) {
 		return Product.builder()
 			.id(product.getId())
 			.productName(product.getProductName())
@@ -143,7 +143,7 @@ public class ProductMapper {
 			.discountRate(product.getDiscountRate())
 			.llmVersionId(product.getLlmVersionId())
 			.sellerUuid(product.getSellerUuid())
-			.prompt(product.getPrompt())
+			.prompt(encryptedPrompt)
 			.approved(product.isApproved())
 			.avgStar(product.getAvgStar())
 			.sells(product.getSells())

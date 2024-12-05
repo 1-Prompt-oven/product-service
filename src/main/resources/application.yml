@@ -1,4 +1,7 @@
 spring:
+  config:
+    import:
+      - classpath:eventTopic.yaml
   profiles:
     active: local
   application:
@@ -113,13 +116,15 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
   kafka:
-    bootstrap-servers: localhost:9092,localhost:9092,localhost:9092
+    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+    consumer:
+      group-id: review-aggregate-service
   cloud:
     config:
       name: product-service
       fail-fast: false
 server:
-  port: 8080 # random port for security reasons
+  port: 8081 # random port for security reasons
   shutdown: graceful
 logging:
   level:

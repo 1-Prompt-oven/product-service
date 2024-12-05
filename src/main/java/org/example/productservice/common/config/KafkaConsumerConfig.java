@@ -14,14 +14,15 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 
-import com.fasterxml.jackson.databind.deser.std.StringDeserializer;
+
 
 @Configuration
 @EnableKafka
 public class KafkaConsumerConfig {
 
-	@Value("${spring.kafka.text-bootstrap-servers}")
+	@Value("${spring.kafka.bootstrap-servers}")
 	private String bootstrapServers;
 
 	@Bean

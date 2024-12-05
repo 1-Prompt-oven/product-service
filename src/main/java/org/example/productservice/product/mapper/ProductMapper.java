@@ -287,4 +287,33 @@ public class ProductMapper {
 			.productUuid(temporaryAddProductResponseDto.getProductUuid())
 			.build();
 	}
+
+	public Product updateAvgRating(Product product, Double avgRating) {
+
+		return Product.builder()
+			.id(product.getId())
+			.productUuid(product.getProductUuid())
+			.sellerUuid(product.getSellerUuid())
+			.productName(product.getProductName())
+			.price(product.getPrice())
+			.prompt(product.getPrompt())
+			.description(product.getDescription())
+			.llmId(product.getLlmId())
+			.topCategoryUuid(product.getTopCategoryUuid())
+			.subCategoryUuid(product.getSubCategoryUuid())
+			.deleted(product.isDeleted())
+			.temporaryEnrolled(product.isTemporaryEnrolled())
+			.contents(product.getContents())
+			.discountRate(product.getDiscountRate())
+			.enabled(product.isEnabled())
+			.approved(product.isApproved())
+			.seed(product.getSeed())
+			.llmVersionId(product.getLlmVersionId())
+			.avgStar(avgRating)
+			.sells(product.getSells())
+			.createdAt(product.getCreatedAt())
+			.likeCount(product.getLikeCount())
+			.reviewCount(product.getReviewCount())
+			.build();
+	}
 }

@@ -22,4 +22,6 @@ public interface ProductService {
 
 	TemporaryAddProductResponseDto temporaryAddProduct(AddProductRequestDto addProductRequestDto);
 	List<GetTemporaryProductListResponseDto> getTemporaryProductList(String memberUuid);
+
+	void updateAvgRating(String productUuid, Double avgRating);
 }

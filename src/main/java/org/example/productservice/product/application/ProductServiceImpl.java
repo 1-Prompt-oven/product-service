@@ -134,4 +134,13 @@ public class ProductServiceImpl implements ProductService {
 			.toList();
 	}
 
+	@Override
+	public void updateAvgRating(String productUuid, Double avgRating) {
+
+		Product product = productRepository.findByProductUuid(productUuid)
+			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
+
+		productRepository.save(productMapper.updateAvgRating(product, avgRating));
+	}
+
 }

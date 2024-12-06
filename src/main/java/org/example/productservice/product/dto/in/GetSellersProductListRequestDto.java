@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GetSellersProductListRequestDto {
 
+	private String sellerUuid;
 	private String searchBar;
 	private String sortBy;
 	private String sortOption;

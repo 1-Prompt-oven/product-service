@@ -162,8 +162,12 @@ public class ProductController {
 	}
 
 	@Operation(summary = "판매자 상품 목록 보기", description = "판매자의 상품 목록을 조회합니다")
-	@GetMapping("/product/seller/list")
+	@GetMapping("/product/{sellerUuid}/list")
 	public BaseResponse<GetSellersProductListResponseVo> getSellerProducts(
+
+		@Parameter(description = "판매자 UUID", required = true)
+		@PathVariable String sellerUuid,
+
 		@RequestParam(required = false) String searchBar,
 
 		@Parameter(
@@ -193,6 +197,7 @@ public class ProductController {
 		@RequestParam(required = false, defaultValue = "16") Integer pageSize
 	) {
 		GetSellersProductListRequestDto requestDto = GetSellersProductListRequestDto.builder()
+			.sellerUuid(sellerUuid)
 			.searchBar(searchBar)
 			.sortOption(sortOption)
 			.sortBy(sortBy)
@@ -202,8 +207,8 @@ public class ProductController {
 			.pageSize(pageSize)
 			.build();
 
-		log.info("Seller Products List Request - sortOption: {}, enable: {}, temporary: {}",
-			sortOption, enable, temporary);
+		log.info("Seller Products List Request - sellerUuid: {}, sortOption: {}, enable: {}, temporary: {}",
+			sellerUuid, sortOption, enable, temporary);
 
 		return new BaseResponse<>(
 			productMapper.toVo(productService.getSellersProductList(requestDto))

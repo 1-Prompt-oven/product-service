@@ -100,34 +100,36 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
 	}
 
 	@Override
-	public List<Product> findSellersProductListWithCursor(GetSellersProductListRequestDto requestDto,
-		int pageSize) {
+	public List<Product> findSellersProductListWithCursor(GetSellersProductListRequestDto dto, int pageSize) {
 
 		List<Criteria> andCriterias = new ArrayList<>();
 
 		// 기본 필터 조건
 		andCriterias.add(Criteria.where("deleted").is(false));
 
+		// 판매자 UUID 필터 (필수)
+		andCriterias.add(Criteria.where("sellerUuid").is(dto.getSellerUuid()));
+
 		// 검색어 필터 (productName)
-		if (StringUtils.hasText(requestDto.getSearchBar())) {
-			andCriterias.add(Criteria.where("productName").regex(requestDto.getSearchBar(), "i"));
+		if (StringUtils.hasText(dto.getSearchBar())) {
+			andCriterias.add(Criteria.where("productName").regex(dto.getSearchBar(), "i"));
 		}
 
 		// 활성화 상태 필터
-		andCriterias.add(Criteria.where("enabled").is(requestDto.isEnable()));
+		andCriterias.add(Criteria.where("enabled").is(dto.isEnable()));
 
 		// 임시 등록 상태 필터
-		andCriterias.add(Criteria.where("temporaryEnrolled").is(requestDto.isTemporary()));
+		andCriterias.add(Criteria.where("temporaryEnrolled").is(dto.isTemporary()));
 
 		// 커서 기반 페이징
-		if (StringUtils.hasText(requestDto.getCursorId())) {
-			Document cursorDoc = mongoTemplate.findById(requestDto.getCursorId(), Document.class, "products");
+		if (StringUtils.hasText(dto.getCursorId())) {
+			Document cursorDoc = mongoTemplate.findById(dto.getCursorId(), Document.class, "products");
 			if (cursorDoc != null) {
-				String sortField = getSellersProductSortField(requestDto.getSortOption());
-				Object cursorValue = getSellersCursorValue(cursorDoc, requestDto.getSortOption());
+				String sortField = getSellersProductSortField(dto.getSortOption());
+				Object cursorValue = getSellersCursorValue(cursorDoc, dto.getSortOption());
 				Object createdAt = cursorDoc.get("createdAt");
 
-				boolean isAsc = "ASC".equals(requestDto.getSortBy());
+				boolean isAsc = "ASC".equals(dto.getSortBy());
 
 				// 정렬 방향에 따라 비교 연산자 변경
 				Criteria cursorCriteria = new Criteria().orOperator(
@@ -147,7 +149,7 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
 		Criteria finalCriteria = new Criteria().andOperator(andCriterias.toArray(new Criteria[0]));
 
 		// 정렬 조건 설정
-		Sort sort = createSellersProductSort(requestDto.getSortOption(), requestDto.getSortBy());
+		Sort sort = createSellersProductSort(dto.getSortOption(), dto.getSortBy());
 
 		Query query = Query.query(finalCriteria)
 			.with(sort)

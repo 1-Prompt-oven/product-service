@@ -1,9 +1,6 @@
 package org.example.productservice.product.application;
 
-import java.nio.ByteBuffer;
-import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 import org.example.productservice.common.error.BaseException;
 import org.example.productservice.common.response.BaseResponseStatus;
@@ -81,19 +78,7 @@ public class ProductServiceImpl implements ProductService {
 		String prompt = encrypter.decrypt(product.getPrompt())
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.DECRYPTION_ERROR));
 
-		UUID sellerUuid;
-		try {
-			// Base64 디코딩 후 UUID로 변환
-			byte[] decodedBytes = Base64.getDecoder().decode(product.getSellerUuid());
-			ByteBuffer byteBuffer = ByteBuffer.wrap(decodedBytes);
-			long high = byteBuffer.getLong();
-			long low = byteBuffer.getLong();
-			sellerUuid = new UUID(high, low);
-		} catch (IllegalArgumentException e) {
-			throw new BaseException(BaseResponseStatus.INVALID_UUID_FORMAT);
-		}
-
-		return productMapper.toDto(product, prompt, sellerUuid);
+		return productMapper.toDto(product, prompt);
 	}
 
 	@Override

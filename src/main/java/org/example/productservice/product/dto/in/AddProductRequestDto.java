@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AddProductRequestDto {
 
+	private String productUuid;
 	private String sellerUuid;
 	private String productName;
 	private double price;

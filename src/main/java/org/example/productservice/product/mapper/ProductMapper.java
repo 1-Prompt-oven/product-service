@@ -64,6 +64,7 @@ public class ProductMapper {
 	public AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {
 
 		return AddProductRequestDto.builder()
+			.productUuid(UuidGenerator.generateProductUuid())
 			.sellerUuid(addProductRequestVo.getSellerUuid())
 			.productName(addProductRequestVo.getProductName())
 			.price(addProductRequestVo.getPrice())

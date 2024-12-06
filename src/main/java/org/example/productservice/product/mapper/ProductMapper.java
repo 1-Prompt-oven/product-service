@@ -1,15 +1,15 @@
 package org.example.productservice.product.mapper;
 
-import java.util.UUID;
-
 import org.example.productservice.common.utils.UuidGenerator;
 import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
 import org.example.productservice.product.dto.in.GetProductListRequestDto;
+import org.example.productservice.product.dto.in.SellerProductDto;
 import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.dto.message.GetProductListResponseDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
+import org.example.productservice.product.dto.out.GetSellersProductListResponseDto;
 import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
 import org.example.productservice.product.dto.out.ProductDto;
 import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
@@ -20,6 +20,7 @@ import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 import org.example.productservice.product.vo.out.GetProductListResponseVo;
 import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
+import org.example.productservice.product.vo.out.GetSellersProductListResponseVo;
 import org.example.productservice.product.vo.out.GetTemporaryProductListResponseVo;
 import org.springframework.stereotype.Component;
 
@@ -317,6 +318,27 @@ public class ProductMapper {
 			.createdAt(product.getCreatedAt())
 			.likeCount(product.getLikeCount())
 			.reviewCount(product.getReviewCount())
+			.build();
+	}
+
+	public SellerProductDto sellerProductToDto(Product product) {
+
+		return SellerProductDto.builder()
+			.productName(product.getProductName())
+			.productUuid(product.getProductUuid())
+			.price(product.getPrice())
+			.sells(product.getSells())
+			.enable(product.isEnabled())
+			.temporary(product.isTemporaryEnrolled())
+			.build();
+	}
+
+	public GetSellersProductListResponseVo toVo(GetSellersProductListResponseDto sellersProductList) {
+
+		return GetSellersProductListResponseVo.builder()
+			.productList(sellersProductList.getProductList())
+			.nextCursorId(sellersProductList.getNextCursorId())
+			.hasNext(sellersProductList.isHasNext())
 			.build();
 	}
 }

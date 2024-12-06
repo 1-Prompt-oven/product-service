@@ -6,6 +6,7 @@ import java.util.List;
 import org.bson.Document;
 import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.dto.in.GetProductListRequestDto;
+import org.example.productservice.product.dto.in.GetSellersProductListRequestDto;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -96,6 +97,109 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
 			.limit(pageSize);
 
 		return mongoTemplate.find(query, Product.class);
+	}
+
+	@Override
+	public List<Product> findSellersProductListWithCursor(GetSellersProductListRequestDto dto, int pageSize) {
+
+		List<Criteria> andCriterias = new ArrayList<>();
+
+		// 기본 필터 조건
+		andCriterias.add(Criteria.where("deleted").is(false));
+
+		// 판매자 UUID 필터 (필수)
+		andCriterias.add(Criteria.where("sellerUuid").is(dto.getSellerUuid()));
+
+		// 검색어 필터 (productName)
+		if (StringUtils.hasText(dto.getSearchBar())) {
+			andCriterias.add(Criteria.where("productName").regex(dto.getSearchBar(), "i"));
+		}
+
+		// 활성화 상태 필터
+		andCriterias.add(Criteria.where("enabled").is(dto.isEnable()));
+
+		// 임시 등록 상태 필터
+		andCriterias.add(Criteria.where("temporaryEnrolled").is(dto.isTemporary()));
+
+		// 커서 기반 페이징
+		if (StringUtils.hasText(dto.getCursorId())) {
+			Document cursorDoc = mongoTemplate.findById(dto.getCursorId(), Document.class, "products");
+			if (cursorDoc != null) {
+				String sortField = getSellersProductSortField(dto.getSortOption());
+				Object cursorValue = getSellersCursorValue(cursorDoc, dto.getSortOption());
+				Object createdAt = cursorDoc.get("createdAt");
+
+				boolean isAsc = "ASC".equals(dto.getSortBy());
+
+				// 정렬 방향에 따라 비교 연산자 변경
+				Criteria cursorCriteria = new Criteria().orOperator(
+					new Criteria().andOperator(
+						Criteria.where(sortField).is(cursorValue),
+						Criteria.where("createdAt").lt(createdAt)
+					),
+					isAsc ?
+						Criteria.where(sortField).gt(cursorValue) :
+						Criteria.where(sortField).lt(cursorValue)
+				);
+				andCriterias.add(cursorCriteria);
+			}
+		}
+
+		// 모든 조건을 하나의 Criteria로 결합
+		Criteria finalCriteria = new Criteria().andOperator(andCriterias.toArray(new Criteria[0]));
+
+		// 정렬 조건 설정
+		Sort sort = createSellersProductSort(dto.getSortOption(), dto.getSortBy());
+
+		Query query = Query.query(finalCriteria)
+			.with(sort)
+			.limit(pageSize);
+
+		return mongoTemplate.find(query, Product.class);
+	}
+
+	private String getSellersProductSortField(String sortOption) {
+		if (sortOption == null) {
+			return "createdAt";  // 기본값 설정
+		}
+
+		switch (sortOption) {
+			case "price":
+				return "price";
+			case "sells":
+				return "sells";
+			default:
+				return "createdAt";
+		}
+	}
+
+	private Object getSellersCursorValue(Document cursorDoc, String sortOption) {
+		if (sortOption == null) {
+			return cursorDoc.get("createdAt");  // 기본값 설정
+		}
+
+		switch (sortOption) {
+			case "price":
+				Number price = cursorDoc.get("price", Number.class);
+				return price != null ? price.doubleValue() : 0.0;
+			case "sells":
+				Number sells = cursorDoc.get("sells", Number.class);
+				return sells != null ? sells.longValue() : 0L;
+			default:
+				return cursorDoc.get("createdAt");
+		}
+	}
+
+	private Sort createSellersProductSort(String sortOption, String sortBy) {
+		Sort.Direction direction = "ASC".equals(sortBy) ?
+			Sort.Direction.ASC : Sort.Direction.DESC;  // DESC를 기본값으로 설정
+
+		String field = getSellersProductSortField(sortOption);
+
+		return Sort.by(
+			Sort.Order.by(field).with(direction),
+			Sort.Order.by("_id").with(direction)  // 안정적인 정렬을 위해 _id 추가
+		);
 	}
 
 	private String getSortField(String sortOption) {

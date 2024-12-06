@@ -8,10 +8,13 @@ import org.example.productservice.common.utils.Encrypter;
 import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
 import org.example.productservice.product.dto.in.GetProductListRequestDto;
+import org.example.productservice.product.dto.in.GetSellersProductListRequestDto;
+import org.example.productservice.product.dto.in.SellerProductDto;
 import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.dto.message.GetProductListResponseDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
+import org.example.productservice.product.dto.out.GetSellersProductListResponseDto;
 import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
 import org.example.productservice.product.dto.out.ProductDto;
 import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
@@ -141,6 +144,33 @@ public class ProductServiceImpl implements ProductService {
 			.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_DATA));
 
 		productRepository.save(productMapper.updateAvgRating(product, avgRating));
+	}
+
+	@Override
+	public GetSellersProductListResponseDto getSellersProductList(
+		GetSellersProductListRequestDto requestDto) {
+
+		int pageSize = requestDto.getPageSize();
+
+		// 페이지 사이즈 + 1개를 조회하여 다음 페이지 존재 여부 확인
+		List<Product> products = customProductRepository.findSellersProductListWithCursor(requestDto, pageSize + 1);
+
+		boolean hasNext = products.size() > pageSize;
+		if (hasNext) {
+			products = products.subList(0, pageSize);
+		}
+
+		List<SellerProductDto> productDtoLists = products.stream()
+			.map(productMapper::sellerProductToDto)
+			.toList();
+
+		String nextCursorId = hasNext ? products.getLast().getId() : null;
+
+		return GetSellersProductListResponseDto.builder()
+			.productList(productDtoLists)
+			.nextCursorId(nextCursorId)
+			.hasNext(hasNext)
+			.build();
 	}
 
 }

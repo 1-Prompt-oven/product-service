@@ -2,6 +2,7 @@ package org.example.productservice.product.vo.out;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.example.productservice.product.domain.ProductContent;
 
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class GetProductDetailResponseVo {
 
 	private String productUuid;
-	private String sellerUuid;
+	private UUID sellerUuid;
 	private String productName;
 	private double price;
 	private String prompt;

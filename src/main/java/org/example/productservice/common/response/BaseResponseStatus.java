@@ -26,6 +26,7 @@ public enum BaseResponseStatus {
 	CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, false, "카테고리 데이터를 찾지 못했습니다."),
 	INVALID_CSV_FORMAT(HttpStatus.BAD_REQUEST, false, "잘못된 CSV 파일 형식입니다."),
 	NOT_FOUND_DATA(HttpStatus.NOT_FOUND, false, "데이터를 찾을 수 없습니다."),
+	INVALID_UUID_FORMAT(HttpStatus.BAD_REQUEST, false, "잘못된 UUID 형식입니다."),
 	/*
 	 * 405 METHOD_NOT_ALLOWED: 허용되지 않은 Request Method 호출
 	 */
@@ -43,7 +44,9 @@ public enum BaseResponseStatus {
 	INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "내부 서버 오류입니다."),
 	FILE_PROCESSING_ERROR(HttpStatus.PROCESSING, false, "파일 처리 중 오류가 발생했습니다."),
 	DECRYPTION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "복호화 중 오류가 발생했습니다."),
-	ENCRYPTION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "암호화 중 오류가 발생했습니다."), ;
+	ENCRYPTION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "암호화 중 오류가 발생했습니다."),
+	DECODING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "디코딩 중 오류가 발생했습니다."),
+	;
 
 	private final HttpStatusCode httpStatusCode;
 	private final boolean isSuccess;

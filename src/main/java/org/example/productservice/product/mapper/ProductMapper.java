@@ -1,5 +1,7 @@
 package org.example.productservice.product.mapper;
 
+import java.util.UUID;
+
 import org.example.productservice.common.utils.UuidGenerator;
 import org.example.productservice.product.domain.Product;
 import org.example.productservice.product.dto.in.AddProductRequestDto;
@@ -151,10 +153,10 @@ public class ProductMapper {
 			.build();
 	}
 
-	public GetProductDetailResponseDto toDto(Product product, String prompt) {
+	public GetProductDetailResponseDto toDto(Product product, String prompt, UUID sellerUuid) {
 		return GetProductDetailResponseDto.builder()
 			.productUuid(product.getProductUuid())
-			.sellerUuid(product.getSellerUuid())
+			.sellerUuid(sellerUuid)
 			.productName(product.getProductName())
 			.price(product.getPrice())
 			.prompt(prompt)

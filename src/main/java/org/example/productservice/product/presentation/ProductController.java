@@ -5,6 +5,7 @@ import java.util.List;
 import org.example.productservice.common.response.BaseResponse;
 import org.example.productservice.product.application.ProductService;
 import org.example.productservice.product.dto.in.GetProductListRequestDto;
+import org.example.productservice.product.dto.in.GetSellersProductListRequestDto;
 import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
 import org.example.productservice.product.mapper.ProductMapper;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
@@ -12,7 +13,7 @@ import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 import org.example.productservice.product.vo.out.GetProductListResponseVo;
 import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
-import org.example.productservice.product.vo.out.GetTemporaryProductListResponseVo;
+import org.example.productservice.product.vo.out.GetSellersProductListResponseVo;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,16 +58,16 @@ public class ProductController {
 		);
 	}
 
-	@Operation(summary = "상품 임시 등록 목록 보기", description = "상품 임시 등록 목록 보기")
-	@GetMapping("/seller/product/temporary/list")
-	public BaseResponse<List<GetTemporaryProductListResponseVo>> getTemporaryProductList(@RequestParam String memberUuid) {
-
-		return new BaseResponse<>(
-			productService.getTemporaryProductList(memberUuid).stream()
-				.map(productMapper::toVo)
-				.toList()
-		);
-	}
+	// @Operation(summary = "상품 임시 등록 목록 보기", description = "상품 임시 등록 목록 보기")
+	// @GetMapping("/seller/product/temporary/list")
+	// public BaseResponse<List<GetTemporaryProductListResponseVo>> getTemporaryProductList(@RequestParam String memberUuid) {
+	//
+	// 	return new BaseResponse<>(
+	// 		productService.getTemporaryProductList(memberUuid).stream()
+	// 			.map(productMapper::toVo)
+	// 			.toList()
+	// 	);
+	// }
 
 	@Operation(summary = "상품 등록", description = """
 	상품 등록
@@ -160,6 +161,54 @@ public class ProductController {
 		);
 	}
 
+	@Operation(summary = "판매자 상품 목록 보기", description = "판매자의 상품 목록을 조회합니다")
+	@GetMapping("/product/seller/list")
+	public BaseResponse<GetSellersProductListResponseVo> getSellerProducts(
+		@RequestParam(required = false) String searchBar,
+
+		@Parameter(
+			description = "정렬 기준 price, sells, createdAt(default)"
+		)
+		@RequestParam(required = false, defaultValue = "createdAt") String sortOption,
+
+		@Parameter(
+			description = "정렬 방향 ASC, DESC(default)"
+		)
+		@RequestParam(required = false, defaultValue = "DESC") String sortBy,
+
+		@Parameter(
+			description = "true(default), false"
+		)
+		@RequestParam(required = false, defaultValue = "true") boolean enable,
+
+		@Parameter(
+			description = "true, false(default)"
+		)
+		@RequestParam(required = false, defaultValue = "false") boolean temporary,
+		@RequestParam(required = false) String cursorId,
+
+		@Parameter(
+			description = "default: 16"
+		)
+		@RequestParam(required = false, defaultValue = "16") Integer pageSize
+	) {
+		GetSellersProductListRequestDto requestDto = GetSellersProductListRequestDto.builder()
+			.searchBar(searchBar)
+			.sortOption(sortOption)
+			.sortBy(sortBy)
+			.enable(enable)
+			.temporary(temporary)
+			.cursorId(cursorId)
+			.pageSize(pageSize)
+			.build();
+
+		log.info("Seller Products List Request - sortOption: {}, enable: {}, temporary: {}",
+			sortOption, enable, temporary);
+
+		return new BaseResponse<>(
+			productMapper.toVo(productService.getSellersProductList(requestDto))
+		);
+	}
 
 
 }

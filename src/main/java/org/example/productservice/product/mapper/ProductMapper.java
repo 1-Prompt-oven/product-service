@@ -27,8 +27,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductMapper {
 
+	public Product createProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
 
-	private Product buildProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt, boolean isTemporary) {
 		return Product.builder()
 			.sellerUuid(addProductRequestDto.getSellerUuid())
 			.productUuid(UuidGenerator.generateProductUuid())
@@ -41,7 +41,7 @@ public class ProductMapper {
 			.subCategoryUuid(addProductRequestDto.getSubCategoryUuid())
 			.contents(addProductRequestDto.getContents())
 			.enabled(true)
-			.temporaryEnrolled(isTemporary)
+			.temporaryEnrolled(false)
 			.approved(true)
 			.discountRate(addProductRequestDto.getDiscountRate())
 			.seed(addProductRequestDto.getSeed())
@@ -52,14 +52,29 @@ public class ProductMapper {
 			.build();
 	}
 
-	public Product createProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
-
-		return buildProduct(addProductRequestDto, encryptedPrompt, false);
-	}
-
 	public Product temporaryCreateProduct(AddProductRequestDto addProductRequestDto, String encryptedPrompt) {
 
-		return buildProduct(addProductRequestDto, encryptedPrompt, true);
+		return Product.builder()
+			.sellerUuid(addProductRequestDto.getSellerUuid())
+			.productUuid(UuidGenerator.generateProductUuid())
+			.productName(addProductRequestDto.getProductName())
+			.price(addProductRequestDto.getPrice())
+			.prompt(encryptedPrompt)
+			.description(addProductRequestDto.getDescription())
+			.llmId(addProductRequestDto.getLlmId())
+			.topCategoryUuid(addProductRequestDto.getTopCategoryUuid())
+			.subCategoryUuid(addProductRequestDto.getSubCategoryUuid())
+			.contents(addProductRequestDto.getContents())
+			.enabled(false)
+			.temporaryEnrolled(true)
+			.approved(false)
+			.discountRate(addProductRequestDto.getDiscountRate())
+			.seed(addProductRequestDto.getSeed())
+			.llmVersionId(addProductRequestDto.getLlmVersionId())
+			.sells(0L)
+			.avgStar(0.0)
+			.reviewCount(0L)
+			.build();
 	}
 
 	public AddProductRequestDto toDto(AddProductRequestVo addProductRequestVo) {

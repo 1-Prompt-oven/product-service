@@ -6,6 +6,7 @@ import org.example.productservice.common.response.BaseResponse;
 import org.example.productservice.product.application.ProductService;
 import org.example.productservice.product.dto.in.GetProductListRequestDto;
 import org.example.productservice.product.dto.in.GetSellersProductListRequestDto;
+import org.example.productservice.product.dto.in.SellerProductDto;
 import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
 import org.example.productservice.product.mapper.ProductMapper;
 import org.example.productservice.product.vo.in.AddProductRequestVo;
@@ -13,7 +14,10 @@ import org.example.productservice.product.vo.in.UpdateProductRequestVo;
 import org.example.productservice.product.vo.out.GetProductDetailResponseVo;
 import org.example.productservice.product.vo.out.GetProductListResponseVo;
 import org.example.productservice.product.vo.out.GetSellerUuidByProductUuidResponseVo;
-import org.example.productservice.product.vo.out.GetSellersProductListResponseVo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -161,40 +165,32 @@ public class ProductController {
 		);
 	}
 
-	@Operation(summary = "판매자 상품 목록 보기", description = "판매자의 상품 목록을 조회합니다")
+	@Operation(summary = "판매자 상품 목록 보기", description = "판매자의 상품 목록을 조회합니다. number: 현재페이지, size: 페이지 크기, totalElements: 전체 상품 수, totalPages: 전체 페이지 수, numberOfElements: 현재 페이지의 상품 수, pageSize: 페이지당 최대 항목 수")
 	@GetMapping("/product/{sellerUuid}/list")
-	public BaseResponse<GetSellersProductListResponseVo> getSellerProducts(
+	public BaseResponse<Page<SellerProductDto>> getSellerProducts(
 
 		@Parameter(description = "판매자 UUID", required = true)
 		@PathVariable String sellerUuid,
 
 		@RequestParam(required = false) String searchBar,
 
-		@Parameter(
-			description = "정렬 기준 price, sells, createdAt(default)"
-		)
+		@Parameter(description = "정렬 기준 price, sells, createdAt(default)")
 		@RequestParam(required = false, defaultValue = "createdAt") String sortOption,
 
-		@Parameter(
-			description = "정렬 방향 ASC, DESC(default)"
-		)
+		@Parameter(description = "정렬 방향 ASC, DESC(default)")
 		@RequestParam(required = false, defaultValue = "DESC") String sortBy,
 
-		@Parameter(
-			description = "true(default), false"
-		)
+		@Parameter(description = "true(default), false")
 		@RequestParam(required = false, defaultValue = "true") boolean enable,
 
-		@Parameter(
-			description = "true, false(default)"
-		)
+		@Parameter(description = "true, false(default)")
 		@RequestParam(required = false, defaultValue = "false") boolean temporary,
-		@RequestParam(required = false) String cursorId,
 
-		@Parameter(
-			description = "default: 16"
-		)
-		@RequestParam(required = false, defaultValue = "16") Integer pageSize
+		@Parameter(description = "페이지 번호 (0부터 시작)")
+		@RequestParam(required = false, defaultValue = "0") int page,
+
+		@Parameter(description = "페이지 크기 (default: 16)")
+		@RequestParam(required = false, defaultValue = "16") int size
 	) {
 		GetSellersProductListRequestDto requestDto = GetSellersProductListRequestDto.builder()
 			.sellerUuid(sellerUuid)
@@ -203,16 +199,15 @@ public class ProductController {
 			.sortBy(sortBy)
 			.enable(enable)
 			.temporary(temporary)
-			.cursorId(cursorId)
-			.pageSize(pageSize)
 			.build();
 
-		log.info("Seller Products List Request - sellerUuid: {}, sortOption: {}, enable: {}, temporary: {}",
-			sellerUuid, sortOption, enable, temporary);
+		Sort sort = Sort.by("DESC".equals(sortBy) ? Sort.Direction.DESC : Sort.Direction.ASC, sortOption);
+		Pageable pageable = PageRequest.of(page, size, sort);
 
-		return new BaseResponse<>(
-			productMapper.toVo(productService.getSellersProductList(requestDto))
-		);
+		log.info("Seller Products List Request - sellerUuid: {}, sortOption: {}, enable: {}, temporary: {}, page: {}, size: {}",
+			sellerUuid, sortOption, enable, temporary, page, size);
+
+		return new BaseResponse<>(productService.getSellersProductList(requestDto, pageable));
 	}
 
 

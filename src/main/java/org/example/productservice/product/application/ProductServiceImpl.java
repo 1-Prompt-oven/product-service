@@ -14,13 +14,14 @@ import org.example.productservice.product.dto.in.UpdateProductRequestDto;
 import org.example.productservice.product.dto.message.GetProductListResponseDto;
 import org.example.productservice.product.dto.out.GetProductDetailResponseDto;
 import org.example.productservice.product.dto.out.GetSellerUuidByProductUuidResponseDto;
-import org.example.productservice.product.dto.out.GetSellersProductListResponseDto;
 import org.example.productservice.product.dto.out.GetTemporaryProductListResponseDto;
 import org.example.productservice.product.dto.out.ProductDto;
 import org.example.productservice.product.dto.out.TemporaryAddProductResponseDto;
 import org.example.productservice.product.infrastructure.CustomProductRepository;
 import org.example.productservice.product.infrastructure.ProductRepository;
 import org.example.productservice.product.mapper.ProductMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -147,30 +148,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public GetSellersProductListResponseDto getSellersProductList(
-		GetSellersProductListRequestDto requestDto) {
+	public Page<SellerProductDto> getSellersProductList(GetSellersProductListRequestDto requestDto, Pageable pageable) {
 
-		int pageSize = requestDto.getPageSize();
+		Page<Product> productPage = customProductRepository.findSellersProductList(requestDto, pageable);
 
-		// 페이지 사이즈 + 1개를 조회하여 다음 페이지 존재 여부 확인
-		List<Product> products = customProductRepository.findSellersProductListWithCursor(requestDto, pageSize + 1);
-
-		boolean hasNext = products.size() > pageSize;
-		if (hasNext) {
-			products = products.subList(0, pageSize);
-		}
-
-		List<SellerProductDto> productDtoLists = products.stream()
-			.map(productMapper::sellerProductToDto)
-			.toList();
-
-		String nextCursorId = hasNext ? products.getLast().getId() : null;
-
-		return GetSellersProductListResponseDto.builder()
-			.productList(productDtoLists)
-			.nextCursorId(nextCursorId)
-			.hasNext(hasNext)
-			.build();
+		return productPage.map(productMapper::sellerProductToDto);
 	}
 
 }

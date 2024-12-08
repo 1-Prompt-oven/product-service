@@ -17,6 +17,5 @@ public class GetSellersProductListRequestDto {
 	private String sortOption;
 	private boolean enable;
 	private boolean temporary;
-	private String cursorId;
 	private int pageSize;
 }

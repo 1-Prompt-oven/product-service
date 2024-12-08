@@ -95,7 +95,7 @@ public class ProductMapper {
 			.topCategoryUuid(updateProductRequestDto.getTopCategoryUuid())
 			.subCategoryUuid(updateProductRequestDto.getSubCategoryUuid())
 			.deleted(product.isDeleted())
-			.temporaryEnrolled(product.isTemporaryEnrolled())
+			.temporaryEnrolled(false)
 			.contents(updateProductRequestDto.getContents())
 			.discountRate(updateProductRequestDto.getDiscountRate())
 			.enabled(updateProductRequestDto.isEnabled())

@@ -345,6 +345,10 @@ public class ProductMapper {
 			.sells(product.getSells())
 			.enable(product.isEnabled())
 			.temporary(product.isTemporaryEnrolled())
+			.createdAt(product.getCreatedAt())
+			.thumbnailUrl(product.getContents() != null && !product.getContents().isEmpty()
+				? product.getContents().getFirst().getContentUrl()
+				: null)
 			.build();
 	}
 

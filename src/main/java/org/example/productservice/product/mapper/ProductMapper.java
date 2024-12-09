@@ -113,7 +113,7 @@ public class ProductMapper {
 			.temporaryEnrolled(false)
 			.contents(updateProductRequestDto.getContents())
 			.discountRate(updateProductRequestDto.getDiscountRate())
-			.enabled(updateProductRequestDto.isEnabled())
+			.enabled(true)
 			.approved(updateProductRequestDto.isApproved())
 			.seed(updateProductRequestDto.getSeed())
 			.llmVersionId(updateProductRequestDto.getLlmVersionId())

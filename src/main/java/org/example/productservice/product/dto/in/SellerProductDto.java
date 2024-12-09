@@ -1,5 +1,7 @@
 package org.example.productservice.product.dto.in;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,4 +19,6 @@ public class SellerProductDto {
 	private Long sells;
 	private boolean enable;
 	private boolean temporary;
+	private LocalDateTime createdAt;
+	private String thumbnailUrl;
 }

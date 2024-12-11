@@ -1,1 +1,2 @@
 aggregate-finish-event : aggregate-finished
+member-withdraw-event: member-withdraw

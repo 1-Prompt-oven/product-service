@@ -20,4 +20,6 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 		"{ $sort: { createdAt: -1 } }"
 	})
 	List<Product> findTemporaryProductList(String sellerUuid);
+
+	List<Product> findAllBySellerUuid(String sellerUuid);
 }

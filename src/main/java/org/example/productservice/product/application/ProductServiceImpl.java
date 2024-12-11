@@ -155,4 +155,14 @@ public class ProductServiceImpl implements ProductService {
 		return productPage.map(productMapper::sellerProductToDto);
 	}
 
+	@Override
+	public void handleMemberWithdraw(String sellerUuid) {
+
+		productRepository.findAllBySellerUuid(sellerUuid)
+			.forEach(product -> productRepository.save(
+				productMapper.deleteProduct(product, encrypter.encrypt(product.getPrompt())
+					.orElseThrow(() -> new BaseException(BaseResponseStatus.ENCRYPTION_ERROR))))
+			);
+	}
+
 }

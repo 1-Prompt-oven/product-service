@@ -30,4 +30,6 @@ public interface ProductService {
 	void updateAvgRating(String productUuid, Double avgRating);
 
 	Page<SellerProductDto> getSellersProductList(GetSellersProductListRequestDto requestDto, Pageable pageable);
+
+	void handleMemberWithdraw(String memberUUID);
 }

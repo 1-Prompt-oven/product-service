@@ -8,6 +8,7 @@ import org.example.productservice.llm.dto.out.GetLLMListByTypeResponseDto;
 import org.example.productservice.llm.llmMapper.LLMMapper;
 import org.example.productservice.llm.vo.out.GetLLMNameByLLMIdResponseVo;
 import org.example.productservice.llm.vo.out.GetLLMListByTypeResponseVo;
+import org.example.productservice.llm.vo.out.GetLLMNameByProductUuidResponseVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,16 @@ public class LLMController {
 
 		return new BaseResponse<>(
 			llmMapper.toVo(llmService.getLLMNameByLLMId(llmId))
+		);
+	}
+
+	@Operation(summary = "LLM 이름 조회", description = "productUuid에 해당하는 LLM 이름 조회")
+	@GetMapping("/product")
+	public BaseResponse<GetLLMNameByProductUuidResponseVo> getLLMNameByProductUuid(
+		@RequestParam String productUuid) {
+
+		return new BaseResponse<>(
+			llmMapper.toVo(llmService.getLLMNameByProductUuid(productUuid))
 		);
 	}
 }
